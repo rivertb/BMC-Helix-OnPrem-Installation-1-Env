@@ -1,4 +1,4 @@
-# BMC HelixOM ITOM & ITSM OnPrem Installation Step by Step 
+# BMC HelixOM ITOM & ITSM OnPrem Installation Step by Step 1 - Environment Preparation
 
 
 ## 1 Architecture Diagram
