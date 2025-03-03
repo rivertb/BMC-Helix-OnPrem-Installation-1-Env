@@ -3,7 +3,7 @@
 
 ## 1 Architecture Diagram
 
-![4b080021470ebc9e06c4d71c1c8955a6.png](en-resource://database/679:1)
+![Architecture Diagram](./diagram/architecture-diagram.png)
 
 
 
