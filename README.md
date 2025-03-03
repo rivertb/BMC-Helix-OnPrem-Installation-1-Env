@@ -60,9 +60,9 @@
 
 ### 2.3 Install VM
 During the installation of Linux, when creating a disk partition, delete the/home directory, rebuild the root directory, and allocate all remaining disk space to the root directory
-![83a4d70feb871faa8db446739f210d20.png](en-resource://database/517:1)
+![Manual Partitioning](./diagram/manual-partitioning.png)
 Select the Minial Install
-![b6c64d1bf8580075961a56f466e1374f.png](en-resource://database/519:1)
+![Minimal Install](./diagram/minimal-install.png)
 
 
 ### 2.4 Config helix-svc VM
@@ -81,7 +81,7 @@ To reduce network address usage, all servers in the Helix cluster are configured
 * The WAN network card is responsible for providing Internet access services for other VMs and Helix clusters.
 * The LAN network card is responsible for forwarding external service requests
 
-![19d6ecb36843357aca9d5705be075c14.png](en-resource://database/645:1)
+![helix-svc Virtual Hardware](./diagram/helix-svc-virtual-hardware.png)
 
 Set ntwrok via command
 ```
@@ -89,12 +89,12 @@ nmtui-edit
 ```
 
 The popup view
-![c7d8a0ba12a2d987083a98d641f39264.png](en-resource://database/653:1)
+![helix-svc Network Interfaces](./diagram/helix-svc-networks-interfaces.png)
 
 Edit the external network card ens34 and modify the following content:
 
 * Check the "Ignorre automatically obtained DNS parameters" option
-![4bbedd242c5d77e6cd81d37d5c147b28.png](en-resource://database/659:1)
+![helix-svc ens34](./diagram/helix-svc-ens34.png)
 
 Edit the intranet card ens35 and modify the following content:
 
@@ -102,11 +102,12 @@ Edit the intranet card ens35 and modify the following content:
 * DNS: 127.0.0.1
 * Search domains: bmc.local
 * Check the“Never use this network for default route”option
-![470e5faa17e67068e3f484feb0b8303f.png](en-resource://database/657:1)
+![helix-svc ens35](./diagram/helix-svc-ens35.png)
+
 
 #### 2.4.2 Setup firewalld
 
-Create internal and external zone
+Create internal and external zone
 
 ```
 nmcli connection modify ens34 connection.zone external
@@ -181,7 +182,7 @@ For servers other than helix-svc, configure the following:
 * Gateway:192.168.1.1
 * DNS Server:192.168.1.1
 * Search dommains: bmc.local
-![16ad2ab8594333940772259f06d23e71.png](en-resource://database/661:1)
+![Other VMs ens34](./diagram/helix-ens34.png)
 
 Verify that external network access is successful
 ```
@@ -266,7 +267,7 @@ sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin dock
 #Start Docker Engine.
 sudo systemctl enable --now docker   
 
-#Verify that the installation is successful by running the hello-world image:
+#Verify that the installation is successful by running the hello-world image:
 sudo docker run hello-world
 
 ```
@@ -334,87 +335,87 @@ for node in helix-svc helix-harbor helix-k8s-master helix-k8s-worker01 helix-k8s
 ### 5.1 Harbor Installation
 
 * Prepare https certificate for Harbor
-    ```
-    #Configure Harbor registry by using self-signed SSL certificates
-    mkdir -p /data/cert
-    scp root@helix-svc:/root/openssl/bmc.local.crt /data/cert/
-    scp root@helix-svc:/root/openssl/bmc.local.key /data/cert/
-    scp root@helix-svc:/root/openssl/HelixCA.crt /data/cert/
-    
-    #Convert yourdomain.com.crt to yourdomain.com.cert, for use by Docker
-    cd /data/cert
-    openssl x509 -inform PEM -in bmc.local.crt -out bmc.local.cert
-    
-    #Copy the server certificate, key and CA files into the Docker certificates folder on the Harbor host.
-    #mkdir -p /etc/docker/certs.d/yourdomain.com/
-    mkdir -p /etc/docker/certs.d/bmc.local/
+```
+#Configure Harbor registry by using self-signed SSL certificates
+mkdir -p /data/cert
+scp root@helix-svc:/root/openssl/bmc.local.crt /data/cert/
+scp root@helix-svc:/root/openssl/bmc.local.key /data/cert/
+scp root@helix-svc:/root/openssl/HelixCA.crt /data/cert/
 
-    cp /data/cert/bmc.local.cert /etc/docker/certs.d/bmc.local/
-    cp /data/cert/bmc.local.key /etc/docker/certs.d/bmc.local/
-    cp /data/cert/HelixCA.crt /etc/docker/certs.d/bmc.local/
-    
-    #Restart Docker Engine.
-    systemctl restart docker
-    ```
+#Convert yourdomain.com.crt to yourdomain.com.cert, for use by Docker
+cd /data/cert
+openssl x509 -inform PEM -in bmc.local.crt -out bmc.local.cert
+
+#Copy the server certificate, key and CA files into the Docker certificates folder on the Harbor host.
+#mkdir -p /etc/docker/certs.d/yourdomain.com/
+mkdir -p /etc/docker/certs.d/bmc.local/
+
+cp /data/cert/bmc.local.cert /etc/docker/certs.d/bmc.local/
+cp /data/cert/bmc.local.key /etc/docker/certs.d/bmc.local/
+cp /data/cert/HelixCA.crt /etc/docker/certs.d/bmc.local/
+
+#Restart Docker Engine.
+systemctl restart docker
+```
 
 * Install the harbor image registry on helix-harbor. For installation instructions, please refer to：[Create a Harbor registry](https://docs.bmc.com/xwiki/bin/view/IT-Operations-Management/On-Premises-Deployment/BMC-Helix-IT-Operations-Management-Deployment/itomdeploy251/Deploying/Preparing-for-deployment/Accessing-container-images/Setting-up-a-Harbor-registry-in-a-local-network-and-synchronizing-it-with-BMC-DTR/)。
 
-    ```
-    # Download Harbor
-    dnf install wget -y
-    #wget https://github.com/goharbor/harbor/releases/download/v<version>/harbor-offline-installer-v<version>.tgz
+```
+# Download Harbor
+dnf install wget -y
+#wget https://github.com/goharbor/harbor/releases/download/v<version>/harbor-offline-installer-v<version>.tgz
 
-    # Example
-    wget https://github.com/goharbor/harbor/releases/download/v2.1.4/harbor-offline-installer-v2.1.4.tgz
+# Example
+wget https://github.com/goharbor/harbor/releases/download/v2.1.4/harbor-offline-installer-v2.1.4.tgz
 
-    # Unzip the tar file
-    tar xvzf harbor-offline-installer*.tgz
+# Unzip the tar file
+tar xvzf harbor-offline-installer*.tgz
 
-    # Go to the Harbor directory
-    cd harbor
+# Go to the Harbor directory
+cd harbor
 
-    # Copy the configuration template
-    cp harbor.yml.tmpl harbor.yml
+# Copy the configuration template
+cp harbor.yml.tmpl harbor.yml
 
-    ```
+```
 
 * in the harbor.yml file, update the values for the following parameters:
 
-    ```
-    # Specify the name of system where you want to install Harbor.
-    hostname: helix-harbor.bmc.local
-    
-    # Specify the password for the Harbor system administrator.
-    harbor_admin_password: bmcAdm1n
-    
-    # The path of cert and key files for nginx
-    certificate: /data/cert/bmc.local.crt
-    private_key: /data/cert/bmc.local.key
-    
-    # Harbor repository
-    data_volume: /data/harbor
+```
+# Specify the name of system where you want to install Harbor.
+hostname: helix-harbor.bmc.local
 
-    ```
+# Specify the password for the Harbor system administrator.
+harbor_admin_password: bmcAdm1n
 
-* install the Harbor registry
-    ```
-    mkdir /data/harbor
-    ./install.sh
-    ```
+# The path of cert and key files for nginx
+certificate: /data/cert/bmc.local.crt
+private_key: /data/cert/bmc.local.key
+
+# Harbor repository
+data_volume: /data/harbor
+
+```
+
+* install the Harbor registry
+```
+mkdir /data/harbor
+./install.sh
+```
 
 
 * Configure the Harbor registry
-    Log in to the Harbor registry and perform the following steps to create a new project:
-    
-    Select Projects and then click NEW PROJECT.
-    ![9e71bdb911eddc52ca942b4e50ba34fd.png](en-resource://database/529:1)
-    
-    In the New Project window, specify the following values:
-    Project Name: Enter bmc.
-    Access Level: Select the Public check box.
-    Leave the other parameters to their default values.
-    ![b0ef11825bfa31300cab49d3463f2eeb.png](en-resource://database/531:1)
-    Click OK
+Log in to the Harbor registry and perform the following steps to create a new project:
+
+Select Projects and then click NEW PROJECT.
+![Harbor Projects](./diagram/harbor-projects.png)
+
+In the New Project window, specify the following values:
+Project Name: Enter bmc.
+Access Level: Select the Public check box.
+Leave the other parameters to their default values.
+![Harbor New Projects bmc](./diagram/harbor-new-project-bmc.png)
+Click OK
     
 
 ### 5.2 Batch download Helix images
@@ -422,52 +423,52 @@ This step can be performed on any server that can connect to the Internet, not j
 
 * Create Helix images download directory
 
-    ```
-    cp -R ~/helix-metal-install/helix-images-25.1  /root/.
+```
+cp -R ~/helix-metal-install/helix-images-25.1  /root/.
 
-    ```
-*     Download Helix ITOM all_images_<version>.txt file from BMC Docs to root/helix-images-25.1
+```
+* Download Helix ITOM all_images_<version>.txt file from BMC Docs to root/helix-images-25.1
     [all_images_25.1.txt](https://docs.bmc.com/xwiki/bin/view/IT-Operations-Management/On-Premises-Deployment/BMC-Helix-IT-Operations-Management-Deployment/itomdeploy251/Deploying/Preparing-for-deployment/Accessing-container-images/Setting-up-a-Harbor-registry-in-a-local-network-and-synchronizing-it-with-BMC-DTR/)
     
  
-    ```
-    pwd
-    /root/helix-images-25.1
-    
-    ls -l
-    -rw-r--r-- 1 root root 13685 Feb 25 15:55 all_images_25.1.00.txt
-    -rw-r--r-- 1 root root  2158 Feb 25 15:44 helix-load-images.sh
-    -rw-r--r-- 1 root root  2399 Feb 25 15:44 helix-save-images.sh
-    -rw-r--r-- 1 root root   174 Feb 25 15:44 saveall.sh
-    
-    # Convert the file to an UNIX format
-    dnf install dos2unix -y
-    dos2unix all_images_25.1.00.txt
-    
-    # Get Helix ITOM different repository images lists
-    
-    # lp0lz: BMC Helix Platform  images
-    cat all_images_25.1.00.txt | grep lp0lz > lp0lz_images.txt
-    
-    # lp0oz: BMC Helix Intelligent Automation images
-    cat all_images_25.1.00.txt | grep lp0oz > lp0oz_images.txt
-    
-    # lp0pz: BMC Helix Continuous Optimization images
-    cat all_images_25.1.00.txt | grep lp0pz > lp0pz_images.txt
-    
-    # lp0mz: BMC Helix Operations Management on-premises images
-    cat all_images_25.1.00.txt | grep lp0mz > lp0mz_images.txt
-    
-    # la0cz: BMC Helix AIOps images
-    cat all_images_25.1.00.txt | grep la0cz > la0cz_images.txt
-    
-    # Run batch downloader for Helix ITOM image
-    chmod a+x *.sh
-    nohup ./saveall.sh > nohup.out &
-    tail -f nohup.out
+```
+pwd
+/root/helix-images-25.1
 
-    # Due to the limitation of network speed, the entire download process may take several hours to several days.
-    ```
+ls -l
+-rw-r--r-- 1 root root 13685 Feb 25 15:55 all_images_25.1.00.txt
+-rw-r--r-- 1 root root  2158 Feb 25 15:44 helix-load-images.sh
+-rw-r--r-- 1 root root  2399 Feb 25 15:44 helix-save-images.sh
+-rw-r--r-- 1 root root   174 Feb 25 15:44 saveall.sh
+
+# Convert the file to an UNIX format
+dnf install dos2unix -y
+dos2unix all_images_25.1.00.txt
+
+# Get Helix ITOM different repository images lists
+
+# lp0lz: BMC Helix Platform images
+cat all_images_25.1.00.txt | grep lp0lz > lp0lz_images.txt
+
+# lp0oz: BMC Helix Intelligent Automation images
+cat all_images_25.1.00.txt | grep lp0oz > lp0oz_images.txt
+
+# lp0pz: BMC Helix Continuous Optimization images
+cat all_images_25.1.00.txt | grep lp0pz > lp0pz_images.txt
+
+# lp0mz: BMC Helix Operations Management on-premises images
+cat all_images_25.1.00.txt | grep lp0mz > lp0mz_images.txt
+
+# la0cz: BMC Helix AIOps images
+cat all_images_25.1.00.txt | grep la0cz > la0cz_images.txt
+
+# Run batch downloader for Helix ITOM image
+chmod a+x *.sh
+nohup ./saveall.sh > nohup.out &
+tail -f nohup.out
+
+# Due to the limitation of network speed, the entire download process may take several hours to several days.
+```
 
 ### 5.3 Download Rancher image files.
 
@@ -478,29 +479,29 @@ This step can be performed on any server that can connect to the Internet, not j
 To download the Rancher image file, refer to the Rancher official documentation：[Collect and Publish Images to your Private Registry](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/other-installation-methods/air-gapped-helm-cli-install/publish-images)。
 
 * Select the Rancher version, download the offline tool script file and the mirror list file, you can refer to the document：[Rancher Release](https://github.com/rancher/rancher/releases)
-![d94b8ff2cfb2c1610d4f34d2ab56fb01.png](en-resource://database/533:1)
+![Harbor Release](./diagram/rancher-release-v2.10.2.png)
 
 * Download Rancher image files
-    ```
-    #mkdir rancher
-    mkdir /root/rancher-images-2.10.2
+```
+#mkdir rancher
+mkdir /root/rancher-images-2.10.2
+
+# cp rancher-images.txt, rancher-load-images.sh, rancher-save-images.sh file to /root/rancher-images-2.10.2 directory
+cd /root/rancher-images-2.10.2
+chmod a+x *.sh
     
-    # cp rancher-images.txt, rancher-load-images.sh, rancher-save-images.sh file to /root/rancher-images-2.10.2 directory
-    cd /root/rancher-images-2.10.2
-    chmod a+x *.sh
-        
-    ls -l
-    -rw-r--r-- 1 root root 27835 Feb 25 16:33 rancher-images.txt
-    -rwxr-xr-x 1 root root  4115 Feb 25 16:33 rancher-load-images.sh
-    -rwxr-xr-x 1 root root  1757 Feb 25 16:33 rancher-save-images.sh
+ls -l
+-rw-r--r-- 1 root root 27835 Feb 25 16:33 rancher-images.txt
+-rwxr-xr-x 1 root root  4115 Feb 25 16:33 rancher-load-images.sh
+-rwxr-xr-x 1 root root  1757 Feb 25 16:33 rancher-save-images.sh
 
-    # Sort and unique the mirror list to remove duplicate mirror sources.
-    sort -u rancher-images.txt -o rancher-images.txt
+# Sort and unique the mirror list to remove duplicate mirror sources.
+sort -u rancher-images.txt -o rancher-images.txt
 
-    # Create a compressed package of the required image
-    nohup ./rancher-save-images.sh --image-list ./rancher-images.txt > nohup.out &
+# Create a compressed package of the required image
+nohup ./rancher-save-images.sh --image-list ./rancher-images.txt > nohup.out &
 
-    ```
+```
 
 ### 5.4 Import Helix images to harbor
 Import the downloaded Helix Image image package file into the Harbor registry deployed on the helix-harbor server.
@@ -515,89 +516,89 @@ Import the downloaded Rancher Image image package file into the Harbor registry 
 
 * Create new project rancher
 
-    Log in to the Harbor registry and perform the following steps to create a new project:
-    Select Projects and then click NEW PROJECT. In the New Project window, specify the following values:
-    
-    Project Name: Enter rancher.
-    Access Level: Select the Public check box.
-    Leave the other parameters to their default values.
+Log in to the Harbor registry and perform the following steps to create a new project:
+Select Projects and then click NEW PROJECT. In the New Project window, specify the following values:
 
-    ![f0b2f33e4b28f981a30fd072e2d83354.png](en-resource://database/635:1)
+Project Name: Enter rancher.
+Access Level: Select the Public check box.
+Leave the other parameters to their default values.
+
+![Harbor New Project rancher](./diagram/harbor-new-project-rancher.png)
 
 * Import Rancher Images
-    Use rancher-load-images.sh to extract, tag and push rancher-images.txt and rancher-images.tar.gz to harbor registry
+Use rancher-load-images.sh to extract, tag and push rancher-images.txt and rancher-images.tar.gz to harbor registry
 
-    ```
-    # Chang to images file direcotry
-    cd /root/rancher-images-2.10.2
+```
+# Chang to images file direcotry
+cd /root/rancher-images-2.10.2
 
-    # Login to Helix Harbor Server
-    docker login helix-harbor.bmc.local -u admin -p bmcAdm1n
-    
-    # Load Rancher images to Harbor Server
-    nohup ./rancher-load-images.sh --images rancher-images.tar.gz  --registry helix-harbor.bmc.local > nohup.out &
-    tail -f nohup.out
-    ```
+# Login to Helix Harbor Server
+docker login helix-harbor.bmc.local -u admin -p bmcAdm1n
+
+# Load Rancher images to Harbor Server
+nohup ./rancher-load-images.sh --images rancher-images.tar.gz  --registry helix-harbor.bmc.local > nohup.out &
+tail -f nohup.out
+```
 ## 6 Setup Kubernetes Cluster
 ### 6.1 Install Rancher
 
 * Install the containerized Rancher pod on the helix-k8s-master server
 
-    ```
-    # Login to Harbor Server
-    docker login helix-harbor.bmc.local -u admin -p bmcAdm1n
-    
-    # Install Rancher docker version
-    docker run -d --privileged --name rancher --restart=unless-stopped -p 80:80 -p 443:443 -v /opt/rancher:/var/lib/rancher -e CATTLE_SYSTEM_DEFAULT_REGISTRY=helix-harbor.bmc.local helix-harbor.bmc.local/rancher/rancher:v2.10.2
-    ```
+```
+# Login to Harbor Server
+docker login helix-harbor.bmc.local -u admin -p bmcAdm1n
+
+# Install Rancher docker version
+docker run -d --privileged --name rancher --restart=unless-stopped -p 80:80 -p 443:443 -v /opt/rancher:/var/lib/rancher -e CATTLE_SYSTEM_DEFAULT_REGISTRY=helix-harbor.bmc.local helix-harbor.bmc.local/rancher/rancher:v2.10.2
+```
 
 * Fix k3s bug in Rancher container
 
-    ```
-    # There is a bug in the k3s, below is how to permanent fix it
-    # kernel modules load at startup
-    echo "ip_tables" | sudo tee /etc/modules-load.d/iptables.conf
-    echo "iptable_filter" | sudo tee -a /etc/modules-load.d/iptables.conf
+```
+# There is a bug in the k3s, below is how to permanent fix it
+# kernel modules load at startup
+echo "ip_tables" | sudo tee /etc/modules-load.d/iptables.conf
+echo "iptable_filter" | sudo tee -a /etc/modules-load.d/iptables.conf
 
-    # Reload systemd modules and reboot
-    sudo systemctl restart systemd-modules-load
-    sudo reboot
+# Reload systemd modules and reboot
+sudo systemctl restart systemd-modules-load
+sudo reboot
 
-    # Verify the modules are loaded after reboot
-    lsmod | grep ip
-    ```
+# Verify the modules are loaded after reboot
+lsmod | grep ip
+```
 
 * Find the Rancher Console password
-    ```
-    docker logs rancher 2>&1 | grep "Bootstrap Password:"
-    2025/02/26 04:59:02 [INFO] Bootstrap Password: 2ndg88pslbtg29xlntvqm9hwm5ggp6w8tbvmp6bxrc8wf9g8nqh7gt
-    ```
+```
+docker logs rancher 2>&1 | grep "Bootstrap Password:"
+2025/02/26 04:59:02 [INFO] Bootstrap Password: 2ndg88pslbtg29xlntvqm9hwm5ggp6w8tbvmp6bxrc8wf9g8nqh7gt
+```
 
 * Login to Rancher console   
 
-![604240015266d6b532fc55283c183125.png](en-resource://database/639:1)
+![Rancher Login](./diagram/rancher-login.png)
 
 
 * Setup new password
 
-![f4add5a9a2fb7e32b536636611b92ab1.png](en-resource://database/641:1)
+![Rancher New Password](./diagram/rancher-new-password.png)
 
 
 ### 6.2 Create new cluster
 
 * Log in to the Rancher console and you can see that there is only one local cluster by default. We need to create a cluster helix-compact for the installation of helix
-![fa20bd98b67bb4c44b865f87cc62c244.png](en-resource://database/663:1)
+![Rancher Create Cluster(./diagram/rancher-new-create-cluster.png)
 
 * Select RKE1 and create a Custom cluster
-![e8ec173f199973b56c992af11faf51dc.png](en-resource://database/665:1)
+![Rancher Create Custom Cluster(./diagram/rancher-create-custom-cluster.png)
 
 * Set the cluster name to helix-compact and leave the rest of the options as default
 
-![3be6398f2414494ff21d993f9cae20ab.png](en-resource://database/667:1)
+![Rancher Cluster helix-compact(./diagram/rancher-cluster-helix-compact.png)
 
 * Copy the script for adding a worker node
 
-![a3e9af8dd1977862e9f8d4beb8a1e91a.png](en-resource://database/669:1)
+![Rancher Cluster Add Workers(./diagram/rancher-cluster-add-worker.png)
 
 * Paste and run the script on helix-k8s-worker01 to helix-k8s-worker04 servers
 
@@ -608,7 +609,7 @@ sudo docker run -d --privileged --restart=unless-stopped --net=host -v /etc/kube
 
 * Copy the master (etcd & Control Plance) installation script
 
-![8e9249128319f17a63a610abeecdd3ee.png](en-resource://database/671:1)
+![Rancher Cluster Add Master(./diagram/rancher-cluster-add-master.png)
 
 * Paste and execute the installation script on the helix-k8s-master server
 ```
@@ -616,20 +617,20 @@ sudo docker run -d --privileged --restart=unless-stopped --net=host -v /etc/kube
 ```
 
 * Wait for all nodes to join the cluster and the k8s cluster is created
-![ea2b09f0d97313a9add90ad1f8f97ff8.png](en-resource://database/673:1)
+![Rancher Cluster Nodes(./diagram/rancher-cluster-helix-compact-nodes.png)
 
 * If the cluster installation reports an error that an image is missing, it may be that some images are missing from the rancher-images.txt file and need to be added to the local image registry. For example, if an error message is displayed saying that hyperkube:v1.31.5-rancher1 is missing, execute the following command line on the helix-harbor server.
 
-    ```
-    docker pull rancher/hyperkube:v1.31.5-rancher1
-    docker tag rancher/hyperkube:v1.31.5-rancher1 helix-harbor.bmc.local/rancher/hyperkube:v1.31.5-rancher1
-    docker push helix-harbor.bmc.local/rancher/hyperkube:v1.31.5-rancher1
-    ```
+```
+docker pull rancher/hyperkube:v1.31.5-rancher1
+docker tag rancher/hyperkube:v1.31.5-rancher1 helix-harbor.bmc.local/rancher/hyperkube:v1.31.5-rancher1
+docker push helix-harbor.bmc.local/rancher/hyperkube:v1.31.5-rancher1
+```
 
 ### 6.3 Set the k8s cluster token expiration time
 The default validity period of the K8s cluster token managed by Rancher is very short, which will cause problems such as K8s monitoring failure and Helix installation pipeline errors. It is recommended to change it to never expire
-![cd462d4682b27f29756427692382865c.png](en-resource://database/675:1)
-![2f2a4ccc11a5b2ef8d0f3e08c911f46c.png](en-resource://database/677:1)
+![Rancher Global Setting(./diagram/rancher-global-settings.png)
+
 
 
 ### 6.4 nstall Kubernetes client tools
@@ -637,7 +638,7 @@ helix-svc will be used as the Helix installation workstation, and the client too
 #### 6.4.1 kubernetes configuration file
 
 * Copy kubeconfig file contents
-![dd7f955034f6c5160d489e45a9b5235d.png](en-resource://database/685:1)
+![Rancher Copy kubeconfig(./diagram/rancher-copy-kubeconfig.png)
 
 * Save to helix-svc
     ```
