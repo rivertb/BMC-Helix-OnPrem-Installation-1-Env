@@ -74,7 +74,7 @@ helix-svc is the auxiliary server providing peripheral services for Helix OnPrem
 * NFS Server
 * Load Balancer Server
 
-#### 2.4.1 网络配置
+#### 2.4.1 Setup Network
 
 To reduce network address usage, all servers in the Helix cluster are configured on the intranet IP address segment 192.168.1.1/24. Only the helix-svc server is configured with dual network cards, connecting to the internal and external networks respectively. All other virtual machines are configured with a single network card, connected to the LAN network k8s-internal.
 
@@ -292,7 +292,7 @@ docker-compose
  ## 4. Prepare a self-signed certificate
 ###  4.1 Create a certificate
  
- 在helix-svc服务器上，创建CA证书和自签名证书
+ On the helix-svc server, create a CA certificate and a self-signed certificate
 ```
 su - root
 mkdir openssl
