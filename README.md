@@ -1,4 +1,4 @@
-# BMC HelixOM ITOM & ITSM OnPrem Installation Step by Step 1 - Environment Preparation
+# BMC HelixOM OnPrem Installation Step by Step 1 - Prepare the environment
 
 
 ## 1 Architecture Diagram
@@ -7,221 +7,223 @@
 
 
 
-## 2 虚拟机准备
+## 2 Install VMs for Helix
 
-### 2.1 虚拟机列表
+### 2.1 Helix VM List
 
-| 序号 | 主机名 | IP | OS | 配置 | 用途 | 安装的软件 |
+| No. | VM Host Name | IP | OS | Sizing | Description | Software Installed |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | helix-svc.bmc.local | 192.168.1.1 | CentOS8 | 4 vCPU * 8 GB RAM * 500 HDD | Helix辅助服务器 | DNS/NFS/HAProxy/eMail |
-| 2 | helix-harbor.bmc.local | 192.168.1.2 | CentOS8 | 2 vCPU * 4 GB RAM * 500 HDD | 容器镜像Registry |Harbor |
-| 3 | helix-k8s-master.bmc.local | 192.168.1.200 | CentOS8 | 4 vCPU * 8 GB RAM * 100 HDD | k8s管理节点 | rancher容器 |
-| 4 | helix-k8s-worker01.bmc.local | 191.168.1.201 | CentOS8 | 16 vCPU * 64 GB RAM * 100 HDD | k8s工作节点1 | rancher容器 |
-| 5 | helix-k8s-worker02.bmc.local | 191.168.1.202 | CentOS8 | 16 vCPU * 64 GB RAM * 100 HDD | k8s工作节点2 | rancher容器 |
-| 6 | helix-k8s-worker03.bmc.local | 191.168.1.203 | CentOS8 | 16 vCPU * 64 GB RAM * 100 HDD | k8s工作节点3 | rancher容器 |
-| 7 | helix-k8s-worker04.bmc.local | 191.168.1.204 | CentOS8 | 16 vCPU * 64 GB RAM * 100 HDD | k8s工作节点4 | rancher容器 |
-| 8 | helix-discovery.bmc.local | 191.168.1.210 | OLinux9 | 4 vCPU * 4 GB RAM * 65 HDD | Discovery VM | Discovery VM Image导入 |
+| 1 | helix-svc.bmc.local | 192.168.1.1 | CentOS8 | 4 vCPU * 8 GB RAM * 500 HDD | Helix Install workstations and auxiliary services | DNS/NFS/HAProxy/eMail |
+| 2 | helix-harbor.bmc.local | 192.168.1.2 | CentOS8 | 2 vCPU * 4 GB RAM * 500 HDD | Container Image Registry |Harbor |
+| 3 | helix-k8s-master.bmc.local | 192.168.1.200 | CentOS8 | 4 vCPU * 8 GB RAM * 100 HDD | k8s master node | rancher master pod |
+| 4 | helix-k8s-worker01.bmc.local | 191.168.1.201 | CentOS8 | 16 vCPU * 64 GB RAM * 100 HDD | k8s worker node 1 | rancher worker pod |
+| 5 | helix-k8s-worker02.bmc.local | 191.168.1.202 | CentOS8 | 16 vCPU * 64 GB RAM * 100 HDD | k8s worker node 2 | rancher worker pod |
+| 6 | helix-k8s-worker03.bmc.local | 191.168.1.203 | CentOS8 | 16 vCPU * 64 GB RAM * 100 HDD | k8s worker node 3 | rancher woker pod |
+| 7 | helix-k8s-worker04.bmc.local | 191.168.1.204 | CentOS8 | 16 vCPU * 64 GB RAM * 100 HDD | k8s worker node 4 | rancher worker pod |
+| 8 | helix-discovery.bmc.local | 191.168.1.210 | OLinux9 | 4 vCPU * 4 GB RAM * 65 HDD | Discovery VM | Discovery VM |
 
-### 2.2 域名列表
+### 2.2 Helix Domain Name List
 
-| 序号 | 域名 | IP | 用途 |
+| No. | Domain Name | IP | Category |
 | --- | --- | --- | --- |
-| 1 | helix-svc.bmc.local | 192.168.1.1 | VM |
-| 2 | helix-harbor.bmc.local | 192.168.1.2 | VM |
-| 3 | helix-k8s-master.bmc.local | 192.168.1.200 | VM |
-| 5 | helix-k8s-worker01.bmc.local | 192.168.1.201 | VM |
-| 6 | helix-k8s-worker02.bmc.local | 192.168.1.202 | VM |
-| 8 | helix-k8s-worker03.bmc.local | 192.168.1.203 | VM |
-| 9 | helix-k8s-worker03.bmc.local | 192.168.1.203 | VM |
-| 10 | helix-k8s-worker03.bmc.local | 192.168.1.210 | VM |
-| 11 | smtp.bmc.local | 192.168.1.1 | ITOM |
-| 12 | lb.bmc.local | 192.168.1.1 | ITOM |
-| 13 | tms.bmc.local | 192.168.1.1 | ITOM |
-| 14 | minio.bmc.local | 192.168.1.1 | ITOM |
-| 15 | minio-api.bmc.local | 192.168.1.1 | ITOM |
-| 16 | kibana.bmc.local | 192.168.1.1 | ITOM |
-| 16 | adelab-private-poc.bmc.local | 192.168.1.1 | ITOM |
-| 16 | adelab-disc-private-poc.bmc.local | 192.168.1.210 | ITOM |
-| 17 | itsm-poc.bmc.local | 192.168.1.1 | ITSM |
-| 18 | itsm-poc-int.bmc.local | 192.168.1.1 | ITSM |
-| 19 | itsm-poc-smartit.bmc.local | 192.168.1.1 | ITSM |
-| 20 | itsm-poc-sr.bmc.local | 192.168.1.1 | ITSM |
-| 21 | itsm-poc-is.bmc.local | 192.168.1.1 | ITSM |
-| 22 | itsm-poc-restapi.bmc.local | 192.168.1.1 | ITSM |
-| 23 | itsm-poc-atws.bmc.local | 192.168.1.1 | ITSM |
-| 24 | itsm-poc-dwp.bmc.local | 192.168.1.1 | ITSM |
-| 25 | itsm-poc-dwpcatalog.bmc.local | 192.168.1.1 | ITSM |
-| 26 | itsm-poc-vchat.bmc.local | 192.168.1.1 | ITSM |
-| 27 | itsm-poc-chat.bmc.local | 192.168.1.1 | ITSM |
-| 28 | itsm-poc-supportassisttool.bmc.local | 192.168.1.1 | ITSM |
+| 1 | helix-svc.bmc.local | 192.168.1.1 | VM Domain Name|
+| 2 | helix-harbor.bmc.local | 192.168.1.2 | VM Domain Name |
+| 3 | helix-k8s-master.bmc.local | 192.168.1.200 | VM Domain Name |
+| 5 | helix-k8s-worker01.bmc.local | 192.168.1.201 | VM Domain Name |
+| 6 | helix-k8s-worker02.bmc.local | 192.168.1.202 | VM Domain Name |
+| 8 | helix-k8s-worker03.bmc.local | 192.168.1.203 | VM Domain Name |
+| 9 | helix-k8s-worker03.bmc.local | 192.168.1.203 | VM Domain Name |
+| 10 | helix-k8s-worker03.bmc.local | 192.168.1.210 | VM Domain Name|
+| 11 | smtp.bmc.local | 192.168.1.1 | ITOM Domain Name |
+| 12 | lb.bmc.local | 192.168.1.1 | ITOM Domain Name |
+| 13 | tms.bmc.local | 192.168.1.1 | ITOM Domain Name |
+| 14 | minio.bmc.local | 192.168.1.1 | ITOM Domain Name|
+| 15 | minio-api.bmc.local | 192.168.1.1 | ITOM Domain Name |
+| 16 | kibana.bmc.local | 192.168.1.1 | ITOM Domain Name |
+| 16 | adelab-private-poc.bmc.local | 192.168.1.1 | ITOM Domain Name |
+| 16 | adelab-disc-private-poc.bmc.local | 192.168.1.210 | ITOM Domain Name |
+| 17 | itsm-poc.bmc.local | 192.168.1.1 | ITSM Domain Name |
+| 18 | itsm-poc-int.bmc.local | 192.168.1.1 | ITSM Domain Name |
+| 19 | itsm-poc-smartit.bmc.local | 192.168.1.1 | ITSM Domain Name|
+| 20 | itsm-poc-sr.bmc.local | 192.168.1.1 | ITSM Domain Name |
+| 21 | itsm-poc-is.bmc.local | 192.168.1.1 | ITSM Domain Name |
+| 22 | itsm-poc-restapi.bmc.local | 192.168.1.1 | ITSM Domain Name |
+| 23 | itsm-poc-atws.bmc.local | 192.168.1.1 | ITSM Domain Name |
+| 24 | itsm-poc-dwp.bmc.local | 192.168.1.1 | ITSM Domain Name |
+| 25 | itsm-poc-dwpcatalog.bmc.local | 192.168.1.1 | ITSM Domain Name |
+| 26 | itsm-poc-vchat.bmc.local | 192.168.1.1 | ITSM Domain Name |
+| 27 | itsm-poc-chat.bmc.local | 192.168.1.1 | ITSM Domain Name|
+| 28 | itsm-poc-supportassisttool.bmc.local | 192.168.1.1 | ITSM Domain Name |
 
 
 
 
-### 2.3 虚拟机安装
-在安装Linux，创建磁盘分区时，删除/home目录，重建根目录，将磁盘剩余空间全部分配给根目录
+### 2.3 Install VM
+During the installation of Linux, when creating a disk partition, delete the/home directory, rebuild the root directory, and allocate all remaining disk space to the root directory
 ![83a4d70feb871faa8db446739f210d20.png](en-resource://database/517:1)
-选择最小安装
+Select the Minial Install
 ![b6c64d1bf8580075961a56f466e1374f.png](en-resource://database/519:1)
 
 
-### 2.4 辅助服务器helix-svc配置
+### 2.4 Config helix-svc VM
+helix-svc is the auxiliary server providing peripheral services for Helix OnPrem.
 
-辅助服务器helix-svc的作用是为整个Helix OnPrem提供辅助服务：
-
-* 提供外网访问的网关
-* DNS域名服务器
-* 邮件服务器
-* NFS为k8s集群提供块存储
-* 为Helix集群提供负载均衡服务
+* Gateway for all other VMs
+* DNS Server
+* eMail Server
+* NFS Server
+* Load Balancer Server
 
 #### 2.4.1 网络配置
 
-为了减少网络地址占用，Helix集群的所有服务器都配置在内外IP地址段192.168.1.1/24上，只有helix-svc服务器配置了双网卡，其他虚拟机全部是单网卡配置，连接LAN网络k8s-internal。
+To reduce network address usage, all servers in the Helix cluster are configured on the intranet IP address segment 192.168.1.1/24. Only the helix-svc server is configured with dual network cards, connecting to the internal and external networks respectively. All other virtual machines are configured with a single network card, connected to the LAN network k8s-internal.
 
-* WAN网卡负责对外提供Helix服务
-* LAN网卡负责对外服务的转发
+* The WAN network card is responsible for providing Internet access services for other VMs and Helix clusters.
+* The LAN network card is responsible for forwarding external service requests
 
 ![19d6ecb36843357aca9d5705be075c14.png](en-resource://database/645:1)
 
-设置网络
+Set ntwrok via command
 ```
 nmtui-edit
 ```
 
-弹出配置页面
+The popup view
 ![c7d8a0ba12a2d987083a98d641f39264.png](en-resource://database/653:1)
 
-编辑外网网卡ens34，修改如下内容：
+Edit the external network card ens34 and modify the following content:
 
-* 选中“Ignore automatically obtained DNS parameters”
+* Check the "Ignorre automatically obtained DNS parameters" option
 ![4bbedd242c5d77e6cd81d37d5c147b28.png](en-resource://database/659:1)
 
-编辑内网网卡ens35，修改如下内容：
+Edit the intranet card ens35 and modify the following content:
 
 * IPv4 Configuration: Manual
 * DNS: 127.0.0.1
 * Search domains: bmc.local
-* 选中“Never use this network for default route”
+* Check the“Never use this network for default route”option
 ![470e5faa17e67068e3f484feb0b8303f.png](en-resource://database/657:1)
 
-#### 2.4.2 防火墙配置
+#### 2.4.2 Setup firewalld
 
-创建internal和external zone
+Create internal and external zone
 
 ```
 nmcli connection modify ens34 connection.zone external
 nmcli connection modify ens35 connection.zone internal
 ```
 
-查看zone:
+View zones:
 
 ```
 firewall-cmd --get-active-zones
 ```
 
-在两个zone上设置 masquerading (source-nat)
+
+Set masquerading (source-nat) on the both zones
 
 ```
 firewall-cmd --zone=external --add-masquerade --permanent
 firewall-cmd --zone=internal --add-masquerade --permanent
 firewall-cmd --reload
 ```
-查看当前设置
+
+Check the current settings of each zone
 ```
 firewall-cmd --list-all --zone=internal
 firewall-cmd --list-all --zone=external
 cat /proc/sys/net/ipv4/ip_forward
 ```
-#### 2.4.3 安装配置DNS
-安装BIND作为DNS
+#### 2.4.3 Setup DNS
+
+Install and configure BIND DNS
 ```
 dnf install bind bind-utils -y
 ```
-拷贝配置文件
+Apply configuration
 ```
 \cp ~/helix-metal-install/dns/named.conf /etc/named.conf
 cp -R ~/helix -metal-install/dns/zones /etc/named/
 ```
-在防火墙上开放DNS端口
+Configure the firewall for DNS
 ```
 firewall-cmd --add-port=53/udp --zone=internal --permanent
 firewall-cmd --add-port=53/tcp --zone=internal --permanent
 firewall-cmd --reload
 ```
-启动DNS服务
+Enable and start the service
 ```
 systemctl enable named
 systemctl start named
 systemctl status named
 ```
-重启网络服务
+Restart Network Manager
 ```
 systemctl restart NetworkManager
 ```
-验证本地DNS可以解析本地域名
+Confirm dig now sees the correct DNS results by using the DNS Server running locally
 ```
 dig lb.bmc.local
 dig -o 192.168.1.1
 ```
 
-#### 2.4.4 install JDK
+#### 2.4.4 Setup JDK
 ```
 yum install java-11-openjdk
 ls /usr/lib/jvm/jre-11-openjdk
 ```
 
-### 2.5 其他虚拟机配置网络配置 
-除了helix-svc之外的其他服务器，配置如下内容：
+### 2.5 Setup network for other VMs 
+For servers other than helix-svc, configure the following:
 
 * IPv4 Configuration: Manual
-* Addresses: 为各个服务器分配的地址
+* Addresses: Assign IP addresses to VMs according to the table definition in 2.1.
 * Gateway:192.168.1.1
 * DNS Server:192.168.1.1
 * Search dommains: bmc.local
 ![16ad2ab8594333940772259f06d23e71.png](en-resource://database/661:1)
 
-验证外网访问能力
+Verify that external network access is successful
 ```
 dig www.baidu.com
 ```
 
-验证本地DNS可以解析本地域名
+Verify that the local DNS can resolve the local domain name
 ```
 dig lb.bmc.local
 dig -o 192.168.1.1
 ```
 
-### 2.6 Linux参数调整
+### 2.6 Adjusting Linux Configuration
 ```
-# 系统更新
+#Update OS
 yum update -y
 yum upgrade -y
 
-# 关闭防火墙
+# Close firewalld
 systemctl stop firewalld
 systemctl disable firewalld
 
-# 关闭SELinux
+#Disable SELinux
 setenforce 0
 sed -i 's#SELINUX=enforcing#SELINUX=disabled#g' /etc/sysconfig/selinux
 sed -i 's#SELINUX=enforcing#SELINUX=disabled#g' /etc/selinux/config
 
-# 关闭swap
+# Swapoff swap
 swapoff -a && sysctl -w vm.swappiness=0
 sed -ri '/^[^#]*swap/s@^@#@' /etc/fstab
 
-# 设置时区
+#Set time zone
 timedatectl set-timezone Asia/Shanghai 
 
-# 时钟同步
+#Time sync
 yum install -y chrony
 systemctl start chronyd
 systemctl enable chronyd
 
 chronyc sources -V
 
-# 设置内核参数
+#Set kernel parameters
 ulimit -SHn 65535
 
 cat <<EOF >> /etc/security/limits.conf
@@ -233,18 +235,18 @@ cat <<EOF >> /etc/security/limits.conf
 * hard memlock unlimited
 EOF
 
-# 重启虚拟机
+#Take the adjust to effect
 reboot
 ```
-## 3. Docker Installation
+## 3. Install Docker Environment 
 
-### 3.1 Docker Engine安装
+### 3.1 Install Docker Engine
 
-   在所有VM上安装Docker，安装方法请参考：[Install Docker Engine](https://docs.docker.com/engine/install/)
+   Install Docker on all VMs. For installation instructions, refer to：[Install Docker Engine](https://docs.docker.com/engine/install/)
     
-   根据当前操作系统的类型，分别选择不同的安装方式。例如对于CentOS:
+ Select different installation methods according to the type of the current operating system. For example, for CentOS:
 ```
-# Uninstall old versions
+#Uninstall old versions
 sudo dnf remove docker \
                   docker-client \
                   docker-client-latest \
@@ -254,54 +256,51 @@ sudo dnf remove docker \
                   docker-logrotate \
                   docker-engine
 
-# Set up the repository
+#Set up the repository
 sudo dnf -y install dnf-plugins-core
 sudo dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 
-# Install Docker Engine Latest version
+#Install Docker Engine Latest version
 sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 
-# Start Docker Engine.
+#Start Docker Engine.
 sudo systemctl enable --now docker   
 
-# Verify that the installation is successful by running the hello-world image:
+#Verify that the installation is successful by running the hello-world image:
 sudo docker run hello-world
 
 ```
 
-### 3.2 Docker Compose安装
-   在helix-harbor和helix-bhii上安装Docker Compose，安装方法请参考：[Install the Docker Compose standalone](https://docs.docker.com/compose/install/standalone/)
+### 3.2 Install Docker Compose
+Install Docker Compose on helix-harbor and helix-bhii，For installation instructions, refer to：[Install the Docker Compose standalone](https://docs.docker.com/compose/install/standalone/)
    
    
 ```
-# To download and install the Docker Compose standalone
+#To download and install the Docker Compose standalone
 curl -SL https://github.com/docker/compose/releases/download/v2.33.1/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
 
-# Apply executable permissions
+#Apply executable permissions
 chmod +x /usr/local/bin/docker-compose
 
-# Create a symbolic link
+#Create a symbolic link
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
-# Test and execute Docker Compose
+#Test and execute Docker Compose
 docker-compose
 ```
-       
-       
- ## 4. 准备自签名证书
-###  4.1 创建证书
+            
+ ## 4. Prepare a self-signed certificate
+###  4.1 Create a certificate
  
  在helix-svc服务器上，创建CA证书和自签名证书
 ```
-# 登录helix-svc服务器
 su - root
 mkdir openssl
 cd openssl
 cp ~/helix-metal-install/cert/create_certs.sh .
 chmod a+x *.sh
 
-
-# 创建Helix根证书和自签名证书
+# Execute the script to create the Helix root certificate and self-signed certificate
 ./create_certs.sh
 
 ls
@@ -316,13 +315,7 @@ ls
 -rw-r--r-- 1 root root 1574 Feb 27 13:24 bmc.local.crt
 ```
 
-创建Helix使用的全量证书
-```
-cat bmc.local.crt HelixCA.crt > full_chain.crt
-openssl x509 -text -in full_chain.crt
-```
-
-### 4.2 设置免登录
+### 4.2 Set up ssh password-free login
 ```
 cd /root
 ssh-keygen -t rsa
@@ -330,29 +323,29 @@ ssh-keygen -t rsa
 for i in helix-svc helix-k8s-master helix-k8s-worker01 helix-k8s-worker02 helix-k8s-worker03 helix-k8s-worker04;do ssh-copy-id -i .ssh/id_rsa.pub $i;done
 ```
 
-### 4.3 添加自签名证书信任
+### 4.3 Set trusted certificate
 
-将证书添加到所有的服务器中
+Add the certificate to all servers
 ```
 cd /root/
 for node in helix-svc helix-harbor helix-k8s-master helix-k8s-worker01 helix-k8s-worker02 helix-k8s-worker03 helix-k8s-worker04; do echo $node; scp HelixCA.crt root@$node:/etc/pki/ca-trust/source/anchors/; ssh root@$node "update-ca-trust enable;update-ca-trust extract;systemctl restart docker";done
 ```
-## 5. Harbor Registry镜像库准备
+## 5. Setup Harbor Registry
 ### 5.1 Harbor Installation
 
-* 为Harbor准备https证书
+* Prepare https certificate for Harbor
     ```
-    # Configure Harbor registry by using self-signed SSL certificates
+    #Configure Harbor registry by using self-signed SSL certificates
     mkdir -p /data/cert
     scp root@helix-svc:/root/openssl/bmc.local.crt /data/cert/
     scp root@helix-svc:/root/openssl/bmc.local.key /data/cert/
     scp root@helix-svc:/root/openssl/HelixCA.crt /data/cert/
     
-    # Convert yourdomain.com.crt to yourdomain.com.cert, for use by Docker
+    #Convert yourdomain.com.crt to yourdomain.com.cert, for use by Docker
     cd /data/cert
     openssl x509 -inform PEM -in bmc.local.crt -out bmc.local.cert
     
-    # Copy the server certificate, key and CA files into the Docker certificates folder on the Harbor host.
+    #Copy the server certificate, key and CA files into the Docker certificates folder on the Harbor host.
     #mkdir -p /etc/docker/certs.d/yourdomain.com/
     mkdir -p /etc/docker/certs.d/bmc.local/
 
@@ -360,11 +353,11 @@ for node in helix-svc helix-harbor helix-k8s-master helix-k8s-worker01 helix-k8s
     cp /data/cert/bmc.local.key /etc/docker/certs.d/bmc.local/
     cp /data/cert/HelixCA.crt /etc/docker/certs.d/bmc.local/
     
-    # Restart Docker Engine.
+    #Restart Docker Engine.
     systemctl restart docker
     ```
 
-* 在helix-harbor安装harbor镜像库，安装方法请参考：[Create a Harbor registry](https://docs.bmc.com/xwiki/bin/view/IT-Operations-Management/On-Premises-Deployment/BMC-Helix-IT-Operations-Management-Deployment/itomdeploy251/Deploying/Preparing-for-deployment/Accessing-container-images/Setting-up-a-Harbor-registry-in-a-local-network-and-synchronizing-it-with-BMC-DTR/)。
+* Install the harbor image registry on helix-harbor. For installation instructions, please refer to：[Create a Harbor registry](https://docs.bmc.com/xwiki/bin/view/IT-Operations-Management/On-Premises-Deployment/BMC-Helix-IT-Operations-Management-Deployment/itomdeploy251/Deploying/Preparing-for-deployment/Accessing-container-images/Setting-up-a-Harbor-registry-in-a-local-network-and-synchronizing-it-with-BMC-DTR/)。
 
     ```
     # Download Harbor
@@ -424,18 +417,14 @@ for node in helix-svc helix-harbor helix-k8s-master helix-k8s-worker01 helix-k8s
     Click OK
     
 
-### 5.2 Helix容器镜像文件下载
-如果helix-harbor服务器可以连接互联网，镜像下载可以在helix-harbor操作，否则需要另找一台服务器，安装上docker engine后操作。
+### 5.2 Batch download Helix images
+This step can be performed on any server that can connect to the Internet, not just the helix-harbor server. The prerequisite is docker engine environment.
 
 * Create Helix images download directory
 
     ```
-    mkdir /root/helix-images-25.1
-    cd /root/helix-images-25.1
+    cp -R ~/helix-metal-install/helix-images-25.1  /root/.
 
-    # cp helix-load-images.sh to /root/helix-images-25.1
-    # cp helix-save-images.sh to /root/helix-images-25.1
-    # cp saveall.sh to /root/helix-images-25.1
     ```
 *     Download Helix ITOM all_images_<version>.txt file from BMC Docs to root/helix-images-25.1
     [all_images_25.1.txt](https://docs.bmc.com/xwiki/bin/view/IT-Operations-Management/On-Premises-Deployment/BMC-Helix-IT-Operations-Management-Deployment/itomdeploy251/Deploying/Preparing-for-deployment/Accessing-container-images/Setting-up-a-Harbor-registry-in-a-local-network-and-synchronizing-it-with-BMC-DTR/)
@@ -480,18 +469,18 @@ for node in helix-svc helix-harbor helix-k8s-master helix-k8s-worker01 helix-k8s
     # Due to the limitation of network speed, the entire download process may take several hours to several days.
     ```
 
-### 5.3 Rancher容器镜像文件下载
+### 5.3 Download Rancher image files.
 
-在本测试中，Helix安装的Kubernetes集群采用Rancher进行创建和管理。下面的步骤是准备Rancher的镜像文件。
+In this test, the Kubernetes cluster where Helix installed is created and managed using Rancher. The following steps are to prepare the Rancher image file.
 
-如果helix-harbor服务器可以连接互联网，镜像下载可以在helix-harbor操作，否则需要另找一台服务器，安装上docker engine后操作。
+This step can be performed on any server that can connect to the Internet, not just the helix-harbor server. The prerequisite is docker engine environment.
 
-Rancher镜像文件的下载，可以参考Rancher官方文档：[Collect and Publish Images to your Private Registry](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/other-installation-methods/air-gapped-helm-cli-install/publish-images)。
+To download the Rancher image file, refer to the Rancher official documentation：[Collect and Publish Images to your Private Registry](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/other-installation-methods/air-gapped-helm-cli-install/publish-images)。
 
-* 选择Rancher版本，下载离线工具脚本文件与镜像列表文件，可以参考文档：[Rancher Release](https://github.com/rancher/rancher/releases)
+* Select the Rancher version, download the offline tool script file and the mirror list file, you can refer to the document：[Rancher Release](https://github.com/rancher/rancher/releases)
 ![d94b8ff2cfb2c1610d4f34d2ab56fb01.png](en-resource://database/533:1)
 
-* Rancher镜像文件下载
+* Download Rancher image files
     ```
     #mkdir rancher
     mkdir /root/rancher-images-2.10.2
@@ -505,24 +494,24 @@ Rancher镜像文件的下载，可以参考Rancher官方文档：[Collect and Pu
     -rwxr-xr-x 1 root root  4115 Feb 25 16:33 rancher-load-images.sh
     -rwxr-xr-x 1 root root  1757 Feb 25 16:33 rancher-save-images.sh
 
-    # 对镜像列表进行排序和唯一化，以去除重复的镜像源。
+    # Sort and unique the mirror list to remove duplicate mirror sources.
     sort -u rancher-images.txt -o rancher-images.txt
 
-    # 创建所需镜像的压缩包
+    # Create a compressed package of the required image
     nohup ./rancher-save-images.sh --image-list ./rancher-images.txt > nohup.out &
 
     ```
 
-### 5.4 Helix镜像导入
-本节的工作内容是将下载的Helix Image镜像包文件导入helix-harbor服务器上部署的Harbor registry.
+### 5.4 Import Helix images to harbor
+Import the downloaded Helix Image image package file into the Harbor registry deployed on the helix-harbor server.
 ```
 cd /root/helix-image-25.1
 nohup ./loadall.sh > nohup.out &
 tail -f nohup.out
 ```
 
-### 5.5 Rancher镜像导入
-本节的工作内容是将下载的Rancher Image镜像包文件导入helix-harbor服务器上部署的Harbor registry.
+### 5.5 Import Rancher images
+Import the downloaded Rancher Image image package file into the Harbor registry deployed on the helix-harbor server.
 
 * Create new project rancher
 
@@ -535,8 +524,8 @@ tail -f nohup.out
 
     ![f0b2f33e4b28f981a30fd072e2d83354.png](en-resource://database/635:1)
 
-* Rancher Image Importing
-    使用脚本 rancher-load-images.sh提取rancher-images.tar.gz文件中的镜像，根据文件rancher-images.txt中的镜像列表对提取的镜像文件重新打 tag 并推送到私有镜像库中。
+* Import Rancher Images
+    Use rancher-load-images.sh to extract, tag and push rancher-images.txt and rancher-images.tar.gz to harbor registry
 
     ```
     # Chang to images file direcotry
@@ -549,24 +538,21 @@ tail -f nohup.out
     nohup ./rancher-load-images.sh --images rancher-images.tar.gz  --registry helix-harbor.bmc.local > nohup.out &
     tail -f nohup.out
     ```
-## 6 Kubernetes集群安装
-### 6.1 Rancher容器安装
+## 6 Setup Kubernetes Cluster
+### 6.1 Install Rancher
 
-* 在helix-k8s-master服务器安装容器化的Rancher服务器
-
+* Install the containerized Rancher pod on the helix-k8s-master server
 
     ```
-    #  Login to Harbor Server
+    # Login to Harbor Server
     docker login helix-harbor.bmc.local -u admin -p bmcAdm1n
     
     # Install Rancher docker version
     docker run -d --privileged --name rancher --restart=unless-stopped -p 80:80 -p 443:443 -v /opt/rancher:/var/lib/rancher -e CATTLE_SYSTEM_DEFAULT_REGISTRY=helix-harbor.bmc.local helix-harbor.bmc.local/rancher/rancher:v2.10.2
-    
     ```
 
-* Fix k8s bug in Rancher container
+* Fix k3s bug in Rancher container
 
-    
     ```
     # There is a bug in the k3s, below is how to permanent fix it
     # kernel modules load at startup
@@ -587,86 +573,84 @@ tail -f nohup.out
     2025/02/26 04:59:02 [INFO] Bootstrap Password: 2ndg88pslbtg29xlntvqm9hwm5ggp6w8tbvmp6bxrc8wf9g8nqh7gt
     ```
 
-* 登录Rancher console   
+* Login to Rancher console   
 
 ![604240015266d6b532fc55283c183125.png](en-resource://database/639:1)
 
 
-* 设置新密码
+* Setup new password
 
 ![f4add5a9a2fb7e32b536636611b92ab1.png](en-resource://database/641:1)
 
 
-### 6.2 创建集群
+### 6.2 Create new cluster
 
-* 登录Rancher控制台，可以看到默认只有一个local集群，我们需要为helix的安装创建一个集群
+* Log in to the Rancher console and you can see that there is only one local cluster by default. We need to create a cluster helix-compact for the installation of helix
 ![fa20bd98b67bb4c44b865f87cc62c244.png](en-resource://database/663:1)
 
-* 选择RKE1，创建Custom集群
+* Select RKE1 and create a Custom cluster
 ![e8ec173f199973b56c992af11faf51dc.png](en-resource://database/665:1)
 
-* 设置集群名称为helix-compact，其余选项默认
+* Set the cluster name to helix-compact and leave the rest of the options as default
 
 ![3be6398f2414494ff21d993f9cae20ab.png](en-resource://database/667:1)
 
-* 拷贝添加worker节点的脚本
+* Copy the script for adding a worker node
 
 ![a3e9af8dd1977862e9f8d4beb8a1e91a.png](en-resource://database/669:1)
 
-* 在helix-k8s-worker01至helix-k8s-worker04服务器上粘贴并运行脚本
+* Paste and run the script on helix-k8s-worker01 to helix-k8s-worker04 servers
 
 ```
 sudo docker run -d --privileged --restart=unless-stopped --net=host -v /etc/kubernetes:/etc/kubernetes -v /var/run:/var/run  helix-harbor.bmc.local/rancher/rancher-agent:v2.10.2 --server https://192.168.1.200 --token rv6vjhfqpc9czznz7j7qt4twz7d5wjlksqjw9cbl9v96fkdxpjdz7b --ca-checksum 4a158b1469cba97e2b7d19120e449133a46edb5d7715ccb629618df27d2a073d --worker
 
 ```
 
-* 拷贝master(etcd & Control Plance)安装脚本
+* Copy the master (etcd & Control Plance) installation script
 
 ![8e9249128319f17a63a610abeecdd3ee.png](en-resource://database/671:1)
 
-* 在helix-k8s-master服务器上粘贴并执行安装脚本
+* Paste and execute the installation script on the helix-k8s-master server
 ```
 sudo docker run -d --privileged --restart=unless-stopped --net=host -v /etc/kubernetes:/etc/kubernetes -v /var/run:/var/run  helix-harbor.bmc.local/rancher/rancher-agent:v2.10.2 --server https://192.168.1.200 --token rv6vjhfqpc9czznz7j7qt4twz7d5wjlksqjw9cbl9v96fkdxpjdz7b --ca-checksum 4a158b1469cba97e2b7d19120e449133a46edb5d7715ccb629618df27d2a073d --etcd --controlplane
 ```
 
-* 等待所有节点全部加入集群，k8s集群创建完成
+* Wait for all nodes to join the cluster and the k8s cluster is created
 ![ea2b09f0d97313a9add90ad1f8f97ff8.png](en-resource://database/673:1)
 
-* 如果集群安装报错缺少某个image，可能是rancher-images.txt文件中缺少了一些镜像，需要补充到本地镜像库即可
+* If the cluster installation reports an error that an image is missing, it may be that some images are missing from the rancher-images.txt file and need to be added to the local image registry. For example, if an error message is displayed saying that hyperkube:v1.31.5-rancher1 is missing, execute the following command line on the helix-harbor server.
 
     ```
-    # 比如报错缺少hyperkube:v1.31.5-rancher1，在helix-harbor服务器上执行
     docker pull rancher/hyperkube:v1.31.5-rancher1
     docker tag rancher/hyperkube:v1.31.5-rancher1 helix-harbor.bmc.local/rancher/hyperkube:v1.31.5-rancher1
     docker push helix-harbor.bmc.local/rancher/hyperkube:v1.31.5-rancher1
     ```
 
-
-### 6.3 设置k8s集群token时效
-Rancher管理的K8s集群token的默认时效都很短，会带来k8s的监控失效和Helix的安装pipeline报错等问题，建议修改为永不失效
+### 6.3 Set the k8s cluster token expiration time
+The default validity period of the K8s cluster token managed by Rancher is very short, which will cause problems such as K8s monitoring failure and Helix installation pipeline errors. It is recommended to change it to never expire
 ![cd462d4682b27f29756427692382865c.png](en-resource://database/675:1)
 ![2f2a4ccc11a5b2ef8d0f3e08c911f46c.png](en-resource://database/677:1)
 
 
-### 6.4 安装kubernetes客户端工具
-helix-svc将作为Helix安装工作站，需要在此服务器安装客户端工具
-#### 6.4.1 配置kubernetes配置文件
+### 6.4 nstall Kubernetes client tools
+helix-svc will be used as the Helix installation workstation, and the client tools need to be installed on this server
+#### 6.4.1 kubernetes configuration file
 
-* 拷贝配置文件
+* Copy kubeconfig file contents
 ![dd7f955034f6c5160d489e45a9b5235d.png](en-resource://database/685:1)
 
-* 写入配置文件
+* Save to helix-svc
     ```
     mkdir -p ~/.kube
     cd ~/.kube
     vi config
 
-    # 粘贴剪切板内容并保存
+    # Paste the clipboard contents and save
     ```
 
-#### 6.4.1 安装kubectl
+#### 6.4.2 Install kubectl
 
-* 在helix-svc服务器安装跟kubernetes版本一致的kubectl
+* Install kubectl on the helix-svc server that matches the Kubernetes version
 
     ```
     curl -o /usr/local/bin/kubectl -LO https://storage.googleapis.com/kubernetes-release/release/v1.31.0/bin/linux/amd64/kubectl && chmod +x /usr/local/bin/kubectl
@@ -677,15 +661,15 @@ helix-svc将作为Helix安装工作站，需要在此服务器安装客户端工
     kubectl top nodes
     ```
 
-* 创建ITOM使用的命名空间helixade, ITSM使用的命名空间helixis
+* Create the namespace helixade used by ITOM and the namespace helixis used by ITSM
     ```
     kubectl create ns helixade
     kubectl create ns helixis
     ```
 
-#### 6.4.2 安装helm
+#### 6.4.2 Install helm
 
-* 在helix-svc服务器安装最新版本的helm
+* Install the latest version of helm on the helix-svc server
 
     ```
     #Deploy helm
