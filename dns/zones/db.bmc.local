@@ -1,0 +1,45 @@
+$TTL 1W
+@       IN      SOA     helix-svc.bmc.local.    smtp (
+                        2019070700      ; serial
+                        3H              ; refresh (3 hours)
+                        30M             ; retry (30 minutes)
+                        2W              ; expiry (2 weeks)
+                        1W )            ; minimum (1 week)
+        IN      NS      helix-svc.bmc.local.
+        IN      MX 10   smtp.bmc.local.
+; VM
+helix-svc.bmc.local.        	IN      A       192.168.1.1
+helix-harbor.bmc.local.     	IN      A       192.168.1.2
+helix-k8s-master.bmc.local.     IN      A       192.168.1.200
+helix-k8s-worker01.bmc.local.   IN      A       192.168.1.201
+helix-k8s-worker02.bmc.local.   IN      A       192.168.1.202
+helix-k8s-worker03.bmc.local.   IN      A       192.168.1.203
+helix-k8s-worker04.bmc.local.   IN      A       192.168.1.204
+helix-discovery.bmc.local.   	IN      A       192.168.1.210
+
+; ITOM
+smtp.bmc.local.           IN      A       192.168.1.1
+lb.bmc.local.             IN      A       192.168.1.1
+tms.bmc.local.            IN      A       192.168.1.1
+minio.bmc.local.          IN      A       192.168.1.1
+minio-api.bmc.local.      IN      A       192.168.1.1
+kibana.bmc.local.         IN      A       192.168.1.1
+
+; ITSM
+itsm-poc.bmc.local.			IN      A       192.168.1.1		
+itsm-poc-int.bmc.local.			IN      A       192.168.1.1
+itsm-poc-smartit.bmc.local.		IN      A       192.168.1.1
+itsm-poc-sr.bmc.local.			IN      A       192.168.1.1
+itsm-poc-is.bmc.local.			IN      A       192.168.1.1
+itsm-poc-restapi.bmc.local.		IN      A       192.168.1.1
+itsm-poc-atws.bmc.local.		IN      A       192.168.1.1
+itsm-poc-dwp.bmc.local.			IN      A       192.168.1.1
+itsm-poc-dwpcatalog.bmc.local.	IN      A       192.168.1.1
+itsm-poc-vchat.bmc.local.		IN      A       192.168.1.1
+itsm-poc-chat.bmc.local.		IN      A       192.168.1.1
+itsm-poc-supportassisttool.bmc.local.	IN      A       192.168.1.1
+
+adelab-private-poc.bmc.local.		IN	A	192.168.1.1
+adelab-disc-private-poc.bmc.local.	IN	A	192.168.1.210
+
+;EOF

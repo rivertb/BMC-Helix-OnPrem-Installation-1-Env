@@ -1,0 +1,41 @@
+$TTL 1W
+@       IN      SOA     helix-svc.bmc.local.        root (
+                        2019070700      ; serial
+                        3H              ; refresh (3 hours)
+                        30M             ; retry (30 minutes)
+                        2W              ; expiry (2 weeks)
+                        1W )            ; minimum (1 week)
+        IN      NS      ns1.bmc.local.
+;
+1.1.168.192.in-addr.arpa.       IN      PTR     helix-svc.bmc.local.
+2.1.168.192.in-addr.arpa.       IN      PTR     helix-harbor.bmc.local.
+200.1.168.192.in-addr.arpa.     IN      PTR     helix-k8s-master.bmc.local.
+201.1.168.192.in-addr.arpa.     IN      PTR     helix-k8s-worker01.bmc.local.
+202.1.168.192.in-addr.arpa.     IN      PTR     helix-k8s-worker02.bmc.local.
+203.1.168.192.in-addr.arpa.     IN      PTR     helix-k8s-worker03.bmc.local.
+204.1.168.192.in-addr.arpa.     IN      PTR     helix-k8s-worker04.bmc.local.
+210.1.168.192.in-addr.arpa.     IN      PTR     helix-discovery.bmc.local.
+
+1.1.168.192.in-addr.arpa.       IN      PTR     lb.bmc.local.
+1.1.168.192.in-addr.arpa.       IN      PTR     tsm.bmc.local.
+1.1.168.192.in-addr.arpa.       IN      PTR     minio.bmc.local.
+1.1.168.192.in-addr.arpa.       IN      PTR     minio-api.bmc.local.
+1.1.168.192.in-addr.arpa.       IN      PTR     kibana.bmc.local.
+1.1.168.192.in-addr.arpa.       IN      PTR     smtp.bmc.local.
+
+1.1.168.192.in-addr.arpa.       IN      PTR     itsm-poc.bmc.local.
+1.1.168.192.in-addr.arpa.       IN      PTR     itsm-poc-int.bmc.local.
+1.1.168.192.in-addr.arpa.       IN      PTR     itsm-poc-smartit.bmc.local.
+1.1.168.192.in-addr.arpa.       IN      PTR     itsm-poc-sr.bmc.local.
+1.1.168.192.in-addr.arpa.       IN      PTR     itsm-poc-is.bmc.local.
+1.1.168.192.in-addr.arpa.       IN      PTR     itsm-poc-restapi.bmc.local.
+1.1.168.192.in-addr.arpa.       IN      PTR     itsm-poc-atws.bmc.local.
+1.1.168.192.in-addr.arpa.       IN      PTR     itsm-poc-dwp.bmc.local.
+1.1.168.192.in-addr.arpa.       IN      PTR     itsm-poc-dwpcatalog.bmc.local.
+1.1.168.192.in-addr.arpa.       IN      PTR     itsm-poc-vchat.bmc.local.
+1.1.168.192.in-addr.arpa.       IN      PTR     itsm-poc-chat.bmc.local.
+1.1.168.192.in-addr.arpa.       IN      PTR     itsm-poc-supportassisttool.bmc.local.
+
+
+;
+;EOF
