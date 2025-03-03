@@ -641,40 +641,40 @@ helix-svc will be used as the Helix installation workstation, and the client too
 ![Rancher Copy kubeconfig(./diagram/rancher-copy-kubeconfig.png)
 
 * Save to helix-svc
-    ```
-    mkdir -p ~/.kube
-    cd ~/.kube
-    vi config
+```
+mkdir -p ~/.kube
+cd ~/.kube
+vi config
 
-    # Paste the clipboard contents and save
+# Paste the clipboard contents and save
     ```
 
 #### 6.4.2 Install kubectl
 
 * Install kubectl on the helix-svc server that matches the Kubernetes version
 
-    ```
-    curl -o /usr/local/bin/kubectl -LO https://storage.googleapis.com/kubernetes-release/release/v1.31.0/bin/linux/amd64/kubectl && chmod +x /usr/local/bin/kubectl
+```
+curl -o /usr/local/bin/kubectl -LO https://storage.googleapis.com/kubernetes-release/release/v1.31.0/bin/linux/amd64/kubectl && chmod +x /usr/local/bin/kubectl
 
-    #Verifiy kubectl
-    kubectl version
-    kubectl get nodes
-    kubectl top nodes
+#Verifiy kubectl
+kubectl version
+kubectl get nodes
+kubectl top nodes
     ```
 
 * Create the namespace helixade used by ITOM and the namespace helixis used by ITSM
-    ```
-    kubectl create ns helixade
-    kubectl create ns helixis
-    ```
+```
+kubectl create ns helixade
+kubectl create ns helixis
+```
 
 #### 6.4.2 Install helm
 
 * Install the latest version of helm on the helix-svc server
 
-    ```
-    #Deploy helm
-    curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
-    chmod 700 get_helm.sh
-    ./get_helm.sh
-    ```
+```
+#Deploy helm
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+```
