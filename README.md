@@ -154,7 +154,7 @@ git clone https://github.com/rivertb/BMC-Helix-OnPrem-Installation-1-Env
 
 Apply configuration
 ```
-\cp ~/helix-metal-install/dns/named.conf /etc/named.conf
+\cp ~/BMC-Helix-OnPrem-Installation-1-Env/dns/named.conf /etc/named.conf
 cp -R ~/helix -metal-install/dns/zones /etc/named/
 ```
 Configure the firewall for DNS
@@ -309,7 +309,7 @@ docker-compose
 su - root
 mkdir openssl
 cd openssl
-cp ~/helix-metal-install/cert/create_certs.sh .
+cp ~/BMC-Helix-OnPrem-Installation-1-Env/cert/create_certs.sh .
 chmod a+x *.sh
 
 # Execute the script to create the Helix root certificate and self-signed certificate
@@ -435,7 +435,7 @@ This step can be performed on any server that can connect to the Internet, not j
 * Create Helix images download directory
 
 ```
-cp -R ~/helix-metal-install/helix-images-25.1  /root/.
+cp -R ~/BMC-Helix-OnPrem-Installation-1-Env/helix-images-25.1  /root/.
 
 ```
 * Download Helix ITOM all_images_<version>.txt file from BMC Docs to root/helix-images-25.1
