@@ -1,691 +1,585 @@
-# BMC HelixOM OnPrem Installation Step by Step 1 - Prepare the environment
+# BMC HelixOM ITOM & ITSM OnPrem Installation Step by Step 2 - ITOM
 
-- [BMC HelixOM OnPrem Installation Step by Step 1 - Prepare the environment](#bmc-helixom-onprem-installation-step-by-step-1---prepare-the-environment)
-  - [1 Architecture Diagram](#1-architecture-diagram)
-  - [2 Install VMs for Helix](#2-install-vms-for-helix)
-  - [3 Install Docker Environment](#3-install-docker-environment)
-  - [4 Prepare a self-signed certificate)](#4-prepare-a-self-signed-certificate)
-  - [5 Setup Harbor Registry)](#5-setup-harbor-registry)
-  - [6 Setup Kubernetes Cluster)](#6-setup-kubernetes-cluster)
+- [BMC HelixOM ITOM & ITSM OnPrem Installation Step by Step 2 - ITOM](#bmc-helixom-itom-&-itsm-onprem-installation-step-by-step-2---itom)
+  - [1 Pre-installation preparation](#1-pre-installation-preparation)
+  - [2 Deploy Helix Dashboard](#2-deploy-helix-dashboard)
+  - [3 Deploy Helix Discovery](#3-deploy-helix-discovery)
+  - [4 Install other ITOM components)](#4-install-other-itom-components)
+  - [5 Import PATROL KM to Helix Monitor repository)](#5-import-patrol-km-to-helix-monitor-repository)
+  
+## 1 Pre-installation preparation
 
-## 1 Architecture Diagram
-![Architecture Diagram](./diagram/architecture-diagram.png)
+The installation environment of this project depends on [BMC-Helix-OnPrem-Installation-1-Env](https://github.com/rivertb/BMC-Helix-OnPrem-Installation-1-Env). Please complete it before proceeding.
 
+### 1.1 Download Helix Deployment Manager
+The Helix ITOM installation process is completed by helix deployment manager.
 
-## 2 Install VMs for Helix
+* Login to [EPD](https://webepd.bmc.com/edownloads/ddl/cv/LP/442432/537020?fltk_=VTH1iwPCxfU%3D)，Download the latest version of helix-on-prem-deployment-manager-<release_version>.sh file，eg. helix-on-prem-deployment-manager-25.1.00-45.sh
 
-### 2.1 Helix VM List
+![EPD Helix Deployment Manager](./diagram/epd-helix-deployment-manager.png)
 
-| No. | VM Host Name | IP | OS | Sizing | Description | Software Installed |
-| --- | --- | --- | --- | --- | --- | --- |
-| 1 | helix-svc.bmc.local | 192.168.1.1 | CentOS8 | 4 vCPU * 8 GB RAM * 500 HDD | Helix Install workstations and auxiliary services | DNS/NFS/HAProxy/eMail |
-| 2 | helix-harbor.bmc.local | 192.168.1.2 | CentOS8 | 2 vCPU * 4 GB RAM * 500 HDD | Container Image Registry |Harbor |
-| 3 | helix-k8s-master.bmc.local | 192.168.1.200 | CentOS8 | 4 vCPU * 8 GB RAM * 100 HDD | k8s master node | rancher master pod |
-| 4 | helix-k8s-worker01.bmc.local | 191.168.1.201 | CentOS8 | 16 vCPU * 64 GB RAM * 100 HDD | k8s worker node 1 | rancher worker pod |
-| 5 | helix-k8s-worker02.bmc.local | 191.168.1.202 | CentOS8 | 16 vCPU * 64 GB RAM * 100 HDD | k8s worker node 2 | rancher worker pod |
-| 6 | helix-k8s-worker03.bmc.local | 191.168.1.203 | CentOS8 | 16 vCPU * 64 GB RAM * 100 HDD | k8s worker node 3 | rancher woker pod |
-| 7 | helix-k8s-worker04.bmc.local | 191.168.1.204 | CentOS8 | 16 vCPU * 64 GB RAM * 100 HDD | k8s worker node 4 | rancher worker pod |
-| 8 | helix-discovery.bmc.local | 191.168.1.210 | OLinux9 | 4 vCPU * 4 GB RAM * 65 HDD | Discovery VM | Discovery VM |
+* Upload helix-on-prem-deployment-manager-25.1.00-45.sh to the helix-svc server
 
-### 2.2 Helix Domain Name List
+* Add executable permissions to shell files
 
-| No. | Domain Name | IP | Category |
+```
+chmod a+x helix-on-prem-deployment-manager-25.1.00-45.sh
+```
+
+* Execute the self-extracting file and create the directory helix-on-prem-deployment-manager
+```
+./helix-on-prem-deployment-manager-25.1.00-45.sh
+```
+
+* Modify the directory name to facilitate the distinction between versions
+```
+mv helix-on-prem-deployment-manager helix-on-prem-deployment-manager-25.1
+```
+
+### 1.2 Set the config files
+#### 1.2.1 infra.config
+
+* Edit the ./config/infra.config file and modify the parameter values as shown in the following table:
+
+| Line No. | Parameter | Value | Description |
 | --- | --- | --- | --- |
-| 1 | helix-svc.bmc.local | 192.168.1.1 | VM Domain Name|
-| 2 | helix-harbor.bmc.local | 192.168.1.2 | VM Domain Name |
-| 3 | helix-k8s-master.bmc.local | 192.168.1.200 | VM Domain Name |
-| 5 | helix-k8s-worker01.bmc.local | 192.168.1.201 | VM Domain Name |
-| 6 | helix-k8s-worker02.bmc.local | 192.168.1.202 | VM Domain Name |
-| 8 | helix-k8s-worker03.bmc.local | 192.168.1.203 | VM Domain Name |
-| 9 | helix-k8s-worker03.bmc.local | 192.168.1.203 | VM Domain Name |
-| 10 | helix-k8s-worker03.bmc.local | 192.168.1.210 | VM Domain Name|
-| 11 | smtp.bmc.local | 192.168.1.1 | ITOM Domain Name |
-| 12 | lb.bmc.local | 192.168.1.1 | ITOM Domain Name |
-| 13 | tms.bmc.local | 192.168.1.1 | ITOM Domain Name |
-| 14 | minio.bmc.local | 192.168.1.1 | ITOM Domain Name|
-| 15 | minio-api.bmc.local | 192.168.1.1 | ITOM Domain Name |
-| 16 | kibana.bmc.local | 192.168.1.1 | ITOM Domain Name |
-| 16 | adelab-private-poc.bmc.local | 192.168.1.1 | ITOM Domain Name |
-| 16 | adelab-disc-private-poc.bmc.local | 192.168.1.210 | ITOM Domain Name |
-| 17 | itsm-poc.bmc.local | 192.168.1.1 | ITSM Domain Name |
-| 18 | itsm-poc-int.bmc.local | 192.168.1.1 | ITSM Domain Name |
-| 19 | itsm-poc-smartit.bmc.local | 192.168.1.1 | ITSM Domain Name|
-| 20 | itsm-poc-sr.bmc.local | 192.168.1.1 | ITSM Domain Name |
-| 21 | itsm-poc-is.bmc.local | 192.168.1.1 | ITSM Domain Name |
-| 22 | itsm-poc-restapi.bmc.local | 192.168.1.1 | ITSM Domain Name |
-| 23 | itsm-poc-atws.bmc.local | 192.168.1.1 | ITSM Domain Name |
-| 24 | itsm-poc-dwp.bmc.local | 192.168.1.1 | ITSM Domain Name |
-| 25 | itsm-poc-dwpcatalog.bmc.local | 192.168.1.1 | ITSM Domain Name |
-| 26 | itsm-poc-vchat.bmc.local | 192.168.1.1 | ITSM Domain Name |
-| 27 | itsm-poc-chat.bmc.local | 192.168.1.1 | ITSM Domain Name|
-| 28 | itsm-poc-supportassisttool.bmc.local | 192.168.1.1 | ITSM Domain Name |
+| 9 | IMAGE_REGISTRY_HOST | helix-harbor.bmc.local |  |
+| 10 | IMAGE_REGISTRY_USERNAME | admin | The password is set in the secrets file |
+| 20 | NAMESPACE | helixade | Namespace for itom installation |
+| 21 | LB_HOST | lb.bmc.local | |
+| 22 | LB_PORT | 443 | |
+| 23 | TMS_LB_HOST | tms.bmc.local | |
+| 24 | DOMAIN | bmc.local | |
+| 26 | MINIO_LB_HOST | minio.bmc.local |  |
+| 27 | MINIO_API_LB_HOST | minio-api.bmc.local |  |
+| 28 | MINIO_API_LB_HOST | minio-api.bmc.local |  |
+| 30 | TENANT_ENVIRONMENT | poc |  |
+| 46 | TENANT_NAME | adelab |  |
+| 47 | TENANT_EMAIL | adelab@bmc.local |  |
+| 48 | TENANT_FIRST_NAME | adelab |  |
+| 49 | TENANT_LAST_NAME | helix |  |
+| 51 | TENANT_TYPE | private | |
+| 53 | TENANT_COUNTRY | "China" |  |
+| 68 | SMTP_HOST | helix-svc.bmc.local |  |
+| 69 | SMTP_PORT | 25 |  |
+| 70 | SMTP_USERNAME | dummy |  |
+| 71 | SMTP_FROM_EMAIL | helix@bmc.local |  |
+| 73 | SMTP_TLS | false |  |
+| 74 | SMTP_AUTH_DASHBOARD | true |  |
+| 75 | SMTP_AUTH  | PLAIN |  |
+| 76 | OPS_GROUP_EMAIL | ops@bmc.local |  |
+| 77 | APPROVAL_GROUP_EMAIL | approval@bmc.local |  |
+| 91 | PG_STORAGE_CLASS | nfs-storage |  |
+| 92 | VMSTORAGE_STORAGE_CLASS | nfs-storage |  |
+| 93 | VMAGGSTORAGE_STORAGE_CLASS | nfs-storage |  |
+| 94 | ES_MASTER_STORAGE_CLASS | nfs-storage |  |
+| 95 | ES_DATA_STORAGE_CLASS | nfs-storage |  |
+| 96 | MINIO_STORAGE_CLASS | nfs-storage |  |
+| 97 | EFS_STORAGE_CLASS | nfs-storage |  |
+| 98 | REDIS_HA_GLOBAL_STORAGECLASS | nfs-storage |  |
+| 99 | KAFKA_STORAGECLASS | nfs-storage |  |  
+| 100 | REDIS_CLUSTER_STORAGE_CLASS | nfs-storage |  |
+| 101 | AIOPS_STORAGE_CLASS | nfs-storage |  |
+| 105 | OPT_STORAGE_CLASS | nfs-storage |  |
+| 111 | CUSTOM_CA_SIGNED_CERT_IN_USE | true |  |
+| 126 | SMART_SYSTEM_USERNAME | system | Helix Discovery password is set in the secrets file |
+| 130 | INGRESS_CLASS | nginx |  |
+| 135 | INGRESS_TLS_SECRET_NAME | my-tls-secret |  |
+| 140 | HELM_BIN | /usr/local/bin/helm |  |
+| 141 | KUBECTL_BIN | /usr/local/bin/kubectl |  |
+| 189 | LOGIN_ID | hannah_admin | Helix Dashboard admin user |
 
 
+#### 1.2.2 deployment.config
+Edit the ./config/deployment.config configuration file and modify the following parameters:
+
+| Line No. | Parameter | Value | Description |
+| --- | --- | --- | --- |
+| 7 | DEPLOYMENT_SIZE | compact | For PoC only |
 
 
-### 2.3 Install VM
-During the installation of Linux, when creating a disk partition, delete the/home directory, rebuild the root directory, and allocate all remaining disk space to the root directory
-![Manual Partitioning](./diagram/manual-partitioning.png)
-Select the Minial Install
-![Minimal Install](./diagram/minimal-install.png)
+#### 1.2.3 secrets.txt
 
+* Edit the ./common/certs/secrets.txt file and modify the following content:
 
-### 2.4 Config helix-svc VM
-helix-svc is the auxiliary server providing peripheral services for Helix OnPrem.
+| Line No. | Parameter | Value | Description |
+| --- | --- | --- | --- |
+| 2 | IMAGE_REGISTRY_PASSWORD | bmcAdm1n | Harbor console admin password |
+| 3 | SMTP_PASSWORD | dummy | MailHog mailbox does not require a password |
+| 4 | SMART_SYSTEM_PASSWORD | bmcAdm1n | All passwords are set to bmcAdm1n for easy memorization |
+| 9 | ES_JKS_PASSWORD | bmcAdm1n | |
 
-* Gateway for all other VMs
-* DNS Server
-* eMail Server
-* NFS Server
-* Load Balancer Server
-
-#### 2.4.1 Setup Network
-
-To reduce network address usage, all servers in the Helix cluster are configured on the intranet IP address segment 192.168.1.1/24. Only the helix-svc server is configured with dual network cards, connecting to the internal and external networks respectively. All other virtual machines are configured with a single network card, connected to the LAN network k8s-internal.
-
-* The WAN network card is responsible for providing Internet access services for other VMs and Helix clusters.
-* The LAN network card is responsible for forwarding external service requests
-
-![helix-svc Virtual Hardware](./diagram/helix-svc-virtual-hardware.png)
-
-Set ntwrok via command
+* The secrets.txt file will be deleted when you run the Helix installer for the first time. It is recommended to make a backup.
 ```
-nmtui-edit
+cp secrets.txt secrets.txt.bak
 ```
-
-The popup view
-![helix-svc Network Interfaces](./diagram/helix-svc-networks-interfaces.png)
-
-Edit the external network card ens34 and modify the following content:
-
-* Check the "Ignorre automatically obtained DNS parameters" option
-![helix-svc ens34](./diagram/helix-svc-ens34.png)
-
-Edit the intranet card ens35 and modify the following content:
-
-* IPv4 Configuration: Manual
-* DNS: 127.0.0.1
-* Search domains: bmc.local
-* Check the“Never use this network for default route”option
-![helix-svc ens35](./diagram/helix-svc-ens35.png)
-
-#### 2.4.2 Setup firewalld
-
-Create internal and external zone
-
+#### 1.2.4 custom_cacert.pem
 ```
-nmcli connection modify ens34 connection.zone external
-nmcli connection modify ens35 connection.zone internal
+cp /root/opensslfull_chain.crt /root/helix-on-prem-deployment-manager-25.1/commons/../commons/certs/custom_cacert.pem
+```
+### 1.4 NFS and StorageClass
+
+#### 1.4.1 Setup NFS Server
+* Install NFS server software in helix-svc
+```
+dnf install nfs-utils -y
 ```
 
-View zones:
-
+* Create NFS Storage Directory
 ```
-firewall-cmd --get-active-zones
+mkdir -p /opt/datastore/helixade
+chown -R nobody:nobody /opt/datastore/helixade
+chmod -R 777 /opt/datastore/helixade
 ```
 
-
-Set masquerading (source-nat) on the both zones
-
+* Export NFS directory
 ```
-firewall-cmd --zone=external --add-masquerade --permanent
-firewall-cmd --zone=internal --add-masquerade --permanent
+echo "/opt/datastore/helixade  192.168.1.0/24(rw,sync,root_squash,no_subtree_check,no_wdelay)" > /etc/exports
+exportfs -rv
+```
+
+* Opening the firewall for NFS
+```
+firewall-cmd --zone=internal --add-service mountd --permanent
+firewall-cmd --zone=internal --add-service rpc-bind --permanent
+firewall-cmd --zone=internal --add-service nfs --permanent
 firewall-cmd --reload
 ```
 
-Check the current settings of each zone
+* Enable and start NFS service
 ```
-firewall-cmd --list-all --zone=internal
-firewall-cmd --list-all --zone=external
-cat /proc/sys/net/ipv4/ip_forward
-```
-#### 2.4.3 Setup DNS
-
-Install and configure BIND DNS
-```
-dnf install bind bind-utils -y
+systemctl enable nfs-server rpcbind
+systemctl start nfs-server rpcbind nfs-mountd
 ```
 
-Download config files for each of the services
+* Verify NFS Directory
 ```
-git clone https://github.com/rivertb/BMC-Helix-OnPrem-Installation-1-Env
+showmount -e
 ```
 
+#### 1.4.2 Create StorageClass on NFS
 
-Apply configuration
+* For the creation of NFS Storage Class, please refer to the document[nfs-subdir-external-provisioner](https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner)
+
 ```
-\cp ~/BMC-Helix-OnPrem-Installation-1-Env/dns/named.conf /etc/named.conf
-cp -R ~/BMC-Helix-OnPrem-Installation-1-Env/dns/zones /etc/named/
+#Create namespace for storageclass
+kubectl create namespace infra
+helm repo add nfs-subdir-external-provisioner https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner
+helm install nfs-subdir-external-provisioner nfs-subdir-external-provisioner/nfs-subdir-external-provisioner --set nfs.server=192.168.1.1 --set nfs.path=/opt/datastore/helixade --set storageClass.name=nfs-storage -n infra
 ```
-Configure the firewall for DNS
+
+* Verify the storageclass
 ```
-firewall-cmd --add-port=53/udp --zone=internal --permanent
-firewall-cmd --add-port=53/tcp --zone=internal --permanent
+kubectl -n infra get pod
+kubectl get sc
+```
+### 1.5 Install HAProxy as Load Balancer
+
+* Install HAProxy
+```
+dnf install haproxy -y
+```
+
+* Copy config file
+```
+\cp ~/helix-metal-install/haproxy.cfg /etc/haproxy/haproxy.cfg
+```
+
+* Enable and start HAProxy
+```
+systemctl enable haproxy
+systemctl start haproxy
+systemctl status haproxy
+```
+
+* Open firewall for HAProxy service
+```
+firewall-cmd --add-service=http --zone=internal --permanent # web services hosted on worker nodes
+firewall-cmd --add-service=http --zone=external --permanent # web services hosted on worker nodes
+firewall-cmd --add-service=https --zone=internal --permanent # web services hosted on worker nodes
+firewall-cmd --add-service=https --zone=external --permanent # web services hosted on worker nodes
+firewall-cmd --add-port=9000/tcp --zone=internal --permanent # HAProxy Stats
+firewall-cmd --add-port=9000/tcp --zone=external --permanent # HAProxy Stats
 firewall-cmd --reload
 ```
-Enable and start the service
+
+* Verify HAProxy, browser access https:192.168.1.1:9000/stats
+![Helix Status 1](./diagram/haproxy-status-1.png)
+
+You can see that the queue status is not UP because it has not been configured yet, which is normal.
+
+### 1.6 MailHog as eMail Server
+
+* Run the containerized version of the mailhog mail server to provide mail services for the Helix installation
 ```
-systemctl enable named
-systemctl start named
-systemctl status named
-```
-Restart Network Manager
-```
-systemctl restart NetworkManager
-```
-Confirm dig now sees the correct DNS results by using the DNS Server running locally
-```
-dig lb.bmc.local
-dig -o 192.168.1.1
+#Add helm repo
+helm repo add codecentric https://codecentric.github.io/helm-charts
+helm repo update
+
+#Install MailHog helm chart
+helm install mailhog codecentric/mailhog -n email --create-namespace --set service.type=NodePort
+
+#Verify that the email service was created successfully（STATUS=Running）
+kubectl -n email get pod
 ```
 
-#### 2.4.4 Setup JDK
+* Query service port information
 ```
-yum install java-11-openjdk
-ls /usr/lib/jvm/jre-11-openjdk
+node_ip=$(kubectl get nodes -o=jsonpath='{.items[0].status.addresses[0].address}')
+web_port=$(kubectl --namespace email get svc mailhog -o=jsonpath="{.spec.ports[?(@.name=='http')].nodePort}")
+smtp_port=$(kubectl --namespace email get svc mailhog -o=jsonpath="{.spec.ports[?(@.name=='tcp-smtp')].nodePort}")
+
+echo "MailHog Web UI at http://$node_ip:$web_port"
+echo "MailHog SMTP port at $node_ip:$smtp_port"
+
+
+MailHog Web UI at http://192.168.1.200:31532
+MailHog SMTP port at 192.168.1.200:32354
+```
+The above output shows that the mail console is http://192.168.1.200:31532 and the sending interface is 192.168.1.200:32354
+
+* Modify the HAProxy configuration file and adjust the mailhog port to the SMTP port output value
+```
+vi /etc/haproxy/haproxy.cfg
+```
+backend mailhog
+  mode tcp
+    balance     leastconn
+    server helix-k8s-worker01 192.168.1.200:**32354** check
+
+* Restart the HAProxy service and enable the new configuration file
+```
+systemctl restart haproxy
 ```
 
-### 2.5 Setup network for other VMs 
-For servers other than helix-svc, configure the following:
+* Check the HAProxy console to verify that mailhog is running
+![Helix Status 2](./diagram/haproxy-status-2.png)
 
-* IPv4 Configuration: Manual
-* Addresses: Assign IP addresses to VMs according to the table definition in 2.1.
-* Gateway:192.168.1.1
-* DNS Server:192.168.1.1
-* Search dommains: bmc.local
-![Other VMs ens34](./diagram/helix-ens34.png)
-
-Verify that external network access is successful
+* Open firewall ports for MailHog
 ```
-dig www.baidu.com
+firewall-cmd --add-port=25/tcp --zone=internal --permanent
+firewall-cmd --add-port=31532/tcp --zone=internal --permanent
+firewall-cmd --add-port=32354/tcp --zone=internal --permanent
+firewall-cmd --reload
 ```
 
-Verify that the local DNS can resolve the local domain name
+* Send test mail
 ```
-dig lb.bmc.local
-dig -o 192.168.1.1
+dnf install epel-release -y 
+dnf install swaks -y
+# send email using swaks
+swaks -f host-test@me -t local@me -s $node_ip -p $smtp_port --body "this is a test" --header "Subject: host validation via port: $smtp_port"
+swaks -f host-test@me -t local@me -s 192.168.1.1 -p 25 --body "this is a test" --header "Subject: host validation via port: 25"
+```
+* Log in to the email console https://192.168.1.200:31532 through the browser, and you can see two emails, one sent to the original port and the other to port 25 of the HAProxy proxy
+![MailHog Test eMails](./diagram/mailhog-test-emails.png)
+
+### 1.7 Ingress
+Helix supports two types of Kubernetes reverse proxy and load balancing starting from 24.3
+
+* NGINX Open Source Ingress Controller
+* F5 NGINX Plus Ingress Controller
+
+This document uses the first method. For detailed introduction and installation steps, please refer to the document[IngressController](https://docs.bmc.com/xwiki/bin/view/IT-Operations-Management/On-Premises-Deployment/BMC-Helix-IT-Operations-Management-Deployment/itomdeploy251/Deploying/Preparing-for-deployment/Deploying-and-configuring-the-NGINX-Open-Source-Ingress-Controller/)
+
+* Delete the old ingress-nginx namespace
+
+```
+kubectl delete ds -n ingress-nginx ingress-nginx-controller
+kubectl -n ingress-nginx delete svc ingress-nginx-controller-admission
+kubectl delete clusterrole ingress-nginxkubectl delete ClusterRoleBinding ingress-nginx
+kubectl delete IngressClass nginx
+kubectl delete ValidatingWebhookConfiguration ingress-nginx-admission
+kubectl delete ns ingress-nginx
 ```
 
-### 2.6 Adjusting Linux Configuration
+* Download the corresponding kubernetes version [NGINX Ingress Controller](https://docs.bmc.com/xwiki/bin/view/IT-Operations-Management/On-Premises-Deployment/BMC-Helix-IT-Operations-Management-Deployment/itomdeploy251/Planning/System-requirements/) 
+
 ```
-#Update OS
-yum update -y
-yum upgrade -y
+dnf install wget -y
+wget https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.11.4/deploy/static/provider/cloud/deploy.yaml
+```
 
-# Close firewalld
-systemctl stop firewalld
-systemctl disable firewalld
+* Edit and modify the downloaded deploy.yaml file
 
-#Disable SELinux
-setenforce 0
-sed -i 's#SELINUX=enforcing#SELINUX=disabled#g' /etc/sysconfig/selinux
-sed -i 's#SELINUX=enforcing#SELINUX=disabled#g' /etc/selinux/config
+    Change the kind field of the ingress-nginx-controller from **Deployment** to **DaemonSet**
+    Under kind: **Daemonset**, change the spec.**strategy** field to spec.**updateStrategy**
+    Under kind: **Daemonset**, locate **securityContext**, and then set the value of the flag **allowPrivilegeEscalation** as **true**
 
-# Swapoff swap
-swapoff -a && sysctl -w vm.swappiness=0
-sed -ri '/^[^#]*swap/s@^@#@' /etc/fstab
+*  Deploy deploy.yaml
+```
+kubectl create ns ingress-nginx
+kubectl apply -f deploy.yaml
+```
 
-#Set time zone
+* Wait for Ingress Nginx to be created
+```
+kubectl -n ingress-nginx get all
+
+NAME                                       READY   STATUS      RESTARTS   AGE
+pod/ingress-nginx-admission-create-4fdv9   0/1     Completed   0          111s
+pod/ingress-nginx-admission-patch-tdxjj    0/1     Completed   0          111s
+pod/ingress-nginx-controller-dwxv7         1/1     Running     0          111s
+pod/ingress-nginx-controller-kw2qt         1/1     Running     0          111s
+pod/ingress-nginx-controller-llgpq         1/1     Running     0          111s
+pod/ingress-nginx-controller-sbwrb         1/1     Running     0          111s
+
+NAME                                         TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)                      AGE
+service/ingress-nginx-controller             LoadBalancer   10.43.144.239   <pending>     80:30468/TCP,443:31019/TCP   112s
+service/ingress-nginx-controller-admission   ClusterIP      10.43.137.171   <none>        443/TCP                      112s
+
+NAME                                      DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR            AGE
+daemonset.apps/ingress-nginx-controller   4         4         4       4            4           kubernetes.io/os=linux   111s
+
+NAME                                       STATUS     COMPLETIONS   DURATION   AGE
+job.batch/ingress-nginx-admission-create   Complete   1/1           35s        112s
+job.batch/ingress-nginx-admission-patch    Complete   1/1           35s        112s
+```
+
+* Create secret my-tls-secret
+```
+kubectl create secret tls my-tls-secret --cert=/root/openssl/bmc.local.crt --key=/root/openssl/bmc.local.key -n ingress-nginx
+```
+
+* Modify daemonset to point the default SSL certificate to my-tls-secret
+```
+kubectl edit daemonset ingress-nginx-controller -n ingress-nginx
+```
+The modified configuration is as follows:
+![my-tls-secret-setting](./diagram/my-tls-secret-setting.png)
+
+* Modify ingress-nginx-controller
+```
+kubectl edit cm ingress-nginx-controller -n ingress-nginx
+```
+
+* Add the following content under data:
+
+```
+  enable-underscores-in-headers: "true"
+  proxy-body-size: 250m
+  server-name-hash-bucket-size: "1024"
+  ssl-redirect: "false"
+  use-forwarded-headers: "true"
+  worker-processes: "40"
+  allow-snippet-annotations: "true"
+```
+
+* After modification, the figure is as follows:
+
+![Ingress Nginx Controller](./diagram/ingress-nginx-controller-setting.png)
+
+* Restart daemonset
+```
+kubectl -n ingress-nginx rollout restart ds ingress-nginx-controller
+```
+
+* Wait for the pod restart to complete
+```
+kubectl -n ingress-nginx get pod
+```
+
+* Verify that the new Ingress Controller version is used
+```
+kubectl -n ingress-nginx describe <pod name> | grep -i image
+```
+The verification results are as follows:
+```
+[root@helix-svc openssl]# kubectl -n ingress-nginx get pod
+NAME                                   READY   STATUS      RESTARTS   AGE
+ingress-nginx-admission-create-4fdv9   0/1     Completed   0          46m
+ingress-nginx-admission-patch-tdxjj    0/1     Completed   0          46m
+ingress-nginx-controller-2q2vg         1/1     Running     0          13s
+ingress-nginx-controller-8h92b         1/1     Running     0          98s
+ingress-nginx-controller-wrmq5         1/1     Running     0          66s
+ingress-nginx-controller-zt5wg         1/1     Running     0          35s
+[root@helix-svc openssl]# kubectl -n ingress-nginx describe ingress-nginx-controller-2q2vg | grep -i image
+error: the server doesn't have a resource type "ingress-nginx-controller-2q2vg"
+[root@helix-svc openssl]# kubectl -n ingress-nginx describe pod ingress-nginx-controller-2q2vg | grep -i image
+    Image:           registry.k8s.io/ingress-nginx/controller:v1.11.4@sha256:981a97d78bee3109c0b149946c07989f8f1478a9265031d2d23dea839ba05b52
+    Image ID:        docker-pullable://registry.k8s.io/ingress-nginx/controller@sha256:981a97d78bee3109c0b149946c07989f8f1478a9265031d2d23dea839ba05b52
+  Normal  Pulled     50s   kubelet                   Container image "registry.k8s.io/ingress-nginx/controller:v1.11.4@sha256:981a97d78bee3109c0b149946c07989f8f1478a9265031d2d23dea839ba05b52" already present on machine
+```
+* Delete the Validating Webhook Configuration, otherwise it may prevent the release of the ingress object
+```
+kubectl delete job ingress-nginx-admission-create ingress-nginx-admission-patch -n ingress-nginx --ignore-not-found=true
+kubectl -n ingress-nginx delete -A ValidatingWebhookConfiguration ingress-nginx-admission
+```
+* Update the service ingress-nginx-controller to point the external IP to the address of the service on the balancer
+```
+kubectl patch service/ingress-nginx-controller -n ingress-nginx -p '{"spec":{"externalIPs":["192.168.1.1"]}}'
+```
+
+* Verify that ingress-nginx-controller has been successfully changed
+```
+kubectl -n ingress-nginx get service
+
+NAME                                 TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)                      AGE
+ingress-nginx-controller             LoadBalancer   10.43.144.239   192.168.1.1   80:30468/TCP,443:31019/TCP   55m
+ingress-nginx-controller-admission   ClusterIP      10.43.137.171   <none>        443/TCP                      55m
+```
+
+* Change the HAProxy configuration based on the returned 443 mapping port number (31019 in this example).
+```
+vi /etc/haproxy/haproxy.cfg
+```
+
+* Screenshot of the effect after the change
+
+![HAProxy cfg](./diagram/haproxy-cfg.png)
+
+* Restart the HAProxy service to enable the new configuration
+```
+systemctl restart haproxy
+```
+
+* Log in to the HAProxy console with a browser and verify the result
+![HAProxy Status 3](./diagram/haproxy-status-3.png)
+
+
+## 2 Deploy Helix Dashboard
+
+### 2.1 Run Helix Deployment Manager
+* Execute the Helix deployment manager on the helix-svc server
+
+```
+cd /root//root/helix-on-prem-deployment-manager-25.1
+./deployment-manager.sh
+```
+
+* Wait for the installer to complete:
+![Completed Helix Installation](./diagram/completed-helix-on-prem-installation.png)
+
+### 2.2 Import the CA certificate into the Windows server where the browser is located
+
+* Check Helix Portal account activation email
+![Activate Portal Account](./diagram/activate-portal-account-eamil.png)
+
+* Click the "Sign in to activate your account" link in the email, and the browser will pop up the Helix Portal login page, and the error "net::ERR_CERT_AUTHORITY_INVALID" will be reported. This is normal. Because the Https signing CA used by Helix is customized, the CA certificate needs to be imported into the trust store.
+![NET::ERR-CERT-AUTHORITY-INVALID](./diagram/net-err-cert-authority-invalid.png)
+
+
+* Copy the /root/openssl/HelixCA.crt file on the helix-svc host to the current Windows host and double-click it.
+
+![Install Certification in Chrome](./diagram/install-certification-in-chrome.png)
+
+
+* Enter the Certificate Import Wizard and select Local Machine
+
+![Store Location Local Machine](./diagram/store-location-local-machine.png)
+
+* Select Trusted Root Certificate
+
+![Trusted Root Certifate](./diagram/trusted-root-certification-authorities.png)
+
+* Refresh the browser login interface again and set the password for the default administrator account hannah_admin
+![Change hannah-admin Password](./diagram/hannah_admin-password.png)
+
+* Complete the Helix Portal installation
+![Helix Portal](./diagram/helix-portal.png)
+
+## 3 Deploy Helix Discovery
+BMC Helix Discovery is a basic component of Helix ITOM. You must successfully install and configure Helix Discovery before installing other Helix ITOM components. Helix Discovery is delivered as a virtual machine OVF file and runs as a VM.
+
+### 3.1 Helix Discovery virtual machine import and configuration
+
+* In the virtual machine console, create a virtual machine and choose to create it from an OVF or OVA file.
+
+![Import Helix Discovery VM](./diagram/import-discovery-ovf.png)
+
+* Define the hostname, select the OVF file, and complete the import process
+
+![Select Helix Discovery OVF file](./diagram/select-helix-discovery-ovf.png)
+
+* Login to the helix-discovery server, use the built-in user tideway/tidewayuser, and change the password to bmcAdm1n%
+
+![Login Helix Discovery with tideway](./diagram/login-helix-discovery-with-tideway.png)
+
+* Switch to the root user, the default password is tideway. When you login for the first time, you need to change the password to bmcAdm1n$
+
+![Helix Discovery switch to root](./diagram/helix-discovery-switch-to-root.png)
+
+* Setup time zone
+```
+#set timezone
 timedatectl set-timezone Asia/Shanghai 
 
-#Time sync
-yum install -y chrony
-systemctl start chronyd
-systemctl enable chronyd
-
-chronyc sources -V
-
-#Set kernel parameters
-ulimit -SHn 65535
-
-cat <<EOF >> /etc/security/limits.conf
-* soft nofile 655360
-* hard nofile 131072
-* soft nproc 655350
-* hard nproc 655350
-* soft memlock unlimited
-* hard memlock unlimited
-EOF
-
-#Take the adjust to effect
-reboot
-```
-## 3. Install Docker Environment 
-
-### 3.1 Install Docker Engine
-
-   Install Docker on all VMs. For installation instructions, refer to：[Install Docker Engine](https://docs.docker.com/engine/install/)
-    
- Select different installation methods according to the type of the current operating system. For example, for CentOS:
-```
-#Uninstall old versions
-sudo dnf remove docker \
-                  docker-client \
-                  docker-client-latest \
-                  docker-common \
-                  docker-latest \
-                  docker-latest-logrotate \
-                  docker-logrotate \
-                  docker-engine
-
-#Set up the repository
-sudo dnf -y install dnf-plugins-core
-sudo dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-
-#Install Docker Engine Latest version
-sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
-
-#Start Docker Engine.
-sudo systemctl enable --now docker   
-
-#Verify that the installation is successful by running the hello-world image:
-sudo docker run hello-world
-
+#check result
+timedatectl
 ```
 
-### 3.2 Install Docker Compose
-Install Docker Compose on helix-harbor and helix-bhii，For installation instructions, refer to：[Install the Docker Compose standalone](https://docs.docker.com/compose/install/standalone/)
-   
-   
-```
-#To download and install the Docker Compose standalone
-curl -SL https://github.com/docker/compose/releases/download/v2.33.1/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+* Switch to netadmin user and enter the network management shell
+![Helix Discovery switch to netadmin](./diagram/helix-discovery-switch-to-netadmin.png)
 
-#Apply executable permissions
-chmod +x /usr/local/bin/docker-compose
+* Select option G first, then option H, configure the host name to helix-discovery, option C to submit, and option Q to return to the main menu
 
-#Create a symbolic link
-sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+![Helix Discovery set hostname](./diagram/helix-discovery-set-hostname.png)
 
-#Test and execute Docker Compose
-docker-compose
+
+* Select option I, option 1, reconfigure the network card, and set:
+DHCP: n
+ IPv4 Address: 192.168.1.210
+ Netmask: 255.255.255.0
+ IPv4 Gateway: 192.168.1.1
+ IPv6: n
+ Enable on boot: y
+Select option C to submit, y to confirm the changes, then select option Q to return to the main menu, and finally select option R to restart the virtual machine and complete the virtual machine configuration.
+
+![Helix Discovery set network](./diagram/helix-discovery-set-network.png)
+
+### 3.2 Config Helix Discovery console
+Use a browser to login to the Helix Discovery console at https://192.168.1.210, use the built-in login username system, and the default password system
+![Helix Discovery login](./diagram/helix-discovery-login.png)
+
+* When logging in for the first time, you need to change the system user password, for example, to bmcAdm1n#
+![Helix Discovery set password for system](./diagram/helix-discovery-set-password-for-system.png)
+
+
+* To facilitate testing, it is recommended to modify the security policy and cancel the password restriction. Administration menu -> Security Policy view
+Check out below options:
+Must contain uppercase characters
+Must contain lowercase characters
+Must contain numeric characters
+Must contain special characters
+Must not contain sequences
+Must not match a common dictionary password
+
+![Helix Discovery change Security Policy](./diagram/helix-discovery-change-security-policy.png)
+
+* For easier memorization, change the password to bmcAdm1n, which is consistent with the SMART_SYSTEM_PASSWORD value in secrets.txt.
+![Helix Discovery set system password to bmcAdm1n](./diagram/helix-discovery-set-password-for-system2.png)
+
+* Enter the menu Administration->Appliance Configuration->Name Resolution view to set DNS
+Search Domain: bmc.local
+Name Servers: 192.168.1.1
+
+![Helix Discovery set system Name Resolution](./diagram/helix-discovery-set-name-resolution.png)
+
+* Enter the menu Administration->Time Sync view NTP
+![Helix Discovery set Time Sync](./diagram/helix-discovery-set-time-sync.png)
+
+* Upload the Helix CA certificate as a trusted certificate
+Administration->Single Sign On view，Upload CA Bundle
+![Helix Discovery upload Trustred CA](./diagram/helix-discovery-upload-trusted-ca.png)
+
+
+## 4 Install other ITOM components
+Helix ITOM components include the following list. Select the component to install, change the corresponding parameter value to yes in the deployment.config file, and re-execute /deployment-manager.sh
+
+| Line no. | Parameter | Helix ITOM Component |
+| --- | --- | --- |
+| 42 | AIOPS_SERVICES | Helix Service Monitoring |
+| 45 | MONITOR | Helix Operations Management |
+| 48 | LOG_ANALYTICS_SERVICES | Helix Log Analytics |
+| 51 | INTELLIGENT_AUTOMATION | Helix Intelligent Automation |
+| 54 | OPTIMIZE | Helix Continuous Optimization |
+| 62 | AUTOANAMOLY | Helix Operations Management & Helix Service Monitoring |
+
+## 5 Import PATROL KM to Helix Monitor repository
 ```
-            
- ## 4 Prepare a self-signed certificate
-###  4.1 Create a certificate
- 
- On the helix-svc server, create a CA certificate and a self-signed certificate
-```
-su - root
-mkdir openssl
-cd openssl
-cp ~/BMC-Helix-OnPrem-Installation-1-Env/cert/create_certs.sh .
+cp -R ~/BMC-Helix-OnPrem-Installation-1-Env/BHOM-KMImport /root
+cd /root/HOM-KMImport
 chmod a+x *.sh
-
-# Execute the script to create the Helix root certificate and self-signed certificate
-./create_certs.sh
-
-ls
-
--rwxr-xr-x 1 root root 1816 Feb 27 13:24 create_certs.sh
--rw------- 1 root root 3247 Feb 27 13:24 HelixCA.key
--rw-r--r-- 1 root root 1895 Feb 27 13:24 HelixCA.crt
--rw------- 1 root root 1679 Feb 27 13:24 bmc.local.key
--rw-r--r-- 1 root root  223 Feb 27 13:24 bmc.local.cnf
--rw-r--r-- 1 root root 1094 Feb 27 13:24 bmc.local.csr
--rw-r--r-- 1 root root   41 Feb 27 13:24 HelixCA.srl
--rw-r--r-- 1 root root 1574 Feb 27 13:24 bmc.local.crt
+import-signle-KM-to-repository.sh <KM> <TenantID> <NameSpace>
 ```
 
-### 4.2 Set up ssh password-free login
-```
-cd /root
-ssh-keygen -t rsa
-
-for i in helix-svc helix-k8s-master helix-k8s-worker01 helix-k8s-worker02 helix-k8s-worker03 helix-k8s-worker04;do ssh-copy-id -i .ssh/id_rsa.pub $i;done
-```
-
-### 4.3 Set trusted certificate
-
-Add the certificate to all servers
-```
-cd /root/
-for node in helix-svc helix-harbor helix-k8s-master helix-k8s-worker01 helix-k8s-worker02 helix-k8s-worker03 helix-k8s-worker04; do echo $node; scp HelixCA.crt root@$node:/etc/pki/ca-trust/source/anchors/; ssh root@$node "update-ca-trust enable;update-ca-trust extract;systemctl restart docker";done
-```
-## 5 Setup Harbor Registry
-### 5.1 Harbor Installation
-
-* Prepare https certificate for Harbor
-```
-#Configure Harbor registry by using self-signed SSL certificates
-mkdir -p /data/cert
-scp root@helix-svc:/root/openssl/bmc.local.crt /data/cert/
-scp root@helix-svc:/root/openssl/bmc.local.key /data/cert/
-scp root@helix-svc:/root/openssl/HelixCA.crt /data/cert/
-
-#Convert yourdomain.com.crt to yourdomain.com.cert, for use by Docker
-cd /data/cert
-openssl x509 -inform PEM -in bmc.local.crt -out bmc.local.cert
-
-#Copy the server certificate, key and CA files into the Docker certificates folder on the Harbor host.
-#mkdir -p /etc/docker/certs.d/yourdomain.com/
-mkdir -p /etc/docker/certs.d/bmc.local/
-
-cp /data/cert/bmc.local.cert /etc/docker/certs.d/bmc.local/
-cp /data/cert/bmc.local.key /etc/docker/certs.d/bmc.local/
-cp /data/cert/HelixCA.crt /etc/docker/certs.d/bmc.local/
-
-#Restart Docker Engine.
-systemctl restart docker
-```
-
-* Install the harbor image registry on helix-harbor. For installation instructions, please refer to：[Create a Harbor registry](https://docs.bmc.com/xwiki/bin/view/IT-Operations-Management/On-Premises-Deployment/BMC-Helix-IT-Operations-Management-Deployment/itomdeploy251/Deploying/Preparing-for-deployment/Accessing-container-images/Setting-up-a-Harbor-registry-in-a-local-network-and-synchronizing-it-with-BMC-DTR/)。
-
-```
-# Download Harbor
-dnf install wget -y
-#wget https://github.com/goharbor/harbor/releases/download/v<version>/harbor-offline-installer-v<version>.tgz
-
-# Example
-wget https://github.com/goharbor/harbor/releases/download/v2.1.4/harbor-offline-installer-v2.1.4.tgz
-
-# Unzip the tar file
-tar xvzf harbor-offline-installer*.tgz
-
-# Go to the Harbor directory
-cd harbor
-
-# Copy the configuration template
-cp harbor.yml.tmpl harbor.yml
-
-```
-
-* in the harbor.yml file, update the values for the following parameters:
-
-```
-# Specify the name of system where you want to install Harbor.
-hostname: helix-harbor.bmc.local
-
-# Specify the password for the Harbor system administrator.
-harbor_admin_password: bmcAdm1n
-
-# The path of cert and key files for nginx
-certificate: /data/cert/bmc.local.crt
-private_key: /data/cert/bmc.local.key
-
-# Harbor repository
-data_volume: /data/harbor
-
-```
-
-* install the Harbor registry
-```
-mkdir /data/harbor
-./install.sh
-```
-
-
-* Configure the Harbor registry
-Log in to the Harbor registry and perform the following steps to create a new project:
-
-Select Projects and then click NEW PROJECT.
-![Harbor Projects](./diagram/harbor-projects.png)
-
-In the New Project window, specify the following values:
-Project Name: Enter bmc.
-Access Level: Select the Public check box.
-Leave the other parameters to their default values.
-![Harbor New Projects bmc](./diagram/harbor-new-project-bmc.png)
-Click OK
-    
-
-### 5.2 Batch download Helix images
-This step can be performed on any server that can connect to the Internet, not just the helix-harbor server. The prerequisite is docker engine environment.
-
-* Create Helix images download directory
-
-```
-cp -R ~/BMC-Helix-OnPrem-Installation-1-Env/helix-images-25.1  /root/.
-
-```
-* Download Helix ITOM all_images_<version>.txt file from BMC Docs to root/helix-images-25.1
-    [all_images_25.1.txt](https://docs.bmc.com/xwiki/bin/view/IT-Operations-Management/On-Premises-Deployment/BMC-Helix-IT-Operations-Management-Deployment/itomdeploy251/Deploying/Preparing-for-deployment/Accessing-container-images/Setting-up-a-Harbor-registry-in-a-local-network-and-synchronizing-it-with-BMC-DTR/)
-    
- 
-```
-pwd
-/root/helix-images-25.1
-
-ls -l
--rw-r--r-- 1 root root 13685 Feb 25 15:55 all_images_25.1.00.txt
--rw-r--r-- 1 root root  2158 Feb 25 15:44 helix-load-images.sh
--rw-r--r-- 1 root root  2399 Feb 25 15:44 helix-save-images.sh
--rw-r--r-- 1 root root   174 Feb 25 15:44 saveall.sh
-
-# Convert the file to an UNIX format
-dnf install dos2unix -y
-dos2unix all_images_25.1.00.txt
-
-# Get Helix ITOM different repository images lists
-
-# lp0lz: BMC Helix Platform images
-cat all_images_25.1.00.txt | grep lp0lz > lp0lz_images.txt
-
-# lp0oz: BMC Helix Intelligent Automation images
-cat all_images_25.1.00.txt | grep lp0oz > lp0oz_images.txt
-
-# lp0pz: BMC Helix Continuous Optimization images
-cat all_images_25.1.00.txt | grep lp0pz > lp0pz_images.txt
-
-# lp0mz: BMC Helix Operations Management on-premises images
-cat all_images_25.1.00.txt | grep lp0mz > lp0mz_images.txt
-
-# la0cz: BMC Helix AIOps images
-cat all_images_25.1.00.txt | grep la0cz > la0cz_images.txt
-
-# Run batch downloader for Helix ITOM image
-chmod a+x *.sh
-nohup ./saveall.sh > nohup.out &
-tail -f nohup.out
-
-# Due to the limitation of network speed, the entire download process may take several hours to several days.
-```
-
-### 5.3 Download Rancher image files
-
-In this test, the Kubernetes cluster where Helix installed is created and managed using Rancher. The following steps are to prepare the Rancher image file.
-
-This step can be performed on any server that can connect to the Internet, not just the helix-harbor server. The prerequisite is docker engine environment.
-
-To download the Rancher image file, refer to the Rancher official documentation：[Collect and Publish Images to your Private Registry](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/other-installation-methods/air-gapped-helm-cli-install/publish-images)。
-
-* Select the Rancher version, download the offline tool script file and the mirror list file, you can refer to the document：[Rancher Release](https://github.com/rancher/rancher/releases)
-![Harbor Release](./diagram/rancher-release-v2.10.2.png)
-
-* Download Rancher image files
-```
-#mkdir rancher
-mkdir /root/rancher-images-2.10.2
-
-# cp rancher-images.txt, rancher-load-images.sh, rancher-save-images.sh file to /root/rancher-images-2.10.2 directory
-cd /root/rancher-images-2.10.2
-chmod a+x *.sh
-    
-ls -l
--rw-r--r-- 1 root root 27835 Feb 25 16:33 rancher-images.txt
--rwxr-xr-x 1 root root  4115 Feb 25 16:33 rancher-load-images.sh
--rwxr-xr-x 1 root root  1757 Feb 25 16:33 rancher-save-images.sh
-
-# Sort and unique the mirror list to remove duplicate mirror sources.
-sort -u rancher-images.txt -o rancher-images.txt
-
-# Create a compressed package of the required image
-nohup ./rancher-save-images.sh --image-list ./rancher-images.txt > nohup.out &
-
-```
-
-### 5.4 Import Helix images to harbor
-Import the downloaded Helix Image image package file into the Harbor registry deployed on the helix-harbor server.
-```
-cd /root/helix-image-25.1
-nohup ./loadall.sh > nohup.out &
-tail -f nohup.out
-```
-
-### 5.5 Import Rancher images
-Import the downloaded Rancher Image image package file into the Harbor registry deployed on the helix-harbor server.
-
-* Create new project rancher
-
-Log in to the Harbor registry and perform the following steps to create a new project:
-Select Projects and then click NEW PROJECT. In the New Project window, specify the following values:
-
-Project Name: Enter rancher.
-Access Level: Select the Public check box.
-Leave the other parameters to their default values.
-
-![Harbor New Project rancher](./diagram/harbor-new-project-rancher.png)
-
-* Import Rancher Images
-Use rancher-load-images.sh to extract, tag and push rancher-images.txt and rancher-images.tar.gz to harbor registry
-
-```
-# Chang to images file direcotry
-cd /root/rancher-images-2.10.2
-
-# Login to Helix Harbor Server
-docker login helix-harbor.bmc.local -u admin -p bmcAdm1n
-
-# Load Rancher images to Harbor Server
-nohup ./rancher-load-images.sh --images rancher-images.tar.gz  --registry helix-harbor.bmc.local > nohup.out &
-tail -f nohup.out
-```
-## 6 Setup Kubernetes Cluster
-### 6.1 Install Rancher
-
-* Install the containerized Rancher pod on the helix-k8s-master server
-
-```
-# Login to Harbor Server
-docker login helix-harbor.bmc.local -u admin -p bmcAdm1n
-
-# Install Rancher docker version
-docker run -d --privileged --name rancher --restart=unless-stopped -p 80:80 -p 443:443 -v /opt/rancher:/var/lib/rancher -e CATTLE_SYSTEM_DEFAULT_REGISTRY=helix-harbor.bmc.local helix-harbor.bmc.local/rancher/rancher:v2.10.2
-```
-
-* Fix k3s bug in Rancher container
-
-```
-# There is a bug in the k3s, below is how to permanent fix it
-# kernel modules load at startup
-echo "ip_tables" | sudo tee /etc/modules-load.d/iptables.conf
-echo "iptable_filter" | sudo tee -a /etc/modules-load.d/iptables.conf
-
-# Reload systemd modules and reboot
-sudo systemctl restart systemd-modules-load
-sudo reboot
-
-# Verify the modules are loaded after reboot
-lsmod | grep ip
-```
-
-* Find the Rancher Console password
-```
-docker logs rancher 2>&1 | grep "Bootstrap Password:"
-2025/02/26 04:59:02 [INFO] Bootstrap Password: 2ndg88pslbtg29xlntvqm9hwm5ggp6w8tbvmp6bxrc8wf9g8nqh7gt
-```
-
-* Login to Rancher console   
-
-![Rancher Login](./diagram/rancher-login.png)
-
-
-* Setup new password
-
-![Rancher New Password](./diagram/rancher-new-password.png)
-
-
-### 6.2 Create new cluster
-
-* Log in to the Rancher console and you can see that there is only one local cluster by default. We need to create a cluster helix-compact for the installation of helix
-![Rancher Create Cluster(./diagram/rancher-new-create-cluster.png)
-
-* Select RKE1 and create a Custom cluster
-![Rancher Create Custom Cluster(./diagram/rancher-create-custom-cluster.png)
-
-* Set the cluster name to helix-compact and leave the rest of the options as default
-
-![Rancher Cluster helix-compact(./diagram/rancher-cluster-helix-compact.png)
-
-* Copy the script for adding a worker node
-
-![Rancher Cluster Add Workers(./diagram/rancher-cluster-add-worker.png)
-
-* Paste and run the script on helix-k8s-worker01 to helix-k8s-worker04 servers
-
-```
-sudo docker run -d --privileged --restart=unless-stopped --net=host -v /etc/kubernetes:/etc/kubernetes -v /var/run:/var/run  helix-harbor.bmc.local/rancher/rancher-agent:v2.10.2 --server https://192.168.1.200 --token rv6vjhfqpc9czznz7j7qt4twz7d5wjlksqjw9cbl9v96fkdxpjdz7b --ca-checksum 4a158b1469cba97e2b7d19120e449133a46edb5d7715ccb629618df27d2a073d --worker
-
-```
-
-* Copy the master (etcd & Control Plance) installation script
-
-![Rancher Cluster Add Master(./diagram/rancher-cluster-add-master.png)
-
-* Paste and execute the installation script on the helix-k8s-master server
-```
-sudo docker run -d --privileged --restart=unless-stopped --net=host -v /etc/kubernetes:/etc/kubernetes -v /var/run:/var/run  helix-harbor.bmc.local/rancher/rancher-agent:v2.10.2 --server https://192.168.1.200 --token rv6vjhfqpc9czznz7j7qt4twz7d5wjlksqjw9cbl9v96fkdxpjdz7b --ca-checksum 4a158b1469cba97e2b7d19120e449133a46edb5d7715ccb629618df27d2a073d --etcd --controlplane
-```
-
-* Wait for all nodes to join the cluster and the k8s cluster is created
-![Rancher Cluster Nodes(./diagram/rancher-cluster-helix-compact-nodes.png)
-
-* If the cluster installation reports an error that an image is missing, it may be that some images are missing from the rancher-images.txt file and need to be added to the local image registry. For example, if an error message is displayed saying that hyperkube:v1.31.5-rancher1 is missing, execute the following command line on the helix-harbor server.
-
-```
-docker pull rancher/hyperkube:v1.31.5-rancher1
-docker tag rancher/hyperkube:v1.31.5-rancher1 helix-harbor.bmc.local/rancher/hyperkube:v1.31.5-rancher1
-docker push helix-harbor.bmc.local/rancher/hyperkube:v1.31.5-rancher1
-```
-
-### 6.3 Set the k8s cluster token expiration time
-The default validity period of the K8s cluster token managed by Rancher is very short, which will cause problems such as K8s monitoring failure and Helix installation pipeline errors. It is recommended to change it to never expire
-![Rancher Global Setting(./diagram/rancher-global-settings.png)
-
-
-
-### 6.4 Install Kubernetes client tools
-helix-svc will be used as the Helix installation workstation, and the client tools need to be installed on this server
-#### 6.4.1 kubernetes configuration file
-
-* Copy kubeconfig file contents
-![Rancher Copy kubeconfig(./diagram/rancher-copy-kubeconfig.png)
-
-* Save to helix-svc
-```
-mkdir -p ~/.kube
-cd ~/.kube
-vi config
-
-# Paste the clipboard contents and save
-    ```
-
-#### 6.4.2 Install kubectl
-
-* Install kubectl on the helix-svc server that matches the Kubernetes version
-
-```
-curl -o /usr/local/bin/kubectl -LO https://storage.googleapis.com/kubernetes-release/release/v1.31.0/bin/linux/amd64/kubectl && chmod +x /usr/local/bin/kubectl
-
-#Verifiy kubectl
-kubectl version
-kubectl get nodes
-kubectl top nodes
-    ```
-
-* Create the namespace helixade used by ITOM and the namespace helixis used by ITSM
-```
-kubectl create ns helixade
-kubectl create ns helixis
-```
-
-#### 6.4.2 Install helm
-
-* Install the latest version of helm on the helix-svc server
-
-```
-#Deploy helm
-curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
-chmod 700 get_helm.sh
-./get_helm.sh
-```
