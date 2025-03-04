@@ -1,0 +1,4 @@
+containers.bmc.com/bmc/smart-reporting:210503HF-202310111638
+containers.bmc.com/bmc/smart-reporting-db-upgrade:210503HF-202310111638
+containers.bmc.com/bmc/sr-db:210503HF-202310111638
+containers.bmc.com/bmc/pipelines-smart-reporting-woraround:06112020-RTM

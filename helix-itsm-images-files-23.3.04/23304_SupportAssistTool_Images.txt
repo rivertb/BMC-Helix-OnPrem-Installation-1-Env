@@ -1,0 +1,2 @@
+containers.bmc.com/bmc/assisttool:v116_110520241328_23304_RTM
+containers.bmc.com/bmc/authproxy:HSSO_Auth_Proxy_RC_221_23304_RTM
