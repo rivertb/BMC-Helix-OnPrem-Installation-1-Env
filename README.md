@@ -155,7 +155,7 @@ git clone https://github.com/rivertb/BMC-Helix-OnPrem-Installation-1-Env
 Apply configuration
 ```
 \cp ~/BMC-Helix-OnPrem-Installation-1-Env/dns/named.conf /etc/named.conf
-cp -R ~/helix -metal-install/dns/zones /etc/named/
+cp -R ~/BMC-Helix-OnPrem-Installation-1-Env/dns/zones /etc/named/
 ```
 Configure the firewall for DNS
 ```
