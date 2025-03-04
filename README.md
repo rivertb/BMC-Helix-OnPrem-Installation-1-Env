@@ -16,7 +16,7 @@
   - [3 Install Docker Environment](#3-install-docker-environment)
     - [3.1 Install Docker Engine)](#3.1-install-docker-engine)
     - [3.2 Install Docker Compose)](#3.2-install-docker-compose)
-  - [4 Prepare a self-signed certificate)(#4-prepare-a-self-signed-certificate)
+  - [4 Prepare a self-signed certificate)](#4-prepare-a-self-signed-certificate)
     - [4.1 Create a certificate)](#4.1-create-a-certificate)
     - [4.2 Set up ssh password-free login)](#4.2-set-up-ssh-password-free-login)
     - [4.3 Set trusted certificate)](#4.3-set-trusted-certificate)
