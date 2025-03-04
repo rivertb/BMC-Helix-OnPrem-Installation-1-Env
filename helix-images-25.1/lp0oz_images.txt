@@ -1,0 +1,15 @@
+containers.bmc.com/bmc/lp0oz:ade-action-library-service-1449
+containers.bmc.com/bmc/lp0oz:ade-insight-ingestion-service-1023
+containers.bmc.com/bmc/lp0oz:ade-intelligent-automation-portal-2990
+containers.bmc.com/bmc/lp0oz:automationeventsservice-937
+containers.bmc.com/bmc/lp0oz:automationproffer-1089
+containers.bmc.com/bmc/lp0oz:ia-ansibleplugin-895
+containers.bmc.com/bmc/lp0oz:ia-automation-service-1298
+containers.bmc.com/bmc/lp0oz:ia-deploy-db-98
+containers.bmc.com/bmc/lp0oz:iaitsmservice-904
+containers.bmc.com/bmc/lp0oz:ia-kafka-service-897
+containers.bmc.com/bmc/lp0oz:iatransformerplugin-822
+containers.bmc.com/bmc/lp0oz:iawebhook-event-ingestion-359
+containers.bmc.com/bmc/lp0oz:is-plugin-882
+containers.bmc.com/bmc/lp0oz:remotepluginservice-1077
+containers.bmc.com/bmc/lp0oz:restapiplugin-1221
