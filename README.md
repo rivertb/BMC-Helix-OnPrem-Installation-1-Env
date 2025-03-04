@@ -109,7 +109,6 @@ Edit the intranet card ens35 and modify the following content:
 * Check the“Never use this network for default route”option
 ![helix-svc ens35](./diagram/helix-svc-ens35.png)
 
-
 #### 2.4.2 Setup firewalld
 
 Create internal and external zone
@@ -146,6 +145,13 @@ Install and configure BIND DNS
 ```
 dnf install bind bind-utils -y
 ```
+
+Download config files for each of the services
+```
+git clone https://github.com/rivertb/ocp4-metal-install
+```
+
+
 Apply configuration
 ```
 \cp ~/helix-metal-install/dns/named.conf /etc/named.conf
