@@ -1,10 +1,41 @@
 # BMC HelixOM OnPrem Installation Step by Step 1 - Prepare the environment
 
+- [BMC HelixOM OnPrem Installation Step by Step 1 - Prepare the environment](#bmc-helixom-onprem-installation-step-by-step-1---prepare-the-environment)
+  - [1 Architecture Diagram](#1-architecture-diagram)
+  - [2 Install VMs for Helix](#2-install-vms-for-helix)
+    - [2.1 Helix VM List](#2.1-helix-vm-list)
+    - [2.2 Helix Domain Name List](#2.2-helix-domain-name-list)
+    - [2.3 Install VM](#2.3-install-vm)
+    - [2.4 Config helix-svc VM](#2.4-config-helix-svc-vm)
+      - [2.4.1 Setup Network](#2.4.1-setup-network)
+      - [2.4.2 Setup firewalld](#2.4.2-setup-firewalld)
+      - [2.4.3 Setup DNS](#2.4.3-setup-dns)
+      - [2.4.4 Setup JDK](#2.4.4-setup-jdk)
+    - [2.5 Setup network for other VMs](#2.5-setup-network-for-other-vms)
+    - [2.6 Adjusting Linux Configuration](#2.6-adjusting-linux-configuration)
+  - [3 Install Docker Environment](#3-install-docker-environment)
+    - [3.1 Install Docker Engine)(#3.1-install-docker-engine)
+    - [3.2 Install Docker Compose)(#3.2-install-docker-compose)
+  - [4 Prepare a self-signed certificate)(#4-prepare-a-self-signed-certificate)
+    - [4.1 Create a certificate)(#4.1-create-a-certificate)
+    - [4.2 Set up ssh password-free login)(#4.2-set-up-ssh-password-free-login)
+    - [4.3 Set trusted certificate)(#4.3-set-trusted-certificate)
+  - [5 Setup Harbor Registry)(#5-setup-harbor-registry)
+    - [5.1 Harbor Installation)(#5.1-harbor-installation)
+    - [5.2 Batch download Helix images)(#5.2-batch-download-helix-images)
+    - [5.3 Download Rancher image files)(#5.3-download-rancher-image-files)
+    - [5.4 Import Helix images to harbor)(#5.4-import-helix-images-to-harbor)
+    - [5.5 Import Rancher images)(#5.5-import-rancher-images)
+  - [6 Setup Kubernetes Cluster)(#6-setup-kubernetes-cluster)
+    - [6.1 Install Rancher)(#6.1-install-rancher)
+    - [6.2 Create new cluster)(#6.2-create-new-cluster)
+    - [6.3 Set the k8s cluster token expiration time)(#set-the-k8s-cluster-token-expiration-time)
+    - [6.4 Install Kubernetes client tools)(#6.4-install-kubernetes-client-tools)
+      - [6.4.1 kubernetes configuration file)(#6.4.1-kubernetes-configuration-file)
+      - [6.4.2 Install helm)(#6.4.2-install-helm)
 
 ## 1 Architecture Diagram
-
 ![Architecture Diagram](./diagram/architecture-diagram.png)
-
 
 
 ## 2 Install VMs for Helix
@@ -290,7 +321,7 @@ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 docker-compose
 ```
             
- ## 4. Prepare a self-signed certificate
+ ## 4 Prepare a self-signed certificate
 ###  4.1 Create a certificate
  
  On the helix-svc server, create a CA certificate and a self-signed certificate
@@ -331,7 +362,7 @@ Add the certificate to all servers
 cd /root/
 for node in helix-svc helix-harbor helix-k8s-master helix-k8s-worker01 helix-k8s-worker02 helix-k8s-worker03 helix-k8s-worker04; do echo $node; scp HelixCA.crt root@$node:/etc/pki/ca-trust/source/anchors/; ssh root@$node "update-ca-trust enable;update-ca-trust extract;systemctl restart docker";done
 ```
-## 5. Setup Harbor Registry
+## 5 Setup Harbor Registry
 ### 5.1 Harbor Installation
 
 * Prepare https certificate for Harbor
@@ -470,7 +501,7 @@ tail -f nohup.out
 # Due to the limitation of network speed, the entire download process may take several hours to several days.
 ```
 
-### 5.3 Download Rancher image files.
+### 5.3 Download Rancher image files
 
 In this test, the Kubernetes cluster where Helix installed is created and managed using Rancher. The following steps are to prepare the Rancher image file.
 
@@ -633,7 +664,7 @@ The default validity period of the K8s cluster token managed by Rancher is very 
 
 
 
-### 6.4 nstall Kubernetes client tools
+### 6.4 Install Kubernetes client tools
 helix-svc will be used as the Helix installation workstation, and the client tools need to be installed on this server
 #### 6.4.1 kubernetes configuration file
 
