@@ -148,7 +148,7 @@ dnf install bind bind-utils -y
 
 Download config files for each of the services
 ```
-git clone https://github.com/rivertb/ocp4-metal-install
+git clone https://github.com/rivertb/BMC-Helix-OnPrem-Installation-1-Env
 ```
 
 
