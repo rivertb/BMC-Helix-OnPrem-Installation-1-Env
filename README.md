@@ -148,6 +148,7 @@ dnf install bind bind-utils -y
 
 Download config files for each of the services
 ```
+dnf install git -y
 git clone https://github.com/rivertb/BMC-Helix-OnPrem-Installation-1-Env
 ```
 
