@@ -109,6 +109,10 @@ Edit the intranet card ens35 and modify the following content:
 * Check the“Never use this network for default route”option
 ![helix-svc ens35](./diagram/helix-svc-ens35.png)
 
+Restart Network
+```
+systemctl restart NetworkManager
+```
 #### 2.4.2 Setup firewalld
 
 Create internal and external zone
@@ -160,8 +164,14 @@ cp -R ~/BMC-Helix-OnPrem-Installation-1-Env/dns/zones /etc/named/
 ```
 Configure the firewall for DNS
 ```
-firewall-cmd --add-port=53/udp --zone=internal --permanent
-firewall-cmd --add-port=53/tcp --zone=internal --permanent
+firewall-cmd --add-service=dns --zone=external --permanent 
+firewall-cmd --add-service=dns --zone=internal --permanent 
+firewall-cmd --reload
+```
+Assign source IP network ranges
+```
+firewall-cmd --add-source=192.168.1.0/24 --zone=external --permanent 
+firewall-cmd --add-source=192.168.1.0/24 --zone=internal --permanent
 firewall-cmd --reload
 ```
 Enable and start the service
@@ -177,12 +187,12 @@ systemctl restart NetworkManager
 Confirm dig now sees the correct DNS results by using the DNS Server running locally
 ```
 dig lb.bmc.local
-dig -o 192.168.1.1
+dig -x 192.168.1.1
 ```
 
 #### 2.4.4 Setup JDK
 ```
-yum install java-11-openjdk
+yum install java-11-openjdk -y
 ls /usr/lib/jvm/jre-11-openjdk
 ```
 
@@ -204,7 +214,7 @@ dig www.baidu.com
 Verify that the local DNS can resolve the local domain name
 ```
 dig lb.bmc.local
-dig -o 192.168.1.1
+dig -x 192.168.1.1
 ```
 
 ### 2.6 Adjusting Linux Configuration
