@@ -18,13 +18,13 @@
 
 | No. | VM Host Name | IP | OS | Sizing | Description | Software Installed |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | helix-svc.bmc.local | 192.168.1.1 | CentOS8 | 4 vCPU * 8 GB RAM * 500 HDD | Helix Install workstations and auxiliary services | DNS/NFS/HAProxy/eMail |
-| 2 | helix-harbor.bmc.local | 192.168.1.2 | CentOS8 | 2 vCPU * 4 GB RAM * 500 HDD | Container Image Registry |Harbor |
-| 3 | helix-k8s-master.bmc.local | 192.168.1.200 | CentOS8 | 4 vCPU * 8 GB RAM * 100 HDD | k8s master node | rancher master pod |
-| 4 | helix-k8s-worker01.bmc.local | 191.168.1.201 | CentOS8 | 16 vCPU * 64 GB RAM * 100 HDD | k8s worker node 1 | rancher worker pod |
-| 5 | helix-k8s-worker02.bmc.local | 191.168.1.202 | CentOS8 | 16 vCPU * 64 GB RAM * 100 HDD | k8s worker node 2 | rancher worker pod |
-| 6 | helix-k8s-worker03.bmc.local | 191.168.1.203 | CentOS8 | 16 vCPU * 64 GB RAM * 100 HDD | k8s worker node 3 | rancher woker pod |
-| 7 | helix-k8s-worker04.bmc.local | 191.168.1.204 | CentOS8 | 16 vCPU * 64 GB RAM * 100 HDD | k8s worker node 4 | rancher worker pod |
+| 1 | helix-svc.bmc.local | 192.168.1.1 | Rocky9 | 4 vCPU * 8 GB RAM * 500 HDD | Helix Install workstations and auxiliary services | DNS/NFS/HAProxy/eMail |
+| 2 | helix-harbor.bmc.local | 192.168.1.2 | Rocky9 | 2 vCPU * 4 GB RAM * 500 HDD | Container Image Registry |Harbor |
+| 3 | helix-k8s-master.bmc.local | 192.168.1.200 | Rocky9 | 4 vCPU * 8 GB RAM * 100 HDD | k8s master node | rancher master pod |
+| 4 | helix-k8s-worker01.bmc.local | 191.168.1.201 | Rocky9 | 16 vCPU * 64 GB RAM * 100 HDD | k8s worker node 1 | rancher worker pod |
+| 5 | helix-k8s-worker02.bmc.local | 191.168.1.202 | Rocky9 | 16 vCPU * 64 GB RAM * 100 HDD | k8s worker node 2 | rancher worker pod |
+| 6 | helix-k8s-worker03.bmc.local | 191.168.1.203 | Rocky9 | 16 vCPU * 64 GB RAM * 100 HDD | k8s worker node 3 | rancher woker pod |
+| 7 | helix-k8s-worker04.bmc.local | 191.168.1.204 | Rocky9 | 16 vCPU * 64 GB RAM * 100 HDD | k8s worker node 4 | rancher worker pod |
 | 8 | helix-discovery.bmc.local | 191.168.1.210 | OLinux9 | 4 vCPU * 4 GB RAM * 65 HDD | Discovery VM | Discovery VM |
 
 ### 2.2 Helix Domain Name List
