@@ -683,7 +683,7 @@ curl -o /usr/local/bin/kubectl -LO https://storage.googleapis.com/kubernetes-rel
 kubectl version
 kubectl get nodes
 kubectl top nodes
-    ```
+```
 
 * Create the namespace helixade used by ITOM and the namespace helixis used by ITSM
 ```
