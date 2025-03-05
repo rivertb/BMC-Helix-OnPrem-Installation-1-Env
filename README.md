@@ -220,8 +220,7 @@ dig -x 192.168.1.1
 ### 2.6 Adjusting Linux Configuration
 ```
 #Update OS
-yum update -y
-yum upgrade -y
+dnf update -y
 
 # Close firewalld
 systemctl stop firewalld
@@ -320,7 +319,7 @@ docker-compose
 su - root
 mkdir openssl
 cd openssl
-cp ~/BMC-Helix-OnPrem-Installation-1-Env/cert/create_certs.sh .
+cp ~/BMC-Helix-OnPrem-Installation-1-Env/certs/create_certs.sh .
 chmod a+x *.sh
 
 # Execute the script to create the Helix root certificate and self-signed certificate
