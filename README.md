@@ -325,7 +325,7 @@ chmod a+x *.sh
 # Execute the script to create the Helix root certificate and self-signed certificate
 ./create_certs.sh
 
-ls
+ll			
 
 -rwxr-xr-x 1 root root 1816 Feb 27 13:24 create_certs.sh
 -rw------- 1 root root 3247 Feb 27 13:24 HelixCA.key
@@ -349,7 +349,7 @@ for i in helix-svc helix-k8s-master helix-k8s-worker01 helix-k8s-worker02 helix-
 
 Add the certificate to all servers
 ```
-cd /root/
+cd /root/openssl
 for node in helix-svc helix-harbor helix-k8s-master helix-k8s-worker01 helix-k8s-worker02 helix-k8s-worker03 helix-k8s-worker04; do echo $node; scp HelixCA.crt root@$node:/etc/pki/ca-trust/source/anchors/; ssh root@$node "update-ca-trust enable;update-ca-trust extract;systemctl restart docker";done
 ```
 ## 5 Setup Harbor Registry
