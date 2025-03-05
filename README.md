@@ -342,7 +342,7 @@ ll
 cd /root
 ssh-keygen -t rsa
 
-for i in helix-svc helix-k8s-master helix-k8s-worker01 helix-k8s-worker02 helix-k8s-worker03 helix-k8s-worker04;do ssh-copy-id -i .ssh/id_rsa.pub $i;done
+for i in helix-svc helix-harbor helix-k8s-master helix-k8s-worker01 helix-k8s-worker02 helix-k8s-worker03 helix-k8s-worker04;do ssh-copy-id -i .ssh/id_rsa.pub $i;done
 ```
 
 ### 4.3 Set trusted certificate
@@ -608,9 +608,11 @@ docker logs rancher 2>&1 | grep "Bootstrap Password:"
 ### 6.2 Create new cluster
 
 * Log in to the Rancher console and you can see that there is only one local cluster by default. We need to create a cluster helix-compact for the installation of helix
+
 ![Rancher Create Cluster(./diagram/rancher-new-create-cluster.png)
 
 * Select RKE1 and create a Custom cluster
+
 ![Rancher Create Custom Cluster(./diagram/rancher-create-custom-cluster.png)
 
 * Set the cluster name to helix-compact and leave the rest of the options as default
