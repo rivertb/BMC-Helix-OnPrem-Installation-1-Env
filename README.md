@@ -661,7 +661,7 @@ helix-svc will be used as the Helix installation workstation, and the client too
 #### 6.4.1 kubernetes configuration file
 
 * Copy kubeconfig file contents
-![Rancher Copy kubeconfig(./diagram/rancher-copy-kubeconfig.png)
+![Rancher Copy kubeconfig](./diagram/rancher-copy-kubeconfig.png)
 
 * Save to helix-svc
 ```
