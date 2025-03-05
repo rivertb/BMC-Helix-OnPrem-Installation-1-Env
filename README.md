@@ -670,7 +670,7 @@ cd ~/.kube
 vi config
 
 # Paste the clipboard contents and save
-    ```
+```
 
 #### 6.4.2 Install kubectl
 
