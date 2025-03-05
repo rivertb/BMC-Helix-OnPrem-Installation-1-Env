@@ -609,19 +609,19 @@ docker logs rancher 2>&1 | grep "Bootstrap Password:"
 
 * Log in to the Rancher console and you can see that there is only one local cluster by default. We need to create a cluster helix-compact for the installation of helix
 
-![Rancher Create Cluster(./diagram/rancher-new-create-cluster.png)
+![Rancher Create Cluster](./diagram/rancher-new-create-cluster.png)
 
 * Select RKE1 and create a Custom cluster
 
-![Rancher Create Custom Cluster(./diagram/rancher-create-custom-cluster.png)
+![Rancher Create Custom Cluster](./diagram/rancher-create-custom-cluster.png)
 
 * Set the cluster name to helix-compact and leave the rest of the options as default
 
-![Rancher Cluster helix-compact(./diagram/rancher-cluster-helix-compact.png)
+![Rancher Cluster helix-compact](./diagram/rancher-cluster-helix-compact.png)
 
 * Copy the script for adding a worker node
 
-![Rancher Cluster Add Workers(./diagram/rancher-cluster-add-worker.png)
+![Rancher Cluster Add Workers](./diagram/rancher-cluster-add-worker.png)
 
 * Paste and run the script on helix-k8s-worker01 to helix-k8s-worker04 servers
 
@@ -632,7 +632,7 @@ sudo docker run -d --privileged --restart=unless-stopped --net=host -v /etc/kube
 
 * Copy the master (etcd & Control Plance) installation script
 
-![Rancher Cluster Add Master(./diagram/rancher-cluster-add-master.png)
+![Rancher Cluster Add Master](./diagram/rancher-cluster-add-master.png)
 
 * Paste and execute the installation script on the helix-k8s-master server
 ```
@@ -640,7 +640,7 @@ sudo docker run -d --privileged --restart=unless-stopped --net=host -v /etc/kube
 ```
 
 * Wait for all nodes to join the cluster and the k8s cluster is created
-![Rancher Cluster Nodes(./diagram/rancher-cluster-helix-compact-nodes.png)
+![Rancher Cluster Nodes](./diagram/rancher-cluster-helix-compact-nodes.png)
 
 * If the cluster installation reports an error that an image is missing, it may be that some images are missing from the rancher-images.txt file and need to be added to the local image registry. For example, if an error message is displayed saying that hyperkube:v1.31.5-rancher1 is missing, execute the following command line on the helix-harbor server.
 
@@ -652,7 +652,7 @@ docker push helix-harbor.bmc.local/rancher/hyperkube:v1.31.5-rancher1
 
 ### 6.3 Set the k8s cluster token expiration time
 The default validity period of the K8s cluster token managed by Rancher is very short, which will cause problems such as K8s monitoring failure and Helix installation pipeline errors. It is recommended to change it to never expire
-![Rancher Global Setting(./diagram/rancher-global-settings.png)
+![Rancher Global Setting](./diagram/rancher-global-settings.png)
 
 
 
