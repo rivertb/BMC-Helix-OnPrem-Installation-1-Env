@@ -190,11 +190,29 @@ dig lb.bmc.local
 dig -x 192.168.1.1
 ```
 
+
 #### 2.4.4 Setup JDK
 ```
 yum install java-11-openjdk -y
 ls /usr/lib/jvm/jre-11-openjdk
 ```
+
+#### 2.4.5 Add firewall rule for NTP
+```
+firewall-cmd --zone=internal --permanent --add-service=ntp
+firewall-cmd --zone=external --permanent --add-service=ntp
+firewall-cmd --reload
+```
+
+#### 2.4.6 Time sync
+```
+yum install -y chrony
+systemctl start chronyd
+systemctl enable chronyd
+chronyc makestep
+chronyc sources -V
+```
+
 
 ### 2.5 Setup network for other VMs 
 For servers other than helix-svc, configure the following:
