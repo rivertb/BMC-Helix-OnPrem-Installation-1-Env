@@ -242,7 +242,7 @@ timedatectl set-timezone Asia/Shanghai
 yum install -y chrony
 systemctl start chronyd
 systemctl enable chronyd
-
+chronyc makestep
 chronyc sources -V
 
 sysctl -w vm.max_map_count=262144
