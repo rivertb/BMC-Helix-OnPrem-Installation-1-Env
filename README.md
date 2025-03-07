@@ -1,4 +1,4 @@
-# BMC Helix OnPrem Installation Step by Step 1 - Prepare the environment
+# BMC Helix ITOM & ITSM OnPrem Installation Step by Step 1 - Prepare the environment
 
 - [BMC HelixOM OnPrem Installation Step by Step 1 - Prepare the environment](#bmc-helixom-onprem-installation-step-by-step-1---prepare-the-environment)
   - [1 Architecture Diagram](#1-architecture-diagram)
