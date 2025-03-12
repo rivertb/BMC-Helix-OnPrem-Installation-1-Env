@@ -417,17 +417,17 @@ We get the new cacerts with public key stored. It will be upload to Jenkins pipe
 ### 7.1 Verifying DNS for applications
 We have configured DNS for the BMC Helix Service Management applications so that we can access the applications by using the following URL format. 
 * Mid Tier: \<CUSTOMER_SERVICE\>-\<ENVIRONMENT\>.<CLUSTER_DOMAIN>
-* Mid Tier integration: <CUSTOMER_SERVICE>-\<ENVIRONMENT\>-int.<CLUSTER_DOMAIN>
-* Smart IT: <CUSTOMER_SERVICE>-\<ENVIRONMENT\>-smartit.<CLUSTER_DOMAIN>
-* Smart Reporting: <CUSTOMER_SERVICE>-\<ENVIRONMENT\>-sr.<CLUSTER_DOMAIN>
-* Innovation Studio: <CUSTOMER_SERVICE>-\<ENVIRONMENT\>-is.<CLUSTER_DOMAIN>
-* Innovation Suite REST API or CMDB: <CUSTOMER_SERVICE>-\<ENVIRONMENT\>-restapi.<CLUSTER_DOMAIN>
-* Atrium Web Services: <CUSTOMER_SERVICE>-\<ENVIRONMENT\>-atws.<CLUSTER_DOMAIN>
-* Digital Workplace: <CUSTOMER_SERVICE>-\<ENVIRONMENT\>-dwp.<CLUSTER_DOMAIN>
-* Digital Workplace Catalog: <CUSTOMER_SERVICE>-\<ENVIRONMENT\>-dwpcatalog.<CLUSTER_DOMAIN>
-* Live Chat: <CUSTOMER_SERVICE>-\<ENVIRONMENT\>-vchat.<CLUSTER_DOMAIN>
-* Openfire Chat: <CUSTOMER_SERVICE>-\<ENVIRONMENT\>-chat.<CLUSTER_DOMAIN>
-* Support Assistant tool: <CUSTOMER_SERVICE>-\<ENVIRONMENT\>-supportassisttool.<CLUSTER_DOMAIN>
+* Mid Tier integration: \<CUSTOMER_SERVICE\>-\<ENVIRONMENT\>-int.<CLUSTER_DOMAIN>
+* Smart IT: \<CUSTOMER_SERVICE\>-\<ENVIRONMENT\>-smartit.<CLUSTER_DOMAIN>
+* Smart Reporting: \<CUSTOMER_SERVICE\>-\<ENVIRONMENT\>-sr.<CLUSTER_DOMAIN>
+* Innovation Studio: \<CUSTOMER_SERVICE\>-\<ENVIRONMENT\>-is.<CLUSTER_DOMAIN>
+* Innovation Suite REST API or CMDB: \<CUSTOMER_SERVICE\>-\<ENVIRONMENT\>-restapi.<CLUSTER_DOMAIN>
+* Atrium Web Services: \<CUSTOMER_SERVICE\>-\<ENVIRONMENT\>-atws.<CLUSTER_DOMAIN>
+* Digital Workplace: \<CUSTOMER_SERVICE\>-\<ENVIRONMENT\>-dwp.<CLUSTER_DOMAIN>
+* Digital Workplace Catalog: \<CUSTOMER_SERVICE\>-\<ENVIRONMENT\>-dwpcatalog.<CLUSTER_DOMAIN>
+* Live Chat: \<CUSTOMER_SERVICE\>-\<ENVIRONMENT\>-vchat.<CLUSTER_DOMAIN>
+* Openfire Chat: \<CUSTOMER_SERVICE\>-\<ENVIRONMENT\>-chat.<CLUSTER_DOMAIN>
+* Support Assistant tool: \<CUSTOMER_SERVICE\>-\<ENVIRONMENT\>-supportassisttool.<CLUSTER_DOMAIN>
 
 ```
 ping -c 4 itsm-poc.bmc.local
@@ -466,7 +466,7 @@ In the General tab, enter the following details:
 
 | Filed | Value | Desc |
 | --- | --- | --- |
-| Realm ID | itsm-poc | <CUSTOMER_SERVICE>-\<ENVIRONMENT\> |
+| Realm ID | itsm-poc | \<CUSTOMER_SERVICE\>-\<ENVIRONMENT\> |
 | Application Domain(s) | itsm-poc-atws.bmc.local, itsm-poc-dwpcatalog.bmc.local, itsm-poc.bmc.local, itsm-poc-restapi.bmc.local, itsm-poc-is.bmc.local, itsm-poc-sr.bmc.local, itsm-poc-dwp.bmc.local, itsm-poc-smartit.bmc.local, itsm-poc-chat.bmc.local, itsm-poc-vchat.bmc.local, itsm-poc-int.bmc.local |  |
 | Tenant | adelab.\<TENANT-ID\> | paste the tenant name |
 
