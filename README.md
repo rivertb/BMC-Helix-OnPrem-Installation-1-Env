@@ -1,725 +1,651 @@
-# BMC Helix ITOM & ITSM OnPrem Installation Step by Step 1 - Prepare the environment
+# BMC Helix ITOM & ITSM OnPrem Installation Step by Step 3 - ITSM
 
-- [BMC HelixOM OnPrem Installation Step by Step 1 - Prepare the environment](#bmc-helixom-onprem-installation-step-by-step-1---prepare-the-environment)
-  - [1 Architecture Diagram](#1-architecture-diagram)
-  - [2 Install VMs for Helix](#2-install-vms-for-helix)
-  - [3 Install Docker Environment](#3-install-docker-environment)
-  - [4 Prepare a self-signed certificate)](#4-prepare-a-self-signed-certificate)
-  - [5 Setup Harbor Registry)](#5-setup-harbor-registry)
-  - [6 Setup Kubernetes Cluster)](#6-setup-kubernetes-cluster)
-
-## 1 Architecture Diagram
-![Architecture Diagram](./diagram/architecture-diagram.png)
-
-
-## 2 Install VMs for Helix
-
-### 2.1 Helix VM List
-
-| No. | VM Host Name | IP | OS | Sizing | Description | Software Installed |
-| --- | --- | --- | --- | --- | --- | --- |
-| 1 | helix-svc.bmc.local | 192.168.1.1 | Rocky9 | 4 vCPU * 8 GB RAM * 500 HDD | Helix Install workstations and auxiliary services | DNS/NFS/HAProxy/eMail |
-| 2 | helix-harbor.bmc.local | 192.168.1.2 | Rocky9 | 2 vCPU * 4 GB RAM * 500 HDD | Container Image Registry |Harbor |
-| 3 | helix-k8s-master.bmc.local | 192.168.1.200 | Rocky9 | 4 vCPU * 8 GB RAM * 100 HDD | k8s master node | rancher master pod |
-| 4 | helix-k8s-worker01.bmc.local | 191.168.1.201 | Rocky9 | 16 vCPU * 64 GB RAM * 100 HDD | k8s worker node 1 | rancher worker pod |
-| 5 | helix-k8s-worker02.bmc.local | 191.168.1.202 | Rocky9 | 16 vCPU * 64 GB RAM * 100 HDD | k8s worker node 2 | rancher worker pod |
-| 6 | helix-k8s-worker03.bmc.local | 191.168.1.203 | Rocky9 | 16 vCPU * 64 GB RAM * 100 HDD | k8s worker node 3 | rancher woker pod |
-| 7 | helix-k8s-worker04.bmc.local | 191.168.1.204 | Rocky9 | 16 vCPU * 64 GB RAM * 100 HDD | k8s worker node 4 | rancher worker pod |
-| 8 | helix-discovery.bmc.local | 191.168.1.210 | OLinux9 | 4 vCPU * 4 GB RAM * 65 HDD | Discovery VM | Discovery VM |
-
-### 2.2 Helix Domain Name List
-
-| No. | Domain Name | IP | Category |
-| --- | --- | --- | --- |
-| 1 | helix-svc.bmc.local | 192.168.1.1 | VM Domain Name|
-| 2 | helix-harbor.bmc.local | 192.168.1.2 | VM Domain Name |
-| 3 | helix-k8s-master.bmc.local | 192.168.1.200 | VM Domain Name |
-| 5 | helix-k8s-worker01.bmc.local | 192.168.1.201 | VM Domain Name |
-| 6 | helix-k8s-worker02.bmc.local | 192.168.1.202 | VM Domain Name |
-| 8 | helix-k8s-worker03.bmc.local | 192.168.1.203 | VM Domain Name |
-| 9 | helix-k8s-worker03.bmc.local | 192.168.1.203 | VM Domain Name |
-| 10 | helix-k8s-worker03.bmc.local | 192.168.1.210 | VM Domain Name|
-| 11 | smtp.bmc.local | 192.168.1.1 | ITOM Domain Name |
-| 12 | lb.bmc.local | 192.168.1.1 | ITOM Domain Name |
-| 13 | tms.bmc.local | 192.168.1.1 | ITOM Domain Name |
-| 14 | minio.bmc.local | 192.168.1.1 | ITOM Domain Name|
-| 15 | minio-api.bmc.local | 192.168.1.1 | ITOM Domain Name |
-| 16 | kibana.bmc.local | 192.168.1.1 | ITOM Domain Name |
-| 16 | adelab-private-poc.bmc.local | 192.168.1.1 | ITOM Domain Name |
-| 16 | adelab-disc-private-poc.bmc.local | 192.168.1.210 | ITOM Domain Name |
-| 17 | itsm-poc.bmc.local | 192.168.1.1 | ITSM Domain Name |
-| 18 | itsm-poc-int.bmc.local | 192.168.1.1 | ITSM Domain Name |
-| 19 | itsm-poc-smartit.bmc.local | 192.168.1.1 | ITSM Domain Name|
-| 20 | itsm-poc-sr.bmc.local | 192.168.1.1 | ITSM Domain Name |
-| 21 | itsm-poc-is.bmc.local | 192.168.1.1 | ITSM Domain Name |
-| 22 | itsm-poc-restapi.bmc.local | 192.168.1.1 | ITSM Domain Name |
-| 23 | itsm-poc-atws.bmc.local | 192.168.1.1 | ITSM Domain Name |
-| 24 | itsm-poc-dwp.bmc.local | 192.168.1.1 | ITSM Domain Name |
-| 25 | itsm-poc-dwpcatalog.bmc.local | 192.168.1.1 | ITSM Domain Name |
-| 26 | itsm-poc-vchat.bmc.local | 192.168.1.1 | ITSM Domain Name |
-| 27 | itsm-poc-chat.bmc.local | 192.168.1.1 | ITSM Domain Name|
-| 28 | itsm-poc-supportassisttool.bmc.local | 192.168.1.1 | ITSM Domain Name |
+- [BMC HelixOM ITOM & ITSM OnPrem Installation Step by Step 3 - ITSM](#bmc-helixom-itom-&-itsm-onprem-installation-step-by-step-3---itsm)
+  - [1 Download installation file](#1-download-installation-file)
+  - [2 Sync Helix ITSM images to local Harbor](#2-sync-helix-itsm-images-to-local-harbor)
+  - [3 Setup PostgreSQL database](#3-setup-postgresql-database)
+  - [4 Setup Helix Deployment Engine](#4-setup-helix-deployment-engine)
+  - [5 Dry run Pipeline](#5-dry-run-pipeline)
+  - [6 Create a self-signed or custom CA certificate](#6-create-a-self-signed-or-custom-ca-certificate)
+  - [7 Setup Installation environment](#7-setup-installation-environment)
+  - [8 Install Helix Platform Common services](#8-install-helix-platform-common-services)
+  - [9 Config HELIX_ONPREM_DEPLOYMENT pipeline](#9-config-helix_onprem_deployment-pipeline)
+  - [10 Install Helix Service Management](#10-install-helix-service-management)
 
 
+**Attention**! The installation of Helix Innovation Suite(ITSM) depends on Helix Platform Common services. Please refer to [BMC-Helix-OnPrem-Installation-2-ITOM](https://github.com/rivertb/BMC-Helix-OnPrem-Installation-2-ITOM?tab=readme-ov-file) and complete at least the section of "2 Deploy Helix Dashboard".
 
+## 1 Download installation file
+You obtain the BMC Helix Service Management installation files by downloading them from the BMC Electronic Product Distribution (EPD) website.
 
-### 2.3 Install VM
-During the installation of Linux, when creating a disk partition, delete the/home directory, rebuild the root directory, and allocate all remaining disk space to the root directory
-![Manual Partitioning](./diagram/manual-partitioning.png)
-Select the Minial Install
-![Minimal Install](./diagram/minimal-install.png)
+* Git repositories and artifacts that are used for BMC Helix Service Management installation
+* Deployment manager that is used for BMC Helix Platform Common Services installation (Already download in [ITOM](https://github.com/rivertb/BMC-Helix-OnPrem-Installation-2-ITOM) project)
 
+In the BMC Helix Innovation Suite OnPrem page, on the Product tab, select BMC Helix Innovation Suite & Service Management Apps latest version, such as  BMC Helix Innovation Suite & Service Management Apps latest version, such as 23.3.04 , and click Download.
+![Innovation Suite](./diagram/innovation-suite.png)
 
-### 2.4 Config helix-svc VM
-helix-svc is the auxiliary server providing peripheral services for Helix OnPrem.
+The BMC_Helix_Innovation_Suite_And_Service_Management_Apps_Version_23.3.04.zip file contains the following files:
 
-* Gateway for all other VMs
-* DNS Server
-* eMail Server
-* NFS Server
-* Load Balancer Server
+* BMC_Remedy_Deployment_Manager_Configuration_Release_23.3.04.zip—This file contains the installation artifacts.
+* BMC_Remedy_Deployment_Engine_Setup_23.3.04.zip—This file contains BMC Deployment Engine set up files.
+* image_pull_push.sh and image_sync_to_private_registry.sh—These files contain the scripts to synchronize your Harbor repository with BMC Helix Innovation Suite and BMC Helix Platform services container images in BMC DTR.
 
-#### 2.4.1 Setup Network
+Hot fix for current version, such as the BMC Helix Innovation Suite & Service Management Apps Sizing Hotfix Version 23.3.04
 
-To reduce network address usage, all servers in the Helix cluster are configured on the intranet IP address segment 192.168.1.1/24. Only the helix-svc server is configured with dual network cards, connecting to the internal and external networks respectively. All other virtual machines are configured with a single network card, connected to the LAN network k8s-internal.
+![Sizing HF](./diagram/sizing-hf.png)
 
-* The WAN network card is responsible for providing Internet access services for other VMs and Helix clusters.
-* The LAN network card is responsible for forwarding external service requests
+## 2 Sync Helix ITSM images to local Harbor
 
-![helix-svc Virtual Hardware](./diagram/helix-svc-virtual-hardware.png)
+The latest list of images required for BMC Helix Service Management installation can be download from [here](https://docs.bmc.com/xwiki/bin/view/Service-Management/On-Premises-Deployment/BMC-Helix-Service-Management-Deployment/brid23304/Installing/Preparing-for-installation/Setting-up-a-Harbor-repository-to-synchronize-container-images/), including:
 
-Set ntwrok via command
+* 23304_ITSM_Platform_Images.txt
+* 23304_ITSM_SmartApps_Images.txt
+* 23304_ITSM_Pipeline_Images.txt
+* 23304_SupportAssistTool_Images.txt
+* 244_Helix_Platform_Images.txt
+* 210503HF12_SmartReporting_Images.txt
+
+You can also copy from ~/BMC-Helix-OnPrem-Installation-1-Env/helix-itsm-images-files-23.3.04.
 ```
-nmtui-edit
+cp -R ~/BMC-Helix-OnPrem-Installation-1-Env/helix-itsm-images-files-23.3.04 /root/.
+cd /root/helix-itsm-images-files-23.3.04
+chmod a+x *.sh
+dnf install dos2unix -y
+dos2unix *.txt
+ls -l
+
+-rw-r--r-- 1 root root  255 Mar  4 15:58 210503HF12_SmartReporting_Images.txt
+-rw-r--r-- 1 root root 2551 Mar  4 15:58 23301HF2_ITSM_Platform_Images.txt
+-rw-r--r-- 1 root root 2002 Mar  4 15:58 23304_ITSM_Pipeline_Images.txt
+-rw-r--r-- 1 root root 3014 Mar  4 15:58 23304_ITSM_Platform_Images.txt
+-rw-r--r-- 1 root root 1556 Mar  4 15:58 23304_ITSM_SmartApps_Images.txt
+-rw-r--r-- 1 root root  127 Mar  4 15:58 23304_SupportAssistTool_Images.txt
+-rw-r--r-- 1 root root 4703 Mar  4 15:58 244_Helix_Platform_Images.txt
+-rwxr-xr-x 1 root root 1026 Mar  4 15:58 image_pull_push.sh
+-rw-r--r-- 1 root root 2551 Mar  4 15:58 images.txt
+-rwxr-xr-x 1 root root 2611 Mar  4 15:58 image_sync_to_private_registry.sh
 ```
-
-The popup view
-![helix-svc Network Interfaces](./diagram/helix-svc-networks-interfaces.png)
-
-Edit the external network card ens34 and modify the following content:
-
-* Check the "Ignorre automatically obtained DNS parameters" option
-![helix-svc ens34](./diagram/helix-svc-ens34.png)
-
-Edit the intranet card ens35 and modify the following content:
-
-* IPv4 Configuration: Manual
-* DNS: 127.0.0.1
-* Search domains: bmc.local
-* Check the“Never use this network for default route”option
-![helix-svc ens35](./diagram/helix-svc-ens35.png)
-
-Restart Network
+Synchronize the Helix ITSM images from https://containers.bmc.com to local Harbor server.
 ```
-systemctl restart NetworkManager
+cat 210503HF12_SmartReporting_Images.txt > images.txt
+cat 23301HF2_ITSM_Platform_Images.txt >> images.txt
+cat 23304_ITSM_Pipeline_Images.txt >> images.txt
+cat 23304_ITSM_Platform_Images.txt >> images.txt
+cat 23304_ITSM_SmartApps_Images.txt >> images.txt
+cat 23304_SupportAssistTool_Images.txt >> images.txt
+
+nohup ./image_sync_to_private_registry.sh > nohup.out &
+tail -f nohup.out
 ```
-#### 2.4.2 Setup firewalld
+The image synchronization process may take several hours to one day.
 
-Create internal and external zone
+## 3 Setup PostgreSQL database
 
+BMC Helix Service Management supports both case-insensitive and sensitive PostgreSQL13.x and 15.x databases. You must set up your PostgreSQL database before you deploy the BMC Helix Innovation Suite platform and applications. For detailed instructions on installing the postgresql database, please refer to:[Install PostgreSQL on Linux](https://www.postgresql.org/download/linux/redhat/)
 ```
-nmcli connection modify ens34 connection.zone external
-nmcli connection modify ens35 connection.zone internal
+sudo dnf install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-9-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+sudo dnf -qy module disable postgresql
+sudo dnf install -y postgresql15-server
+sudo /usr/pgsql-15/bin/postgresql-15-setup initdb
+sudo systemctl enable postgresql-15
+sudo systemctl start postgresql-15
 ```
-
-View zones:
-
+Install postgres-contrib by using the following command:
 ```
-firewall-cmd --get-active-zones
+yum install postgres*contrib -y
 ```
-
-
-Set masquerading (source-nat) on the both zones
-
+Update the pg_hba.conf file and postgresql.conf file:
 ```
-firewall-cmd --zone=external --add-masquerade --permanent
-firewall-cmd --zone=internal --add-masquerade --permanent
+sudo su postgres <<'EOF'
+psql -c "ALTER USER postgres with encrypted password 'bmcAdm1n'"
+echo "[INFO]: editing pg_hba.conf"
+sed -i '/^local   all/c\local   all             all                                     scram-sha-256' /var/lib/pgsql/15/data/pg_hba.conf
+sed -i '/^host    all             all             127.0.0.1/c\host    all             all             0.0.0.0\/0            scram-sha-256' /var/lib/pgsql/15/data/pg_hba.conf
+echo "[INFO]: editing postgresql.conf"
+sed -i "/^#listen_addresses = 'localhost'/c \listen_addresses = '*'" /var/lib/pgsql/15/data/postgresql.conf
+sed -i '/^#password_encryption = scram-sha-256/c \password_encryption = scram-sha-256' /var/lib/pgsql/15/data/postgresql.conf
+sed -i '/^max_connections = 100/c \max_connections = 600' /var/lib/pgsql/15/data/postgresql.conf
+sed -i '/^#random_page_cost = 4.0/c \random_page_cost = 1.1' /var/lib/pgsql/15/data/postgresql.conf
+EOF
+```
+Restart PostgreSQL database 
+```
+systemctl restart postgresql-15
+```
+Add firewall rule for postgresql database
+```
+firewall-cmd --zone=internal --permanent --add-service=postgresql
+firewall-cmd --zone=external --permanent --add-service=postgresql
 firewall-cmd --reload
 ```
-
-Check the current settings of each zone
+Check the database server parameter value for max_connections
 ```
-firewall-cmd --list-all --zone=internal
-firewall-cmd --list-all --zone=external
-cat /proc/sys/net/ipv4/ip_forward
-```
-#### 2.4.3 Setup DNS
-
-Install and configure BIND DNS
-```
-dnf install bind bind-utils -y
-```
-
-Download config files for each of the services
-```
-dnf install git -y
-git clone https://github.com/rivertb/BMC-Helix-OnPrem-Installation-1-Env
+sudo su postgres <<'EOF'
+export PGPASSWORD=bmcAdm1n
+psql -U postgres -c "show max_connections;"
+EOF
 ```
 
 
-Apply configuration
-```
-\cp ~/BMC-Helix-OnPrem-Installation-1-Env/dns/named.conf /etc/named.conf
-cp -R ~/BMC-Helix-OnPrem-Installation-1-Env/dns/zones /etc/named/
-```
-Configure the firewall for DNS
-```
-firewall-cmd --add-service=dns --zone=external --permanent 
-firewall-cmd --add-service=dns --zone=internal --permanent 
-firewall-cmd --reload
-```
-Assign source IP network ranges
-```
-firewall-cmd --add-source=192.168.1.0/24 --zone=external --permanent 
-firewall-cmd --add-source=192.168.1.0/24 --zone=internal --permanent
-firewall-cmd --reload
-```
-Enable and start the service
-```
-systemctl enable named
-systemctl start named
-systemctl status named
-```
-Restart Network Manager
-```
-systemctl restart NetworkManager
-```
-Confirm dig now sees the correct DNS results by using the DNS Server running locally
-```
-dig lb.bmc.local
-dig -x 192.168.1.1
-```
+## 4 Setup Helix Deployment Engine
+### 4.1 Update libraries and packages
 
-
-#### 2.4.4 Setup JDK
-```
-yum install java-11-openjdk -y
-ls /usr/lib/jvm/jre-11-openjdk
-```
-
-#### 2.4.5 Add firewall rule for NTP
-```
-firewall-cmd --zone=internal --permanent --add-service=ntp
-firewall-cmd --zone=external --permanent --add-service=ntp
-firewall-cmd --reload
-```
-
-#### 2.4.6 Time sync
-```
-yum install -y chrony
-systemctl start chronyd
-systemctl enable chronyd
-chronyc makestep
-chronyc sources -V
-```
-
-
-### 2.5 Setup network for other VMs 
-For servers other than helix-svc, configure the following:
-
-* IPv4 Configuration: Manual
-* Addresses: Assign IP addresses to VMs according to the table definition in 2.1.
-* Gateway:192.168.1.1
-* DNS Server:192.168.1.1
-* Search dommains: bmc.local
-![Other VMs ens34](./diagram/helix-ens34.png)
-
-Verify that external network access is successful
-```
-dig www.baidu.com
-```
-
-Verify that the local DNS can resolve the local domain name
-```
-dig lb.bmc.local
-dig -x 192.168.1.1
-```
-
-### 2.6 Adjusting Linux Configuration
+Update your system libraries and packages to the latest available version
 ```
 #Update OS
-dnf update -y
+sudo yum update -y
+sudo yum upgrade -y
+sudo yum clean all
 
-# Close firewalld
-systemctl stop firewalld
-systemctl disable firewalld
+#Install perl
+sudo yum install perl -y
 
-#Disable SELinux
-setenforce 0
-sed -i 's#SELINUX=enforcing#SELINUX=disabled#g' /etc/sysconfig/selinux
-sed -i 's#SELINUX=enforcing#SELINUX=disabled#g' /etc/selinux/config
+#Set up Perl-Data-Dumper package
+sudo yum makecachesudo 
+yum -y install perl-Data-Dumper
+```
+### 4.2 Create and configure users
+Perform the following steps to add the users:
+```
+sudo useradd git -m
+echo "git:bmcAdm1n" | chpasswd
 
-# Swapoff swap
-swapoff -a && sysctl -w vm.swappiness=0
-sed -ri '/^[^#]*swap/s@^@#@' /etc/fstab
+sudo useradd jenkins -m
+echo "jenkins:bmcAdm1n" | chpasswd
+```
 
-#Set time zone
-timedatectl set-timezone Asia/Shanghai 
 
-#Time sync
-yum install -y chrony
-systemctl start chronyd
-systemctl enable chronyd
-chronyc makestep
-chronyc sources -V
-
-sysctl -w vm.max_map_count=262144
-echo vm.max_map_count=262144 > /etc/sysctl.d/es-custom.conf
-sudo sysctl -p
-
-#Set kernel parameters
-ulimit -SHn 65535
-
-cat <<EOF >> /etc/security/limits.conf
-* soft nofile 655360
-* hard nofile 131072
-* soft nproc 655350
-* hard nproc 655350
-* soft memlock unlimited
-* hard memlock unlimited
+### 4.3 Configure passwordless sudo access for git
+Create a sudoers override file:
+```
+cat > /etc/sudoers.d/git_sudoers <<-EOF
+git ALL=(ALL) NOPASSWD: \
+    /usr/sbin/alternatives, \
+    /usr/bin/cat, \
+    /usr/bin/chmod, \
+    /usr/bin/chown, \
+    /usr/bin/cp, \
+    /usr/bin/curl, \
+    /usr/bin/dnf, \
+    /usr/bin/dos2unix, \
+    /usr/bin/grep, \
+    /usr/bin/java, \
+    /usr/bin/ln, \
+    /usr/bin/ls, \
+    /usr/bin/mkdir, \
+    /usr/bin/mv, \
+    /usr/bin/netstat, \
+    /usr/bin/rpm, \
+    /usr/bin/sed, \
+    /usr/bin/su, \
+    /usr/sbin/subscription-manager, \
+    /usr/bin/systemctl, \
+    /usr/bin/unzip, \
+    /usr/bin/crb, \
+    /usr/sbin/update-alternatives, \
+    /usr/bin/wget, \
+    /usr/bin/yum
 EOF
+#Verify that the file has no errors
+visudo -c -f /etc/sudoers.d/git_sudoers
 
-#Take the adjust to effect
-reboot
+#Modify access to sudoers file
+chmod 440 /etc/sudoers.d/git_sudoers
+
+#Switch the user to git user, and validate passwordless sudo access
+su - git
+sudo ls /root
 ```
-## 3. Install Docker Environment 
 
-### 3.1 Install Docker Engine
-
-   Install Docker on all VMs. For installation instructions, refer to：[Install Docker Engine](https://docs.docker.com/engine/install/)
-    
- Select different installation methods according to the type of the current operating system. For example, for CentOS:
+### 4.4 Copy the ssh keys
 ```
-#Uninstall old versions
-sudo dnf remove docker \
-                  docker-client \
-                  docker-client-latest \
-                  docker-common \
-                  docker-latest \
-                  docker-latest-logrotate \
-                  docker-logrotate \
-                  docker-engine
+su - git
 
-#Set up the repository
-sudo dnf -y install dnf-plugins-core
-sudo dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+#Generate the SSH key
+ssh-keygen
+#Tribouble enter to select default value
 
-#Install Docker Engine Latest version
-sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+ssh-copy-id git@helix-svc.bmc.local
+#enter yes and bmcAdm1n as password
 
-#Start Docker Engine.
-sudo systemctl enable --now docker   
+ssh git@helix-svc.bmc.local
 
-#Verify that the installation is successful by running the hello-world image:
-sudo docker run hello-world
+su - jenkins
+ssh-keygen
+#Tribouble enter to select default value
+
+ssh-copy-id git@helix-svc.bmc.local
+ssh git@helix-svc.bmc.local
+#enter yes and bmcAdm1n as password
 
 ```
 
-### 3.2 Install Docker Compose
-Install Docker Compose on helix-harbor and helix-bhii，For installation instructions, refer to：[Install the Docker Compose standalone](https://docs.docker.com/compose/install/standalone/)
-   
-   
+### 4.5 Add the kubeconfig file
+
 ```
-#To download and install the Docker Compose standalone
-curl -SL https://github.com/docker/compose/releases/download/v2.33.1/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+su - git
+mkdir /home/git/.kube
+sudo cp cp /root/.kube/config /home/git/.kube/.
 
-#Apply executable permissions
-chmod +x /usr/local/bin/docker-compose
-
-#Create a symbolic link
-sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-
-#Test and execute Docker Compose
-docker-compose
+#Verify kubectl tool works
+kubectl get nodes
 ```
-            
- ## 4 Prepare a self-signed certificate
-###  4.1 Create a certificate
- 
- On the helix-svc server, create a CA certificate and a self-signed certificate
+### 4.6 Run the BMC Deployment Engine automation script
+
+
+Copy the BMC_Helix_Innovation_Suite_And_Service_Management_Apps_Version_23.3.04.zip file downloaded from EPD and extract the files to the git user home directory
+
 ```
-su - root
-mkdir openssl
-cd openssl
-cp ~/BMC-Helix-OnPrem-Installation-1-Env/certs/create_certs.sh .
-chmod a+x *.sh
-
-# Execute the script to create the Helix root certificate and self-signed certificate
-./create_certs.sh
-
-ll			
-
--rwxr-xr-x 1 root root 1816 Feb 27 13:24 create_certs.sh
--rw------- 1 root root 3247 Feb 27 13:24 HelixCA.key
--rw-r--r-- 1 root root 1895 Feb 27 13:24 HelixCA.crt
--rw------- 1 root root 1679 Feb 27 13:24 bmc.local.key
--rw-r--r-- 1 root root  223 Feb 27 13:24 bmc.local.cnf
--rw-r--r-- 1 root root 1094 Feb 27 13:24 bmc.local.csr
--rw-r--r-- 1 root root   41 Feb 27 13:24 HelixCA.srl
--rw-r--r-- 1 root root 1574 Feb 27 13:24 bmc.local.crt
+#Switch to the git user
+su - git
+unzip ./BMC_Helix_Innovation_Suite_And_Service_Management_Apps_Version_23.3.04.zip
+unzip ./BMC_Remedy_Deployment_Engine_Setup_23.3.04.zip
+cd DE1.0
+```
+Update build.properties and customize the following parameters:
+* ITSM_REPO_GIT_ZIP
+* JENKINS_CONFIG_FILES_ZIP_PATH
+* LIBRARY_REPO_ZIP_PATH
+* DB_TYPE
+* JENKINS_HOSTNAME
+* KUBERNETES_VERSION
+* POSTGRES_VERSION
+* HELM_VERSION
+```
+sed -i "/^ITSM_REPO_GIT_ZIP/c \ITSM_REPO_GIT_ZIP=/home/git/BMC_Remedy_Deployment_Manager_Configuration_Release_23.3.04.zip" /home/git/DE1.0/build.properties
+sed -i "/^JENKINS_CONFIG_FILES_ZIP_PATH/c \JENKINS_CONFIG_FILES_ZIP_PATH=/home/git/Jenkins_Config_Files.zip" /home/git/DE1.0/build.properties
+sed -i "/^LIBRARY_REPO_ZIP_PATH/c \LIBRARY_REPO_ZIP_PATH=/home/git/LIBRARY_REPO.zip" /home/git/DE1.0/build.properties
+sed -i "/^DB_TYPE/c \DB_TYPE=postgres" /home/git/DE1.0/build.properties
+sed -i "/^JENKINS_HOSTNAME/c \JENKINS_HOSTNAME=helix-svc.bmc.local" /home/git/DE1.0/build.properties
+sed -i "/^KUBERNETES_VERSION/c \KUBERNETES_VERSION=1.31.5" /home/git/DE1.0/build.properties
+sed -i "/^POSTGRES_VERSION/c \POSTGRES_VERSION=15" /home/git/DE1.0/build.properties
+sed -i "/^HELM_VERSION/c \HELM_VERSION=3.17.1" /home/git/DE1.0/build.properties
 ```
 
-### 4.2 Set up ssh password-free login
+After updating the build.properties file, run the BMC Deployment Engine automation script to set up the Jenkins job pipeline framework.
 ```
-cd /root
-ssh-keygen -t rsa
+perl setup-Helix-ITSM-onPrem.pl  2>&1 | tee ~/BMC-HELIX-DE-AUTO.log.$$
+```
+The Jenkins job pipeline framework installed.
+![Jenkins Installed](./diagram/jenkins-installed.png)
 
-for i in helix-svc helix-harbor helix-k8s-master helix-k8s-worker01 helix-k8s-worker02 helix-k8s-worker03 helix-k8s-worker04;do ssh-copy-id -i .ssh/id_rsa.pub $i;done
+Add firewall rule for jenkins
+```
+firewall-cmd --add-port=8080/tcp --zone=internal --permanent 
+firewall-cmd --add-port=8080/tcp --zone=external --permanent 
+firewall-cmd --reload
 ```
 
-### 4.3 Set trusted certificate
+### 4.7 Post-installation configuration
 
-Add the certificate to all servers
+Login to Jenkins console. The password for admin can be find in the ~/BMC-HELIX-DE-AUTO.log.$$ file.
+![Login Jenkins](./diagram/login-jenkins.png)
+
+On the Jenkins User Interface, select Install Suggested Plugins
+![Install Sugguested Plugins](./diagram/install-suggested-plugins.png)
+
+Get started to install plugins.
+![Jenkins Plugins Started](./diagram/jenkins-plugins-getting-started.png)
+
+Create the first admin user.
+![Create First Admin User](./diagram/create-first-admin-user.png)
+
+Save Jenkins URL.
+![Jenkins URL](./diagram/jenkins-url.png)
+
+The default Jenkins dashboard.
+![Helix Dashboard](./diagram/helix-dashboard.png)
+
+Download kubeconfig file from Rancher console.
+![Download Kubeconfig](./diagram/download-kubeconfig.png)
+
+Login to http://192.168.1.1:8080/credentials.
+![Jenkins Credentials](./diagram/jenkins-credentials.png)
+
+Select kubeconfig.yaml (kubeconfig), Update->Replace->Choose kubeconfig file just download from Rancher console.
+![Jenkins Update Kubeconfig](./diagram/jenkins-update-kubeconfig.png)
+
+Input password for the below credentials:
+* git/****** (github): Update->Change Password->bmcAdm1n
+* git/****** (ansible_host): Update->Change Password->bmcAdm1n
+* git/****** (ansible): Update->Change Password->bmcAdm1n
+* git/****** (Credentials of git): Update->Change Password->bmcAdm1n
+
+Check Node Status. 
+Goto http://192.168.1.1:8080/computer, Refresh Status, the nodes will start automatically. Or click Configure, select git user as Credentials and Launch Agent.
+![Jenkins Computer Nodes](./diagram/jenkins-computer-nodes.png)
+
+Add Jenkins libraries.
+Jenkins home page->Manage Jenkins->System->Scrolldown to "Global Trusted Pipeline Libraries"->Add
+![Jenkins Global Truested Pipeline Libraries](./diagram/jenkins-manage-system-global-truested-pipeline-libraries.png)
+
+* Name: pipeline-framework
+* Default version: master
+* Load implicitly: Checked
+* Project Repository: ssh://git@helix-svc.bmc.local/home/git/git_repo/LIBRARY_REPO/pipeline-framework/pipeline-framework.git
+* Credentials: Git/****** (Credentials of git)
+
+![Jenkins Pipeline Framework](./diagram/jenkins-pipeline-framework.png)
+
+Click Add button to add another Library, save the change.
+
+* Name: JENKINS-27413-workaround-library
+* Default version: master
+* Load implicitly: Checked
+* Project Repository: ssh://git@helix-svc.bmc.local/home/git/git_repo/LIBRARY_REPO/jenkins-workaround/JENKINS-27413-workaround-library.git
+* Credentials: Git/****** (Credentials of git)
+
+![Jenkins 27413 Workaround Library](./diagram/jenkins-27413-workaround-library.png)
+
+## 5 Dry run Pipeline
+Dry-run deployment pipelines. This is a mandatory step to update the pipeline configuration for any changes to the BMC Helix Service Management installer.
+
+* Navigate to Jenkins Dashboards to view all the pipelines required for deployment.
+* Select each pipeline and click Build with Parameters.
+* In the AGENT parameter(Only in HELIX_ONPREM_DEPLOYMENT), provide the value of the node that has the name git-helix-svc.bmc.local
+* Click Build.The build job will fail, which is expected.
+
+Below two pipelines do NOT require a dry-run
+* agent-add-pipeline
+* HELIX_DR
+
+Select HELIX_CONPREM_DEPLOYMENT.
+![Select HELIX_CONFIG_DEPLOYMENT](./diagram/helix-onprem-deployment-select.png)
+
+Click Build with Parameters.
+![HELIX_CONFIG_DEPLOYMENT Build With Parameters](./diagram/helix-onprem-deployment-build-with-parameters.png)
+
+Input agent.
+![HELIX_CONFIG_DEPLOYMENT Agent Setting](./diagram/helix-onprem-deployment-agent-setting.png)
+
+Check out all under PRODUCT_DEPLOY section.
+![HELIX_CONFIG_DEPLOYMENT Product Deploy](./diagram/helix-onprem-deployment-product-deploy.png)
+
+Build job failed as expected.
+![HELIX_CONFIG_DEPLOYMENT Buildes With Failure](./diagram/helix-onprem-deployment-builds-with-failure.png)
+
+Go to Dashboard->Manage Jenkins->In-process Script Approval.
+![In Process Script Approval](./diagram/in-process-script-approval.png)
+
+Click Approve button.
+![In Process Script Approved](./diagram/in-process-script-approved.png)
+
+## 6 Create a self-signed or custom CA certificate
+We can use a self-signed certificate as a security certificate for BMC Helix Innovation Suite and Service Management applications.
+Get the key store file cacerts 
+```
+cp /root/BMC-Helix-OnPrem-Installation-1-Env/certs/cacerts /root/openssl/.
+```
+Import public key file to key store
 ```
 cd /root/openssl
-for node in helix-svc helix-harbor helix-k8s-master helix-k8s-worker01 helix-k8s-worker02 helix-k8s-worker03 helix-k8s-worker04; do echo $node; scp HelixCA.crt root@$node:/etc/pki/ca-trust/source/anchors/; ssh root@$node "update-ca-trust enable;update-ca-trust extract;systemctl restart docker";done
-```
-## 5 Setup Harbor Registry
-### 5.1 Harbor Installation
-
-* Prepare https certificate for Harbor
-```
-#Configure Harbor registry by using self-signed SSL certificates
-mkdir -p /data/cert
-scp root@helix-svc:/root/openssl/bmc.local.crt /data/cert/
-scp root@helix-svc:/root/openssl/bmc.local.key /data/cert/
-scp root@helix-svc:/root/openssl/HelixCA.crt /data/cert/
-
-#Convert yourdomain.com.crt to yourdomain.com.cert, for use by Docker
-cd /data/cert
-openssl x509 -inform PEM -in bmc.local.crt -out bmc.local.cert
-
-#Copy the server certificate, key and CA files into the Docker certificates folder on the Harbor host.
-#mkdir -p /etc/docker/certs.d/yourdomain.com/
-mkdir -p /etc/docker/certs.d/bmc.local/
-
-cp /data/cert/bmc.local.cert /etc/docker/certs.d/bmc.local/
-cp /data/cert/bmc.local.key /etc/docker/certs.d/bmc.local/
-cp /data/cert/HelixCA.crt /etc/docker/certs.d/bmc.local/
-
-#Restart Docker Engine.
-systemctl restart docker
+keytool -importcert -v -alias helix -file /root/openssl/bmc.local.crt -keystore /root/openssl/cacerts
 ```
 
-* Install the harbor image registry on helix-harbor. For installation instructions, please refer to：[Create a Harbor registry](https://docs.bmc.com/xwiki/bin/view/IT-Operations-Management/On-Premises-Deployment/BMC-Helix-IT-Operations-Management-Deployment/itomdeploy251/Deploying/Preparing-for-deployment/Accessing-container-images/Setting-up-a-Harbor-registry-in-a-local-network-and-synchronizing-it-with-BMC-DTR/)。
+Enter the password as changeit and yes to trust this certificate.
+```
+keytool -importcert -v -alias helix -file /root/openssl/bmc.local.crt -keystore /root/openssl/cacerts
+Enter keystore password:
+Owner: C=CN, O=BMCSoftware, CN=*.bmc.local
+Issuer: C=CN, O=BMCSoftware, CN=BMC-CA
+Serial number: 4b1d7bace2a9b937ae653b7f392e46ebe7ce522
+Valid from: Thu Feb 27 13:24:53 CST 2025 until: Sun Feb 25 13:24:53 CST 2035
+Certificate fingerprints:
+         SHA1: 85:DF:A7:E6:BE:57:2F:66:5E:B4:DE:D4:7A:F0:3A:D0:33:B8:2A:66
+         SHA256: 0F:C6:40:F0:AA:DB:2B:23:C4:85:7A:E8:B4:75:9B:82:1C:DC:32:BB:30:22:86:0B:98:FB:82:75:2B:00:FC:A1
+Signature algorithm name: SHA256withRSA
+Subject Public Key Algorithm: 2048-bit RSA key
+Version: 3
+
+Extensions:
+
+#1: ObjectId: 2.5.29.17 Criticality=false
+SubjectAlternativeName [
+  DNSName: *.bmc.local
+  DNSName: helix-harbor.bmc.local
+  DNSName: helix-discovery.bmc.local
+  DNSName: helix-bhii.bmc.local
+]
+
+Trust this certificate? [no]:  yes
+Certificate was added to keystore
+[Storing /root/openssl/cacerts]
+```
+We get the new cacerts with public key stored. It will be upload to Jenkins pipeline.
+
+## 7 Setup Installation environment
+### 7.1 Verifying DNS for applications
+We have configured DNS for the BMC Helix Service Management applications so that we can access the applications by using the following URL format. 
+* Mid Tier: \<CUSTOMER_SERVICE\>-\<ENVIRONMENT\>.<CLUSTER_DOMAIN>
+* Mid Tier integration: <CUSTOMER_SERVICE>-\<ENVIRONMENT\>-int.<CLUSTER_DOMAIN>
+* Smart IT: <CUSTOMER_SERVICE>-\<ENVIRONMENT\>-smartit.<CLUSTER_DOMAIN>
+* Smart Reporting: <CUSTOMER_SERVICE>-\<ENVIRONMENT\>-sr.<CLUSTER_DOMAIN>
+* Innovation Studio: <CUSTOMER_SERVICE>-\<ENVIRONMENT\>-is.<CLUSTER_DOMAIN>
+* Innovation Suite REST API or CMDB: <CUSTOMER_SERVICE>-\<ENVIRONMENT\>-restapi.<CLUSTER_DOMAIN>
+* Atrium Web Services: <CUSTOMER_SERVICE>-\<ENVIRONMENT\>-atws.<CLUSTER_DOMAIN>
+* Digital Workplace: <CUSTOMER_SERVICE>-\<ENVIRONMENT\>-dwp.<CLUSTER_DOMAIN>
+* Digital Workplace Catalog: <CUSTOMER_SERVICE>-\<ENVIRONMENT\>-dwpcatalog.<CLUSTER_DOMAIN>
+* Live Chat: <CUSTOMER_SERVICE>-\<ENVIRONMENT\>-vchat.<CLUSTER_DOMAIN>
+* Openfire Chat: <CUSTOMER_SERVICE>-\<ENVIRONMENT\>-chat.<CLUSTER_DOMAIN>
+* Support Assistant tool: <CUSTOMER_SERVICE>-\<ENVIRONMENT\>-supportassisttool.<CLUSTER_DOMAIN>
 
 ```
-# Download Harbor
-dnf install wget -y
-#wget https://github.com/goharbor/harbor/releases/download/v<version>/harbor-offline-installer-v<version>.tgz
-
-# Example
-wget https://github.com/goharbor/harbor/releases/download/v2.1.4/harbor-offline-installer-v2.1.4.tgz
-
-# Unzip the tar file
-tar xvzf harbor-offline-installer*.tgz
-
-# Go to the Harbor directory
-cd harbor
-
-# Copy the configuration template
-cp harbor.yml.tmpl harbor.yml
-
+ping -c 4 itsm-poc.bmc.local
+ping -c 4 itsm-poc-int.bmc.local
+ping -c 4 itsm-poc-smartit.bmc.local
+ping -c 4 itsm-poc-sr.bmc.local
+ping -c 4 itsm-poc-is.bmc.local
+ping -c 4 itsm-poc-restapi.bmc.local 
+ping -c 4 itsm-poc-atws.bmc.local
+ping -c 4 itsm-poc-dwp.bmc.local
+ping -c 4 itsm-poc-dwpcatalog.bmc.local
+ping -c 4 itsm-poc-vchat.bmc.local
+ping -c 4 itsm-poc-chat.bmc.local
+ping -c 4 itsm-poc-supportassisttool.bmc.local
 ```
 
-* in the harbor.yml file, update the values for the following parameters:
+### 7.2 Configure Helix Single Sign-On
 
+Log in to BMC Helix Single Sign-On
+
+* URL: lb.bmc.local/rsso
+* Username: Admin
+* Password: RSSO#Admin#
+
+![RSSO Login](./diagram/rsso-login.png)
+
+Click Tenant menu, select the SAAS_TENANT, click "Select Tenant" under Action column, the "Tenant SAAS_TENANT is selected" confirmation message is displayed on the screen.
+Copy another tenant name of adelab.\<TENANT-ID\> for later use.
+
+![RSSO Tenant SAAS Tentant](./diagram/rsso-tenant-sass-tentant.png)
+
+On the main menu, click Realm.
+![RSSO Add Realm](./diagram/rsso-add-realm.png)
+
+In the General tab, enter the following details:
+
+| Filed | Value | Desc |
+| --- | --- | --- |
+| Realm ID | itsm-poc | <CUSTOMER_SERVICE>-\<ENVIRONMENT\> |
+| Application Domain(s) | itsm-poc-atws.bmc.local, itsm-poc-dwpcatalog.bmc.local, itsm-poc.bmc.local, itsm-poc-restapi.bmc.local, itsm-poc-is.bmc.local, itsm-poc-sr.bmc.local, itsm-poc-dwp.bmc.local, itsm-poc-smartit.bmc.local, itsm-poc-chat.bmc.local, itsm-poc-vchat.bmc.local, itsm-poc-int.bmc.local |  |
+| Tenant | adelab.\<TENANT-ID\> | paste the tenant name |
+
+![RSSO Realm General](./diagram/rsso-realm-general.png)
+
+Click Authentication on the left tab, and enter the following details:
+
+* Authentication Type: AR Server
+* Host: platform-user-ext.helixis, helixis is the Helix Innovation Suite namespace
+* Port: 46262 fix value
+
+| Field | Value | Desc |
+| --- | --- | --- |
+| Authentication Type | AR Server |  |
+| Host | platform-user-ext.helixis | helixis is the namespace of Helix Innovation Suite |
+| Port | 46262 | Port Number – 46262 |
+
+![RSSO Authentication](./diagram/rsso-authentication.png)
+
+## 8 Install Helix Platform Common services
+
+Change value setting in /root/helix-on-prem-deployment-manager-25.1/configs/deployment.config
+
+| Line No. | Parameter | Value |
+| --- | --- | --- |
+| 48 | LOG_ANALYTICS_SERVICES | yes |
+| 57 | ARSERVICES | yes |
+
+Execute Deployment Manager script
 ```
-# Specify the name of system where you want to install Harbor.
-hostname: helix-harbor.bmc.local
-
-# Specify the password for the Harbor system administrator.
-harbor_admin_password: bmcAdm1n
-
-# The path of cert and key files for nginx
-certificate: /data/cert/bmc.local.crt
-private_key: /data/cert/bmc.local.key
-
-# Harbor repository
-data_volume: /data/harbor
-
-```
-
-* install the Harbor registry
-```
-mkdir /data/harbor
-./install.sh
-```
-
-
-* Configure the Harbor registry
-Log in to the Harbor registry and perform the following steps to create a new project:
-
-Select Projects and then click NEW PROJECT.
-![Harbor Projects](./diagram/harbor-projects.png)
-
-In the New Project window, specify the following values:
-Project Name: Enter bmc.
-Access Level: Select the Public check box.
-Leave the other parameters to their default values.
-![Harbor New Projects bmc](./diagram/harbor-new-project-bmc.png)
-Click OK
-    
-
-### 5.2 Batch download Helix images
-This step can be performed on any server that can connect to the Internet, not just the helix-harbor server. The prerequisite is docker engine environment.
-
-* Create Helix images download directory
-
-```
-cp -R ~/BMC-Helix-OnPrem-Installation-1-Env/helix-images-25.1  /root/.
-
-```
-* Download Helix ITOM all_images_<version>.txt file from BMC Docs to root/helix-images-25.1
-    [all_images_25.1.txt](https://docs.bmc.com/xwiki/bin/view/IT-Operations-Management/On-Premises-Deployment/BMC-Helix-IT-Operations-Management-Deployment/itomdeploy251/Deploying/Preparing-for-deployment/Accessing-container-images/Setting-up-a-Harbor-registry-in-a-local-network-and-synchronizing-it-with-BMC-DTR/)
-    
- 
-```
-pwd
-/root/helix-images-25.1
-
-ls -l
--rw-r--r-- 1 root root 13685 Feb 25 15:55 all_images_25.1.00.txt
--rw-r--r-- 1 root root  2158 Feb 25 15:44 helix-load-images.sh
--rw-r--r-- 1 root root  2399 Feb 25 15:44 helix-save-images.sh
--rw-r--r-- 1 root root   174 Feb 25 15:44 saveall.sh
-
-# Convert the file to an UNIX format
-dnf install dos2unix -y
-dos2unix all_images_25.1.00.txt
-
-# Get Helix ITOM different repository images lists
-
-# lp0lz: BMC Helix Platform images
-cat all_images_25.1.00.txt | grep lp0lz > lp0lz_images.txt
-
-# lp0oz: BMC Helix Intelligent Automation images
-cat all_images_25.1.00.txt | grep lp0oz > lp0oz_images.txt
-
-# lp0pz: BMC Helix Continuous Optimization images
-cat all_images_25.1.00.txt | grep lp0pz > lp0pz_images.txt
-
-# lp0mz: BMC Helix Operations Management on-premises images
-cat all_images_25.1.00.txt | grep lp0mz > lp0mz_images.txt
-
-# la0cz: BMC Helix AIOps images
-cat all_images_25.1.00.txt | grep la0cz > la0cz_images.txt
-
-# Run batch downloader for Helix ITOM image
-chmod a+x *.sh
-nohup ./saveall.sh > nohup.out &
-tail -f nohup.out
-
-# Due to the limitation of network speed, the entire download process may take several hours to several days.
+/root/helix-on-prem-deployment-manager-25.1/deployment-manager.sh
 ```
 
-### 5.3 Download Rancher image files
+## 9 Config HELIX_ONPREM_DEPLOYMENT pipeline
+On Jenkins Dashboard, click the schdule button at the line of HELIX_ONPREM_DEPLOYMENT pipeline.
+![RSSO Authentication](./diagram/rsso-authentication.png)
 
-In this test, the Kubernetes cluster where Helix installed is created and managed using Rancher. The following steps are to prepare the Rancher image file.
+Click "Build with Parameters" on the left, fill in all the necessary parameters and click the Build button.
 
-This step can be performed on any server that can connect to the Internet, not just the helix-harbor server. The prerequisite is docker engine environment.
+![HELIX_ONPREM_DEPLOYMENT Schdule](./diagram/helix-onprem-deployment-schdule-build-with-parameters.png)
 
-To download the Rancher image file, refer to the Rancher official documentation：[Collect and Publish Images to your Private Registry](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/other-installation-methods/air-gapped-helm-cli-install/publish-images)。
+Parameter Description
 
-* Select the Rancher version, download the offline tool script file and the mirror list file, you can refer to the document：[Rancher Release](https://github.com/rancher/rancher/releases)
-![Harbor Release](./diagram/rancher-release-v2.10.2.png)
+| Section | Parameter | Value | Desc |
+| --- | --- | --- | --- |
+| INFRASTRUCTURE | HELM_BINARY | helm | Helm binary that you have installed |
+| INFRASTRUCTURE | AGENT | git-helix-svc.bmc.local | git-<Jenkins server host name>. |
+| CODE | GIT_USER_HOME_DIR | /home/git | Git user home directory |
+| CODE | GIT_REPO_DIR | ssh://helix-svc.bmc.local/home/git/git_repo | Directory that contains all the Git repositories |
+| CUSTOMER-INFO | DEPLOYMENT_MODE | FRESH  | fresh installation |
+| CUSTOMER-INFO | CLUSTER | helix-compact | Find the cluster from the kubeconfig file |
+| CUSTOMER-INFO | CUSTOMER_NAME | itsmpoc | Specify the customer's full name |
+| CUSTOMER-INFO | IS_NAMESPACE | helixis | Namespace to install BMC Helix Innovation Suite |
+| CUSTOMER-INFO | CUSTOMER_SERVICE  | itsm |  |
+| CUSTOMER-INFO | ENVIRONMENT | poc |  |
+| CUSTOMER-INFO | CLUSTER_DOMAIN | bmc.local |  |
+| CUSTOMER-INFO | CACERTS_FILE | cacerts | Upload cacerts with public certificate create in section 6 |
+| CUSTOMER-INFO | CUSTOMER_SIZE | C | C stands for Compact |
+| CUSTOMER-INFO | HELM_NODE | helix-svc.bmc.local | Hostname of the Jenkins server where HELM installed |
+| PRODUCTS | HELIX_VIRTUALCHAT | check | Helix Live Chat |
+| PRODUCTS | HELIX_OPENFIRE | check | Helix Openfire |
+| PRODUCTS | HELIX_DWP | check | Helix Digital Workplace |
+| PRODUCTS | HELIX_DWPA| check | Helix Digital Workplace Catalog|
+| PRODUCTS | HELIX_CLOUD_ACTIONS | check | Cloud Action connectors |
+| PRODUCTS | HELIX_BWF | check | Helix Business Workflows |
+| PRODUCTS | HELIX_MCSM | check | Helix Multi-Cloud Broker |
+| PRODUCTS | HELIX_ITSM_INSIGHTS| **NOT check** | Helix ITSM Insights, resoure consume high |
+| PRODUCTS | HELIX_SMARTAPPS_CSM | check | Helix Customer Service Management (CSM) |
+| PRODUCTS | HELIX_SMARTAPPS_FAS | check | Helix Portfolio Management |
+| PRODUCTS | HELIX_DRIFT_MANAGEMENTPLUGIN | check | Drift Management |
+| PRODUCTS | HELIX_CLAMAV | **NOT check** | |
+| LOGGING CONFIGURATION | SIDECAR_SUPPORT_ASSISTANT_FPACK | check | Support Assistant tool |
+| LOGGING CONFIGURATION | SUPPORT_ASSISTANT_CREATE_ROLE | check | Support Assistant tool creates a role and role binding |
+| LOGGING CONFIGURATION | SIDECAR_FLUENTBIT | check | install Fluent Bit |
+| LOGGING CONFIGURATION | SIDECAR_FLUENT_DETAIL_LOG | check | Stream APIs, SQL, or filter logs to Elasticsearch |
+| PRODUCT-DEPLOY | HELIX_GENERATE_CONFIG | check  | |
+| PRODUCT-DEPLOY | HELIX_PLATFORM_DEPLOY | check | |
+| PRODUCT-DEPLOY | HELIX_NONPLATFORM_DEPLOY | check | |
+| PRODUCT-DEPLOY | HELIX_CONFIGURE_ITSM | check | |
+| PRODUCT-DEPLOY | HELIX_SMARTAPPS_DEPLOY | check | |
+| PRODUCT-DEPLOY | SUPPORT_ASSISTANT_TOOL | check | Support Assistant Tool Application (UI) |
+| PRODUCT-DEPLOY | HELIX_INTEROPS_DEPLOY | check | Activate services for the BMC Helix Platform users|
+| PRODUCT-DEPLOY | FULL_STACK_UPGRADE | **NOT check** | |
+| DATABASE_REGISTRY_STORAGE_PASSWORDS_SECRETS_DETAILS | HARBOR_REGISTRY_HOST | helix-harbor.bmc.local | |
+| DATABASE_REGISTRY_STORAGE_PASSWORDS_SECRETS_DETAILS | IMAGE_REGISTRY_USERNAME | admin | |
+| DATABASE_REGISTRY_STORAGE_PASSWORDS_SECRETS_DETAILS | IMAGE_REGISTRY_PASSWORD | bmcAdm1n | Change Password |
+| DATABASE_REGISTRY_STORAGE_PASSWORDS_SECRETS_DETAILS | DB_TYPE | postgres | |
+| DATABASE_REGISTRY_STORAGE_PASSWORDS_SECRETS_DETAILS | DB_PORT | 5432 | |
+| DATABASE_REGISTRY_STORAGE_PASSWORDS_SECRETS_DETAILS | DATABASE_HOST_NAME | helix-svc.bmc.local| |
+| DATABASE_REGISTRY_STORAGE_PASSWORDS_SECRETS_DETAILS | DATABASE_ADMIN_USER | postgres | |
+| DATABASE_REGISTRY_STORAGE_PASSWORDS_SECRETS_DETAILS | DATABASE_ADMIN_PASSWORD | bmcAdm1n | |
+| DATABASE_REGISTRY_STORAGE_PASSWORDS_SECRETS_DETAILS | LOGS_ELASTICSEARCH_HOSTNAME | efk-elasticsearch-data-hl.helixade | |
+| DATABASE_REGISTRY_STORAGE_PASSWORDS_SECRETS_DETAILS | LOGS_ELASTICSEARCH_PASSWORD | kibana123| |
+| DATABASE_REGISTRY_STORAGE_PASSWORDS_SECRETS_DETAILS | FTS_ELASTICSEARCH_HOSTNAME | opensearch-logs-data.helixade| |
+| DATABASE_REGISTRY_STORAGE_PASSWORDS_SECRETS_DETAILS | FTS_ELASTICSEARCH_PORT | 9200 | |
+| DATABASE_REGISTRY_STORAGE_PASSWORDS_SECRETS_DETAILS | FTS_ELASTICSEARCH_USERNAME | bmcuser | |
+| DATABASE_REGISTRY_STORAGE_PASSWORDS_SECRETS_DETAILS | FTS_ELASTICSEARCH_USER_PASSWORD | Es_L0g#p@SS | LOG_ES_PASSWD value in secrets.txt |
+| DATABASE_REGISTRY_STORAGE_PASSWORDS_SECRETS_DETAILS | FTS_ELASTICSEARCH_SECURE | check | |
+| DATABASE_REGISTRY_STORAGE_PASSWORDS_SECRETS_DETAILS | AR_LOCALE_TO_INSTALL | zh_CN | Supported locales are fr, de, it, es, ja, ko, zh_CN, pt_BR, he, ru, and pl. English locale is installed by default. It take approximately **2 hours** to install one locale.|
+| DATABASE_REGISTRY_STORAGE_PASSWORDS_SECRETS_DETAILS | IMAGESECRET_NAME | isharbor-secret | |
+| DATABASE_REGISTRY_STORAGE_PASSWORDS_SECRETS_DETAILS | BAKEDUSER_HANNAH_ADMIN_PASSWORD | hannah_admin | Password for BMC Helix Digital Workplace administrator user hannah_admin. The hannah_admin user in ADE is different from hannah_admin user in Innovation Suite  |
+| DATABASE_REGISTRY_STORAGE_PASSWORDS_SECRETS_DETAILS | AR_DB_NAME | is_db | Helix Innovation Suite database |
+| DATABASE_REGISTRY_STORAGE_PASSWORDS_SECRETS_DETAILS | AR_DB_USER | ARAdmin | Helix Innovation Suite database user |
+| DATABASE_REGISTRY_STORAGE_PASSWORDS_SECRETS_DETAILS | AR_DB_PASSWORD | AR#Admin# | Password for BMC Helix Innovation Suite user |
+| DATABASE_REGISTRY_STORAGE_PASSWORDS_SECRETS_DETAILS | AR_SERVER_APP_SERVICE_PASSWORD | AR#Admin# | Specify the password to access applications |
+| DATABASE_REGISTRY_STORAGE_PASSWORDS_SECRETS_DETAILS | AR_SERVER_DSO_USER_PASSWORD | AR#Admin# | Password to access the Distributed Server Option |
+| DATABASE_REGISTRY_STORAGE_PASSWORDS_SECRETS_DETAILS | AR_SERVER_MIDTIER_SERVICE_PASSWORD | AR#Admin# | Password to access the Mid Tier |
+| DATABASE_REGISTRY_STORAGE_PASSWORDS_SECRETS_DETAILS | SMARTREPORTING_DB_NAME | SR | BMC Helix ITSM: Smart Reporting database |
+| DATABASE_REGISTRY_STORAGE_PASSWORDS_SECRETS_DETAILS | SMARTREPORTING_DB_USER | SRAdmin | |
+| DATABASE_REGISTRY_STORAGE_PASSWORDS_SECRETS_DETAILS | SMARTREPORTING_DB_PASSWORD | AR#Admin# | |
+| DATABASE_REGISTRY_STORAGE_PASSWORDS_SECRETS_DETAILS | VC_RKM_USER_NAME | vc_admin | User name for Helix Virtual Agent |
+| DATABASE_REGISTRY_STORAGE_PASSWORDS_SECRETS_DETAILS | VC_RKM_PASSWORD | AR#Admin# | Password for the Helix Virtual Agent user |
+| DATABASE_REGISTRY_STORAGE_PASSWORDS_SECRETS_DETAILS | VC_PROXY_USER_LOGIN_NAME | vcp_admin | Proxy user login name for BMC Helix Virtual Agent |
+| DATABASE_REGISTRY_STORAGE_PASSWORDS_SECRETS_DETAILS | VC_PROXY_USER_PASSWORD | AR#Admin# | |
+| DATABASE_REGISTRY_STORAGE_PASSWORDS_SECRETS_DETAILS | DWP_CONFIG_PRIMARY_ORG_NAME | dwporg | Organization name for BMC Helix Digital Workplace |
+| DATABASE_REGISTRY_STORAGE_PASSWORDS_SECRETS_DETAILS | AR_SERVER_ALIAS | onbmc-s | Alias name of AR System server |
+| DATABASE_REGISTRY_STORAGE_PASSWORDS_SECRETS_DETAILS | PLATFORM_ADMIN_PLATFORM_EXTERNAL_IPS | [192.168.1.201,192.168.1.202,192.168.1.203,192.168.1.204] | External IP address to enable external access.The external IP must be in JSON list format within square brackets. |
+| DATABASE_REGISTRY_STORAGE_PASSWORDS_SECRETS_DETAILS | MIDTIERCACHEBUILDER_TRIGGER_PRELOAD | check | Enable full data cache mode |
+| DATABASE_REGISTRY_STORAGE_PASSWORDS_SECRETS_DETAILS | BWF_DEPLOY_SAMPLE_CONTENT_PACK | check | |
+| DATABASE_REGISTRY_STORAGE_PASSWORDS_SECRETS_DETAILS | DWP_DEPLOY_SAMPLE_CONTENT_PACK | check | |
+| DATABASE_REGISTRY_STORAGE_PASSWORDS_SECRETS_DETAILS | AR_TIMEZONE | Asia/Shanghai | |
+| RSSO_PARAMETERS | RSSO_URL | https://lb.bmc.local/rsso | |
+| RSSO_PARAMETERS | RSSO_ADMIN_USER | Admin | |
+| RSSO_PARAMETERS | RSSO_ADMIN_PASSWORD | RSSO#Admin# | |
+| RSSO_PARAMETERS | TENANT_DOMAIN | adelab.1459264291 | adelab.\<TENANT-ID\> |
+| ITSM INTEROPS PARAMETERS | HELIX_PLATFORM_DOMAIN | bmc.local | |
+| ITSM INTEROPS PARAMETERS | HELIX_PLATFORM_NAMESPACE | helixade | |
+| ITSM INTEROPS PARAMETERS | HELIX_PLATFORM_CUSTOMER_NAME | adelab | |
+| SELECT THE SERVICES FOR INTEROPERABILITY CONFIGURATION | BMC_HELIX_ITSM_INSIGHTS | **NOT check** | |
 
-* Download Rancher image files
+After filling in the form, click Build to start executing the pipeline.
+
+## 10 Install Helix Service Management
+The pipeline usually does not succeed in one go. If an error occurs, we need to learn how to troubleshoot.
+
+Hover the mouse over the stage where the error is reported and click the Logs window that pops up.
+![HELIX_ONPREM_DEPLOYMENT Failure1](./diagram/helix-onprem-deployment-failure1.png)
+
+Click the last stage.
+![HELIX_ONPREM_DEPLOYMENT Failure2](./diagram/helix-onprem-deployment-failure2.png)
+
+Click Console Output to see the output.
+![HELIX_ONPREM_DEPLOYMENT Failure3](./diagram/helix-onprem-deployment-failure3.png)
+
+Scroll down to see the FAILURE.
+![HELIX_ONPREM_DEPLOYMENT Failure4](./diagram/helix-onprem-deployment-failure4.png)
+
+Below exception is pending approval issue
 ```
-#mkdir rancher
-mkdir /root/rancher-images-2.10.2
-
-# cp rancher-images.txt, rancher-load-images.sh, rancher-save-images.sh file to /root/rancher-images-2.10.2 directory
-cd /root/rancher-images-2.10.2
-chmod a+x *.sh
-    
-ls -l
--rw-r--r-- 1 root root 27835 Feb 25 16:33 rancher-images.txt
--rwxr-xr-x 1 root root  4115 Feb 25 16:33 rancher-load-images.sh
--rwxr-xr-x 1 root root  1757 Feb 25 16:33 rancher-save-images.sh
-
-# Sort and unique the mirror list to remove duplicate mirror sources.
-sort -u rancher-images.txt -o rancher-images.txt
-
-# Create a compressed package of the required image
-nohup ./rancher-save-images.sh --image-list ./rancher-images.txt > nohup.out &
-
-```
-
-### 5.4 Import Helix images to harbor
-Import the downloaded Helix Image image package file into the Harbor registry deployed on the helix-harbor server.
-```
-cd /root/helix-image-25.1
-nohup ./loadall.sh > nohup.out &
-tail -f nohup.out
-```
-
-### 5.5 Import Rancher images
-Import the downloaded Rancher Image image package file into the Harbor registry deployed on the helix-harbor server.
-
-* Create new project rancher
-
-Log in to the Harbor registry and perform the following steps to create a new project:
-Select Projects and then click NEW PROJECT. In the New Project window, specify the following values:
-
-Project Name: Enter rancher.
-Access Level: Select the Public check box.
-Leave the other parameters to their default values.
-
-![Harbor New Project rancher](./diagram/harbor-new-project-rancher.png)
-
-* Import Rancher Images
-Use rancher-load-images.sh to extract, tag and push rancher-images.txt and rancher-images.tar.gz to harbor registry
-
-```
-# Chang to images file direcotry
-cd /root/rancher-images-2.10.2
-
-# Login to Helix Harbor Server
-docker login helix-harbor.bmc.local -u admin -p bmcAdm1n
-
-# Load Rancher images to Harbor Server
-nohup ./rancher-load-images.sh --images rancher-images.tar.gz  --registry helix-harbor.bmc.local > nohup.out &
-tail -f nohup.out
-```
-## 6 Setup Kubernetes Cluster
-### 6.1 Install Rancher
-
-* Install the containerized Rancher pod on the helix-k8s-master server
-
-```
-# Login to Harbor Server
-docker login helix-harbor.bmc.local -u admin -p bmcAdm1n
-
-# Install Rancher docker version
-docker run -d --privileged --name rancher --restart=unless-stopped -p 80:80 -p 443:443 -v /opt/rancher:/var/lib/rancher -e CATTLE_SYSTEM_DEFAULT_REGISTRY=helix-harbor.bmc.local helix-harbor.bmc.local/rancher/rancher:v2.10.2
-```
-
-* Fix k3s bug in Rancher container
-
-```
-# There is a bug in the k3s, below is how to permanent fix it
-# kernel modules load at startup
-echo "ip_tables" | sudo tee /etc/modules-load.d/iptables.conf
-echo "iptable_filter" | sudo tee -a /etc/modules-load.d/iptables.conf
-
-# Reload systemd modules and reboot
-sudo systemctl restart systemd-modules-load
-sudo reboot
-
-# Verify the modules are loaded after reboot
-lsmod | grep ip
-```
-
-* Find the Rancher Console password
-```
-docker logs rancher 2>&1 | grep "Bootstrap Password:"
-2025/02/26 04:59:02 [INFO] Bootstrap Password: 2ndg88pslbtg29xlntvqm9hwm5ggp6w8tbvmp6bxrc8wf9g8nqh7gt
-```
-
-* Login to Rancher console   
-
-![Rancher Login](./diagram/rancher-login.png)
-
-
-* Setup new password
-
-![Rancher New Password](./diagram/rancher-new-password.png)
-
-
-### 6.2 Create new cluster
-
-* Log in to the Rancher console and you can see that there is only one local cluster by default. We need to create a cluster helix-compact for the installation of helix
-
-![Rancher Create Cluster](./diagram/rancher-new-create-cluster.png)
-
-* Select RKE1 and create a Custom cluster
-
-![Rancher Create Custom Cluster](./diagram/rancher-create-custom-cluster.png)
-
-* Set the cluster name to helix-compact and leave the rest of the options as default
-
-![Rancher Cluster helix-compact](./diagram/rancher-cluster-helix-compact.png)
-
-* Copy the script for adding a worker node
-
-![Rancher Cluster Add Workers](./diagram/rancher-cluster-add-worker.png)
-
-* Paste and run the script on helix-k8s-worker01 to helix-k8s-worker04 servers
-
-```
-sudo docker run -d --privileged --restart=unless-stopped --net=host -v /etc/kubernetes:/etc/kubernetes -v /var/run:/var/run  helix-harbor.bmc.local/rancher/rancher-agent:v2.10.2 --server https://192.168.1.200 --token rv6vjhfqpc9czznz7j7qt4twz7d5wjlksqjw9cbl9v96fkdxpjdz7b --ca-checksum 4a158b1469cba97e2b7d19120e449133a46edb5d7715ccb629618df27d2a073d --worker
-
+Exception occured : org.jenkinsci.plugins.scriptsecurity.sandbox.RejectedAccessException: Scripts not permitted to use method org.jenkinsci.plugins.workflow.support.steps.build.RunWrapper getRawBuild
 ```
 
-* Copy the master (etcd & Control Plance) installation script
+Click Manage Jenkins tab on Jenkins Dashboard, In-process Script Approval.
+![HELIX_ONPREM_DEPLOYMENT Failure5](./diagram/helix-onprem-deployment-failure5.png)
 
-![Rancher Cluster Add Master](./diagram/rancher-cluster-add-master.png)
+Clicke Approve button.
+![HELIX_ONPREM_DEPLOYMENT Failure6](./diagram/helix-onprem-deployment-failure6.png)
 
-* Paste and execute the installation script on the helix-k8s-master server
+Go back to Jenkins Dashboard, select HELIX_ONPREM_DEPLOYMENT pipeline, select the last build.
+![HELIX_ONPREM_DEPLOYMENT Failure7](./diagram/helix-onprem-deployment-failure7.png)
+
+Clicke Rebuild on the left, scroll down to Rebuild. 
+![HELIX_ONPREM_DEPLOYMENT Failure8](./diagram/helix-onprem-deployment-failure8.png)
+
+Repeat the process again and again until all issues are resolved and the HELIX_ONPREM_DEPLOYMENT pipeline is successfully executed.
+
+During the installation project, you may encounter image pulling errors as shown in the figure below. 
+
+![Helix Portal](./diagram/tctlgentenant-image-pull-error.png)
+
+Use the following command to query the missing image file name and add it to the local image registry.
 ```
-sudo docker run -d --privileged --restart=unless-stopped --net=host -v /etc/kubernetes:/etc/kubernetes -v /var/run:/var/run  helix-harbor.bmc.local/rancher/rancher-agent:v2.10.2 --server https://192.168.1.200 --token rv6vjhfqpc9czznz7j7qt4twz7d5wjlksqjw9cbl9v96fkdxpjdz7b --ca-checksum 4a158b1469cba97e2b7d19120e449133a46edb5d7715ccb629618df27d2a073d --etcd --controlplane
-```
-
-* Wait for all nodes to join the cluster and the k8s cluster is created
-![Rancher Cluster Nodes](./diagram/rancher-cluster-helix-compact-nodes.png)
-
-* If the cluster installation reports an error that an image is missing, it may be that some images are missing from the rancher-images.txt file and need to be added to the local image registry. For example, if an error message is displayed saying that hyperkube:v1.31.5-rancher1 is missing, execute the following command line on the helix-harbor server.
-
-```
-docker pull rancher/hyperkube:v1.31.5-rancher1
-docker tag rancher/hyperkube:v1.31.5-rancher1 helix-harbor.bmc.local/rancher/hyperkube:v1.31.5-rancher1
-docker push helix-harbor.bmc.local/rancher/hyperkube:v1.31.5-rancher1
-```
-
-### 6.3 Set the k8s cluster token expiration time
-The default validity period of the K8s cluster token managed by Rancher is very short, which will cause problems such as K8s monitoring failure and Helix installation pipeline errors. It is recommended to change it to never expire
-![Rancher Global Setting](./diagram/rancher-global-settings.png)
-
-
-
-### 6.4 Install Kubernetes client tools
-helix-svc will be used as the Helix installation workstation, and the client tools need to be installed on this server
-#### 6.4.1 kubernetes configuration file
-
-* Copy kubeconfig file contents
-![Rancher Copy kubeconfig](./diagram/rancher-copy-kubeconfig.png)
-
-* Save to helix-svc
-```
-mkdir -p ~/.kube
-cd ~/.kube
-vi config
-
-# Paste the clipboard contents and save
+kubectl -n helixade describe pod <POD-NAME>
 ```
 
-#### 6.4.2 Install kubectl
+![Helix Portal](./diagram/tctlgentenant-image.png)
 
-* Install kubectl on the helix-svc server that matches the Kubernetes version
 
-```
-curl -o /usr/local/bin/kubectl -LO https://storage.googleapis.com/kubernetes-release/release/v1.31.0/bin/linux/amd64/kubectl && chmod +x /usr/local/bin/kubectl
+After the installation is complete, you will find that the hannah_admin account can no longer log in to the helix portal. That is because in Section 9, we have reset the password to hannah_admin using the parameter BAKEDUSER_HANNAH_ADMIN_PASSWORD.
 
-#Verifiy kubectl
-kubectl version
-kubectl get nodes
-kubectl top nodes
-```
+![Helix Portal](./diagram/helix-portal.png)
 
-* Create the namespace helixade used by ITOM and the namespace helixis used by ITSM
-```
-kubectl create ns helixade
-kubectl create ns helixis
-```
-
-#### 6.4.2 Install helm
-
-* Install the latest version of helm on the helix-svc server
-
-```
-#Deploy helm
-curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
-chmod 700 get_helm.sh
-./get_helm.sh
-```
