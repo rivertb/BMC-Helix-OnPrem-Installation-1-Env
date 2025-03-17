@@ -1,2 +1,2 @@
 #!/bin/bash
-kubectl get job -n helix | grep single
+kubectl get job -n helixade | grep single

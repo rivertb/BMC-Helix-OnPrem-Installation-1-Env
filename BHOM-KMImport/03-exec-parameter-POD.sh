@@ -7,4 +7,4 @@ if [ "$#" -lt "$MIN_ARGS" ]; then
     exit 1
 fi
 
-kubectl -n helix exec -it $1 -- bash
+kubectl -n helixade exec -it $1 -- bash

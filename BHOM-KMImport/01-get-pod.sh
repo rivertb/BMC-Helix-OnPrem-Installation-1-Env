@@ -1,2 +1,2 @@
 #!/bin/bash
-kubectl get pods -n helix | grep deployment
+kubectl get pods -n helixade | grep deployment

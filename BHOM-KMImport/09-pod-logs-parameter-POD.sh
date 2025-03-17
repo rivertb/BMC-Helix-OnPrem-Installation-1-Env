@@ -8,4 +8,4 @@ if [ "$#" -lt "$MIN_ARGS" ]; then
 fi
 
 echo "POD-Name: $1"
-kubectl logs -f $1 -n helix
+kubectl logs -f $1 -n helixade

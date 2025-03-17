@@ -6,4 +6,4 @@ if [ "$#" -lt "$MIN_ARGS" ]; then
 fi
 echo "KM-Name: $1"
 echo "POD-Name: $2"
-kubectl -n helix cp $1 $2:/opt/bmc/bmc-repo
+kubectl -n helixade cp $1 $2:/opt/bmc/bmc-repo
