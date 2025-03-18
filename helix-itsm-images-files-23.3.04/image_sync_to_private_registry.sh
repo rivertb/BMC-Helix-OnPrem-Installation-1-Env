@@ -2,8 +2,8 @@
 
 #Source repo details containers.bmc.com
 SOURCE_REGISTRY_HOST="containers.bmc.com"
-SOURCE_REGISTRY_USER="peng_li@bmc.com"
-SOURCE_REGISTRY_PASSWORD="a0a959a1-d0f2-40dc-aea9-62180c270c07"
+SOURCE_REGISTRY_USER="xxxxx"
+SOURCE_REGISTRY_PASSWORD="xxxxx"
 
 #Target repo details
 IMAGE_REGISTRY_HOST="helix-harbor.bmc.local"
