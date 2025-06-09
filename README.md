@@ -467,43 +467,43 @@ This step can be performed on any server that can connect to the Internet, not j
 * Create Helix images download directory
 
 ```
-cp -R ~/BMC-Helix-OnPrem-Installation-1-Env/helix-images-25.1  /root/.
+cp -R ~/BMC-Helix-OnPrem-Installation-1-Env/helix-images-25.2  /root/.
 
 ```
-* Download Helix ITOM all_images_<version>.txt file from BMC Docs to root/helix-images-25.1
-    [all_images_25.1.txt](https://docs.bmc.com/xwiki/bin/view/IT-Operations-Management/On-Premises-Deployment/BMC-Helix-IT-Operations-Management-Deployment/itomdeploy251/Deploying/Preparing-for-deployment/Accessing-container-images/Setting-up-a-Harbor-registry-in-a-local-network-and-synchronizing-it-with-BMC-DTR/)
+* Download Helix ITOM all_images_<version>.txt file from BMC Docs to root/helix-images-25.2
+    [all_images_25.2.txt](https://docs.bmc.com/xwiki/bin/view/IT-Operations-Management/On-Premises-Deployment/BMC-Helix-IT-Operations-Management-Deployment/itomdeploy252/Deploying/Preparing-for-deployment/Accessing-container-images/Setting-up-a-Harbor-registry-in-a-local-network-and-synchronizing-it-with-BMC-DTR/)
     
  
 ```
 pwd
-/root/helix-images-25.1
+/root/helix-images-25.2
 
 ls -l
--rw-r--r-- 1 root root 13685 Feb 25 15:55 all_images_25.1.00.txt
+-rw-r--r-- 1 root root 13685 Feb 25 15:55 all_images_25.2.txt
 -rw-r--r-- 1 root root  2158 Feb 25 15:44 helix-load-images.sh
 -rw-r--r-- 1 root root  2399 Feb 25 15:44 helix-save-images.sh
 -rw-r--r-- 1 root root   174 Feb 25 15:44 saveall.sh
 
 # Convert the file to an UNIX format
 dnf install dos2unix -y
-dos2unix all_images_25.1.00.txt
+dos2unix all_images_25.2.txt
 
 # Get Helix ITOM different repository images lists
 
 # lp0lz: BMC Helix Platform images
-cat all_images_25.1.00.txt | grep lp0lz > lp0lz_images.txt
+cat all_images_25.2.txt | grep lp0lz > lp0lz_images.txt
 
 # lp0oz: BMC Helix Intelligent Automation images
-cat all_images_25.1.00.txt | grep lp0oz > lp0oz_images.txt
+cat all_images_25.2.txt | grep lp0oz > lp0oz_images.txt
 
 # lp0pz: BMC Helix Continuous Optimization images
-cat all_images_25.1.00.txt | grep lp0pz > lp0pz_images.txt
+cat all_images_25.2.txt | grep lp0pz > lp0pz_images.txt
 
 # lp0mz: BMC Helix Operations Management on-premises images
-cat all_images_25.1.00.txt | grep lp0mz > lp0mz_images.txt
+cat all_images_25.2.txt | grep lp0mz > lp0mz_images.txt
 
 # la0cz: BMC Helix AIOps images
-cat all_images_25.1.00.txt | grep la0cz > la0cz_images.txt
+cat all_images_25.2.txt | grep la0cz > la0cz_images.txt
 
 # Run batch downloader for Helix ITOM image
 chmod a+x *.sh
@@ -522,21 +522,22 @@ This step can be performed on any server that can connect to the Internet, not j
 To download the Rancher image file, refer to the Rancher official documentation：[Collect and Publish Images to your Private Registry](https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/other-installation-methods/air-gapped-helm-cli-install/publish-images)。
 
 * Select the Rancher version, download the offline tool script file and the mirror list file, you can refer to the document：[Rancher Release](https://github.com/rancher/rancher/releases)
-![Harbor Release](./diagram/rancher-release-v2.10.2.png)
+![Harbor Release](./diagram/rancher-release-v2.11.2.png)
 
 * Download Rancher image files
 ```
 #mkdir rancher
-mkdir /root/rancher-images-2.10.2
+mkdir /root/rancher-images-2.11.2
 
-# cp rancher-images.txt, rancher-load-images.sh, rancher-save-images.sh file to /root/rancher-images-2.10.2 directory
-cd /root/rancher-images-2.10.2
+# cp rancher-images.txt, rancher-load-images.sh, rancher-save-images.sh file to /root/rancher-images-2.11.2 directory
+cd /root/rancher-images-2.11.2
 chmod a+x *.sh
     
 ls -l
--rw-r--r-- 1 root root 27835 Feb 25 16:33 rancher-images.txt
--rwxr-xr-x 1 root root  4115 Feb 25 16:33 rancher-load-images.sh
--rwxr-xr-x 1 root root  1757 Feb 25 16:33 rancher-save-images.sh
+-rw-r--r-- 1 root root       26827 Jun  4 18:15 rancher-images.txt
+-rwxr-xr-x 1 root root        4116 Jun  4 14:27 rancher-load-images.sh
+-rwxr-xr-x 1 root root        1757 Jun  4 14:27 rancher-save-images.sh
+
 
 # Sort and unique the mirror list to remove duplicate mirror sources.
 sort -u rancher-images.txt -o rancher-images.txt
@@ -549,7 +550,7 @@ nohup ./rancher-save-images.sh --image-list ./rancher-images.txt > nohup.out &
 ### 5.4 Import Helix images to harbor
 Import the downloaded Helix Image image package file into the Harbor registry deployed on the helix-harbor server.
 ```
-cd /root/helix-image-25.1
+cd /root/helix-image-25.2
 nohup ./loadall.sh > nohup.out &
 tail -f nohup.out
 ```
@@ -573,7 +574,7 @@ Use rancher-load-images.sh to extract, tag and push rancher-images.txt and ranch
 
 ```
 # Chang to images file direcotry
-cd /root/rancher-images-2.10.2
+cd /root/rancher-images-2.11.2
 
 # Login to Helix Harbor Server
 docker login helix-harbor.bmc.local -u admin -p bmcAdm1n
@@ -592,7 +593,7 @@ tail -f nohup.out
 docker login helix-harbor.bmc.local -u admin -p bmcAdm1n
 
 # Install Rancher docker version
-docker run -d --privileged --name rancher --restart=unless-stopped -p 80:80 -p 443:443 -v /opt/rancher:/var/lib/rancher -e CATTLE_SYSTEM_DEFAULT_REGISTRY=helix-harbor.bmc.local helix-harbor.bmc.local/rancher/rancher:v2.10.2
+docker run -d --privileged --name rancher --restart=unless-stopped -p 80:80 -p 443:443 -v /opt/rancher:/var/lib/rancher -e CATTLE_SYSTEM_DEFAULT_REGISTRY=helix-harbor.bmc.local helix-harbor.bmc.local/rancher/rancher:v2.11.2
 ```
 
 * Fix k3s bug in Rancher container
@@ -648,7 +649,7 @@ docker logs rancher 2>&1 | grep "Bootstrap Password:"
 * Paste and run the script on helix-k8s-worker01 to helix-k8s-worker04 servers
 
 ```
-sudo docker run -d --privileged --restart=unless-stopped --net=host -v /etc/kubernetes:/etc/kubernetes -v /var/run:/var/run  helix-harbor.bmc.local/rancher/rancher-agent:v2.10.2 --server https://192.168.1.200 --token rv6vjhfqpc9czznz7j7qt4twz7d5wjlksqjw9cbl9v96fkdxpjdz7b --ca-checksum 4a158b1469cba97e2b7d19120e449133a46edb5d7715ccb629618df27d2a073d --worker
+sudo docker run -d --privileged --restart=unless-stopped --net=host -v /etc/kubernetes:/etc/kubernetes -v /var/run:/var/run  helix-harbor.bmc.local/rancher/rancher-agent:v2.11.2 --server https://192.168.1.200 --token gq8xnnnggvbszhvjw7nnl9gkwgd9x6dfknzfkddwktfbg2fblhk74z --ca-checksum aa8822a3021e9750335cc909cfaf5566c75e2845e81428c5cd100a9a662ce4eb --worker
 
 ```
 
@@ -658,7 +659,7 @@ sudo docker run -d --privileged --restart=unless-stopped --net=host -v /etc/kube
 
 * Paste and execute the installation script on the helix-k8s-master server
 ```
-sudo docker run -d --privileged --restart=unless-stopped --net=host -v /etc/kubernetes:/etc/kubernetes -v /var/run:/var/run  helix-harbor.bmc.local/rancher/rancher-agent:v2.10.2 --server https://192.168.1.200 --token rv6vjhfqpc9czznz7j7qt4twz7d5wjlksqjw9cbl9v96fkdxpjdz7b --ca-checksum 4a158b1469cba97e2b7d19120e449133a46edb5d7715ccb629618df27d2a073d --etcd --controlplane
+sudo docker run -d --privileged --restart=unless-stopped --net=host -v /etc/kubernetes:/etc/kubernetes -v /var/run:/var/run  helix-harbor.bmc.local/rancher/rancher-agent:v2.11.2 --server https://192.168.1.200 --token gq8xnnnggvbszhvjw7nnl9gkwgd9x6dfknzfkddwktfbg2fblhk74z --ca-checksum aa8822a3021e9750335cc909cfaf5566c75e2845e81428c5cd100a9a662ce4eb --etcd --controlplane
 ```
 
 * Wait for all nodes to join the cluster and the k8s cluster is created
@@ -667,9 +668,9 @@ sudo docker run -d --privileged --restart=unless-stopped --net=host -v /etc/kube
 * If the cluster installation reports an error that an image is missing, it may be that some images are missing from the rancher-images.txt file and need to be added to the local image registry. For example, if an error message is displayed saying that hyperkube:v1.31.5-rancher1 is missing, execute the following command line on the helix-harbor server.
 
 ```
-docker pull rancher/hyperkube:v1.31.5-rancher1
-docker tag rancher/hyperkube:v1.31.5-rancher1 helix-harbor.bmc.local/rancher/hyperkube:v1.31.5-rancher1
-docker push helix-harbor.bmc.local/rancher/hyperkube:v1.31.5-rancher1
+docker pull rancher/hyperkube:v1.32.4-rancher1
+docker tag rancher/hyperkube:v1.32.4-rancher1 helix-harbor.bmc.local/rancher/hyperkube:v1.32.4-rancher1
+docker push helix-harbor.bmc.local/rancher/hyperkube:v1.32.4-rancher1
 ```
 
 ### 6.3 Set the k8s cluster token expiration time

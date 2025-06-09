@@ -1,0 +1,2 @@
+containers.bmc.com/bmc/assisttool:assisttool:v11605071047_RTM
+containers.bmc.com/bmc/authproxy:HSSO_Auth_Proxy_DROP_244_RTM
