@@ -476,7 +476,7 @@ cp -R ~/BMC-Helix-OnPrem-Installation-1-Env/helix-images-25.3  /root/.
  
 ```
 pwd
-/root/helix-images-25.2
+/root/helix-images-25.3
 
 ls -l
 -rw-r--r-- 1 root root 13685 Feb 25 15:55 all_images_25.3.txt
