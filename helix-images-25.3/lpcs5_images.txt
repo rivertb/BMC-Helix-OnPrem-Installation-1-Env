@@ -1,0 +1,6 @@
+containers.bmc.com/bmc/lpcs5:bmchelix-discovery-cloud-connector-498
+containers.bmc.com/bmc/lpcs5:truesight-common-tso-connector-760
+containers.bmc.com/bmc/lpcs5:truesight-connectors-service-3865
+containers.bmc.com/bmc/lpcs5:truesight-kafka-service-711
+containers.bmc.com/bmc/lpcs5:truesight-resource-service-2329
+containers.bmc.com/bmc/lpcs5:truesight-workmanager-service-1731

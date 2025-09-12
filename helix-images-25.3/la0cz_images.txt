@@ -1,0 +1,1 @@
+containers.bmc.com/bmc/la0cz:ml-model-mgmt-service-2d281b3-719

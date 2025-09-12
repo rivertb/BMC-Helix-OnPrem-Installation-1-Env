@@ -1,0 +1,1065 @@
+WARNING! Using --password via the CLI is insecure. Use --password-stdin.
+WARNING! Your password will be stored unencrypted in /root/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+Preparing to start load images......
+Loaded image: containers.bmc.com/bmc/lp0lz:kibana-proxy-service-903dec5-1239
+Loaded image: containers.bmc.com/bmc/lp0lz:truesight-featureflag-service-1260
+Loaded image: containers.bmc.com/bmc/lp0lz:25300-v223-redis-cluster-7.4.1-alpine
+Loaded image: containers.bmc.com/bmc/lp0lz:25300-v223-victoriametrics-vmbackupmanager-v1.120.0-enterprise
+Loaded image: containers.bmc.com/bmc/lp0lz:log-compression-f4dcdba4-1403
+Loaded image: containers.bmc.com/bmc/lp0lz:log-fluent-connector-job-2a8ccb36-509
+Loaded image: containers.bmc.com/bmc/lp0lz:event-mgmt-service-d66cc0b6-1369
+Loaded image: containers.bmc.com/bmc/lp0lz:25300-v223-redis-exporter-1.73.0-alpine
+Loaded image: containers.bmc.com/bmc/lp0lz:25300-v95-bmc-patroni-postgress-ha-17.4
+Loaded image: containers.bmc.com/bmc/lp0lz:smart-graph-controller-api-r6680-9-s-25.3.00
+Loaded image: containers.bmc.com/bmc/lp0lz:log-anomaly-service-ddcd4a5-785
+Loaded image: containers.bmc.com/bmc/lp0lz:smart-graph-controller-efsinit-r6680-9-s-25.3.00
+Loaded image: containers.bmc.com/bmc/lp0lz:aif-api-service-b6cecf9-12
+Loaded image: containers.bmc.com/bmc/lp0lz:25300-v223-pgpool2_exporter-1.2.1-alpine
+Loaded image: containers.bmc.com/bmc/lp0lz:25300-v223-redis-7.0.14-alpine3.19
+Loaded image: containers.bmc.com/bmc/lp0lz:25300-v223-bitnami-kafka-exporter-1.9.0-alpine
+Loaded image: containers.bmc.com/bmc/lp0lz:license-reporting-service-adaa601-19
+Loaded image: containers.bmc.com/bmc/lp0lz:log-ingestion-service-c9f85bd-927
+Loaded image: containers.bmc.com/bmc/lp0lz:thirdparty-ingestion-service-9c42cb4-1041
+Loaded image: containers.bmc.com/bmc/lp0lz:prometheus-ingestion-service-002e8f5-1056
+Loaded image: containers.bmc.com/bmc/lp0lz:timeframe-service-544d485-976
+Loaded image: containers.bmc.com/bmc/lp0lz:tmf-events-service-375bf97-867
+Loaded image: containers.bmc.com/bmc/lp0lz:25300-v223-opensearch-exporter-1.9.0
+Loaded image: containers.bmc.com/bmc/lp0lz:25300-v223-opensearch-2.15.0-rockylinux9
+Loaded image: containers.bmc.com/bmc/lp0lz:event-processor-service-a92a4ffba-1
+Loaded image: containers.bmc.com/bmc/lp0lz:ml-model-mgmt-service-2d281b3-719
+Loaded image: containers.bmc.com/bmc/lp0lz:event-service-c971160-1164
+Loaded image: containers.bmc.com/bmc/lp0lz:ade-authz-service-1118
+Loaded image: containers.bmc.com/bmc/lp0lz:aif-clustering-service-94c64bdd-7
+Loaded image: containers.bmc.com/bmc/lp0lz:aif-job-manager-service-18d836b-6
+Loaded image: containers.bmc.com/bmc/lp0lz:aif-ticket-service-cda0ceb-7
+Loaded image: containers.bmc.com/bmc/lp0lz:tctlrest-685
+Loaded image: containers.bmc.com/bmc/lp0lz:aif-machine-learning-utilities-48728db-9
+Loaded image: containers.bmc.com/bmc/lp0lz:25300-v244-postgres-exporter-0.17.1-alpine
+Loaded image: containers.bmc.com/bmc/lp0lz:adereporting-runner-5650121-2376
+Loaded image: containers.bmc.com/bmc/lp0lz:ade-notification-service-1752
+Loaded image: containers.bmc.com/bmc/lp0lz:adeops-util-659
+Loaded image: containers.bmc.com/bmc/lp0lz:adereporting-e232faa-8157
+Loaded image: containers.bmc.com/bmc/lp0lz:ade-identity-management-portal-3026
+Loaded image: containers.bmc.com/bmc/lp0lz:ade-tenant-management-automation-1138
+Loaded image: containers.bmc.com/bmc/lp0lz:adereporting-apiservice-5290c12-1707-hf_july_25
+Loaded image: containers.bmc.com/bmc/lp0lz:25300-v235-fluentbit-3.2.4-rockylinux9
+Loaded image: containers.bmc.com/bmc/lp0lz:24200-v5-redis-7.0.14-alpine3.19
+Loaded image: containers.bmc.com/bmc/lp0lz:adereporting-ootb-content-f70d2f0-246
+Loaded image: containers.bmc.com/bmc/lp0lz:opensearch-dashboards-2x-903dec5-1239
+Loaded image: containers.bmc.com/bmc/lp0lz:25300-v140-ade-on-prem-dr-ab1f719
+Loaded image: containers.bmc.com/bmc/lp0lz:25300-v223-victoriametrics-vmrestore-v1.120.0-enterprise
+Loaded image: containers.bmc.com/bmc/lp0lz:25300-v223-oliver006-redis_exporter-v1.69.0
+Loaded image: containers.bmc.com/bmc/lp0lz:adereporting-kafkacli-e232faa-8157
+Loaded image: containers.bmc.com/bmc/lp0lz:25300-v223-victoriametrics-vminsert-series-update-v1.89.2-cluster-rc20
+Loaded image: containers.bmc.com/bmc/lp0lz:smart-graph-api-r6680-9-s-25.3.00
+Loaded image: containers.bmc.com/bmc/lp0lz:log-processing-service-c5f96a8-1104
+Loaded image: containers.bmc.com/bmc/lp0lz:aif-clustering-job-b9056af-15
+Loaded image: containers.bmc.com/bmc/lp0lz:HSSO_25.3.00-RC_2
+Loaded image: containers.bmc.com/bmc/lp0lz:es-proxy-nginx-service-dd29ba1-1000
+Loaded image: containers.bmc.com/bmc/lp0lz:25300-v223-victoriametrics-vmstorage-series-update-v1.89.2-cluster-rc20
+Loaded image: containers.bmc.com/bmc/lp0lz:es-proxy-service-dd29ba1-1000
+Loaded image: containers.bmc.com/bmc/lp0lz:aif-object-store-sync-job-35951a8-4
+Loaded image: containers.bmc.com/bmc/lp0lz:25300-v223-bitnami-zookeeper-3.9.3-alpine-jdk11
+Loaded image: containers.bmc.com/bmc/lp0lz:ml-model-mgmt-service-6d2769f-671
+Loaded image: containers.bmc.com/bmc/lp0lz:aif-clustering-ingestion-service-6f4f179a-9
+Loaded image: containers.bmc.com/bmc/lp0lz:adereporting-metricserver-e232faa-8157
+Loaded image: containers.bmc.com/bmc/lp0lz:adereporting-init-storage-versioning-5650121-2376
+Loaded image: containers.bmc.com/bmc/lp0lz:adereporting-content-edd89a5-1768
+Loaded image: containers.bmc.com/bmc/lp0lz:25300-v223-victoriametrics-vmselect-series-update-v1.89.2-cluster-rc20
+Loaded image: containers.bmc.com/bmc/lp0lz:25300-v95-bmc-patroni-pgpool-ha-17.4
+Loaded image: containers.bmc.com/bmc/lp0lz:metric-gateway-service-cd023fc-1185
+Loaded image: containers.bmc.com/bmc/lp0lz:aif-index-migration-job-a9dccc9-54
+Loaded image: containers.bmc.com/bmc/lp0lz:adereporting-metadataservice-e5f06fa-1952
+Loaded image: containers.bmc.com/bmc/lp0lz:authproxy-HSSO_Auth_Proxy_RC_254
+Loaded image: containers.bmc.com/bmc/lp0lz:ade-file-service-2f2d5f1-5
+Loaded image: containers.bmc.com/bmc/lp0lz:ade-identity-management-service-2870
+Loaded image: containers.bmc.com/bmc/lp0lz:25300-v242-bitnami-elasticsearch-8.18.0-12-r2-rockylinux-9
+Loaded image: containers.bmc.com/bmc/lp0lz:25300-v223-bitnami-jmx-exporter-0.20.0-alpine-319
+Loaded image: containers.bmc.com/bmc/lp0lz:smart-graph-controller-security-r6680-9-s-25.3.00
+Loaded image: containers.bmc.com/bmc/lp0lz:25300-v251b-bitnami-kibana-8.18.0-12-r1-alpine
+Loaded image: containers.bmc.com/bmc/lp0lz:truesight-credential-service-1072
+Loaded image: containers.bmc.com/bmc/lp0lz:log-metrics-service-bea7874-668
+Loaded image: containers.bmc.com/bmc/lp0lz:25200-v107-bitnami-os-shell-12-debian-12-r34-alpine
+Loaded image: containers.bmc.com/bmc/lp0lz:25300-v247-bitnami-minio-2025.4.22-alpine
+Loaded image: containers.bmc.com/bmc/lp0lz:25300-v223-bitnami-kafka-3.6.0-rockylinux-9
+Loaded image: containers.bmc.com/bmc/lp0lz:ade-ims-webhook-1316
+Loaded image: containers.bmc.com/bmc/lp0lz:adereporting-renderer-2e1af12-2251
+Loaded image: containers.bmc.com/bmc/lp0lz:aif-incident-ingestion-service-a6ff4ef-5
+Loaded image: containers.bmc.com/bmc/lp0lz:aif-clustering-query-service-32c75e0-9
+Loaded image: containers.bmc.com/bmc/lp0lz:25300-v223-bitnami-os-shell-12-r34-alpine
+Loaded image: containers.bmc.com/bmc/lp0lz:25300-v232-ade-infra-clients-alpine
+Loaded image: containers.bmc.com/bmc/lp0lz:25300-v223-haproxy-alpine3.21
+Loaded image: containers.bmc.com/bmc/lp0lz:authproxy-HSSO_Auth_Proxy_RC_250
+Loaded image: containers.bmc.com/bmc/lp0lz:metricservice-93e7c7e-1089
+Loaded image: containers.bmc.com/bmc/lp0lz:logs-enrichment-sync-service-b410173-680
+Loaded image: containers.bmc.com/bmc/lp0lz:truesight-featureflag-service-1363
+Loaded image: containers.bmc.com/bmc/lp0lz:log-situation-service-1cd3b99-752
+Loaded image: containers.bmc.com/bmc/lp0lz:global-config-service-f33f8d3-1236
+Loaded image: containers.bmc.com/bmc/lp0lz:webhook-2102_20210218
+Loaded image: containers.bmc.com/bmc/lp0lz:adereporting-puller-5650121-2376
+Loaded image: containers.bmc.com/bmc/lp0lz:event-ingestion-service-c39822a4-1141
+Loaded image: containers.bmc.com/bmc/lp0lz:logs-portal-d635ecc1-1124
+Loaded image: containers.bmc.com/bmc/lp0lz:adereporting-initdb-e232faa-8157
+Loaded image: containers.bmc.com/bmc/lp0lz:log-mgmt-service-f4dcdba4-1403
+Loaded image: containers.bmc.com/bmc/lp0lz:ade-ui-content-service-996
+Loaded image: containers.bmc.com/bmc/lp0lz:aif-core-service-cbadc68b-6
+Loaded image: containers.bmc.com/bmc/lp0lz:ade-audit-service-1504
+Loaded image: containers.bmc.com/bmc/lp0lz:ade-itsm-identity-sync-1072
+Loaded image: containers.bmc.com/bmc/lp0lz:ade-tenant-management-service-2467
+Loaded image: containers.bmc.com/bmc/lp0lz:anomaly-detection-service-70fba19-1109
+image file: lp0lz_images.txt
+Preparing to start pushing images......
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:aif-clustering-job-b9056af-15---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:aif-clustering-job-b9056af-15
+docker tag containers.bmc.com/bmc/lp0lz:aif-clustering-job-b9056af-15 helix-harbor.bmc.local/bmc/lp0lz:aif-clustering-job-b9056af-15
+docker push helix-harbor.bmc.local/bmc/lp0lz:aif-clustering-job-b9056af-15
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:25300-v223-bitnami-jmx-exporter-0.20.0-alpine-319---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:25300-v223-bitnami-jmx-exporter-0.20.0-alpine-319
+docker tag containers.bmc.com/bmc/lp0lz:25300-v223-bitnami-jmx-exporter-0.20.0-alpine-319 helix-harbor.bmc.local/bmc/lp0lz:25300-v223-bitnami-jmx-exporter-0.20.0-alpine-319
+docker push helix-harbor.bmc.local/bmc/lp0lz:25300-v223-bitnami-jmx-exporter-0.20.0-alpine-319
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:25300-v223-bitnami-kafka-3.6.0-rockylinux-9---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:25300-v223-bitnami-kafka-3.6.0-rockylinux-9
+docker tag containers.bmc.com/bmc/lp0lz:25300-v223-bitnami-kafka-3.6.0-rockylinux-9 helix-harbor.bmc.local/bmc/lp0lz:25300-v223-bitnami-kafka-3.6.0-rockylinux-9
+docker push helix-harbor.bmc.local/bmc/lp0lz:25300-v223-bitnami-kafka-3.6.0-rockylinux-9
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:25300-v223-bitnami-kafka-exporter-1.9.0-alpine---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:25300-v223-bitnami-kafka-exporter-1.9.0-alpine
+docker tag containers.bmc.com/bmc/lp0lz:25300-v223-bitnami-kafka-exporter-1.9.0-alpine helix-harbor.bmc.local/bmc/lp0lz:25300-v223-bitnami-kafka-exporter-1.9.0-alpine
+docker push helix-harbor.bmc.local/bmc/lp0lz:25300-v223-bitnami-kafka-exporter-1.9.0-alpine
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:25300-v223-bitnami-zookeeper-3.9.3-alpine-jdk11---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:25300-v223-bitnami-zookeeper-3.9.3-alpine-jdk11
+docker tag containers.bmc.com/bmc/lp0lz:25300-v223-bitnami-zookeeper-3.9.3-alpine-jdk11 helix-harbor.bmc.local/bmc/lp0lz:25300-v223-bitnami-zookeeper-3.9.3-alpine-jdk11
+docker push helix-harbor.bmc.local/bmc/lp0lz:25300-v223-bitnami-zookeeper-3.9.3-alpine-jdk11
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:25300-v223-haproxy-alpine3.21---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:25300-v223-haproxy-alpine3.21
+docker tag containers.bmc.com/bmc/lp0lz:25300-v223-haproxy-alpine3.21 helix-harbor.bmc.local/bmc/lp0lz:25300-v223-haproxy-alpine3.21
+docker push helix-harbor.bmc.local/bmc/lp0lz:25300-v223-haproxy-alpine3.21
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:25300-v223-oliver006-redis_exporter-v1.69.0---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:25300-v223-oliver006-redis_exporter-v1.69.0
+docker tag containers.bmc.com/bmc/lp0lz:25300-v223-oliver006-redis_exporter-v1.69.0 helix-harbor.bmc.local/bmc/lp0lz:25300-v223-oliver006-redis_exporter-v1.69.0
+docker push helix-harbor.bmc.local/bmc/lp0lz:25300-v223-oliver006-redis_exporter-v1.69.0
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:25300-v223-opensearch-2.15.0-rockylinux9---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:25300-v223-opensearch-2.15.0-rockylinux9
+docker tag containers.bmc.com/bmc/lp0lz:25300-v223-opensearch-2.15.0-rockylinux9 helix-harbor.bmc.local/bmc/lp0lz:25300-v223-opensearch-2.15.0-rockylinux9
+docker push helix-harbor.bmc.local/bmc/lp0lz:25300-v223-opensearch-2.15.0-rockylinux9
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:25300-v223-opensearch-exporter-1.9.0---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:25300-v223-opensearch-exporter-1.9.0
+docker tag containers.bmc.com/bmc/lp0lz:25300-v223-opensearch-exporter-1.9.0 helix-harbor.bmc.local/bmc/lp0lz:25300-v223-opensearch-exporter-1.9.0
+docker push helix-harbor.bmc.local/bmc/lp0lz:25300-v223-opensearch-exporter-1.9.0
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:25300-v223-pgpool2_exporter-1.2.1-alpine---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:25300-v223-pgpool2_exporter-1.2.1-alpine
+docker tag containers.bmc.com/bmc/lp0lz:25300-v223-pgpool2_exporter-1.2.1-alpine helix-harbor.bmc.local/bmc/lp0lz:25300-v223-pgpool2_exporter-1.2.1-alpine
+docker push helix-harbor.bmc.local/bmc/lp0lz:25300-v223-pgpool2_exporter-1.2.1-alpine
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:25300-v223-redis-7.0.14-alpine3.19---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:25300-v223-redis-7.0.14-alpine3.19
+docker tag containers.bmc.com/bmc/lp0lz:25300-v223-redis-7.0.14-alpine3.19 helix-harbor.bmc.local/bmc/lp0lz:25300-v223-redis-7.0.14-alpine3.19
+docker push helix-harbor.bmc.local/bmc/lp0lz:25300-v223-redis-7.0.14-alpine3.19
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:25300-v223-redis-cluster-7.4.1-alpine---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:25300-v223-redis-cluster-7.4.1-alpine
+docker tag containers.bmc.com/bmc/lp0lz:25300-v223-redis-cluster-7.4.1-alpine helix-harbor.bmc.local/bmc/lp0lz:25300-v223-redis-cluster-7.4.1-alpine
+docker push helix-harbor.bmc.local/bmc/lp0lz:25300-v223-redis-cluster-7.4.1-alpine
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:25300-v223-redis-exporter-1.73.0-alpine---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:25300-v223-redis-exporter-1.73.0-alpine
+docker tag containers.bmc.com/bmc/lp0lz:25300-v223-redis-exporter-1.73.0-alpine helix-harbor.bmc.local/bmc/lp0lz:25300-v223-redis-exporter-1.73.0-alpine
+docker push helix-harbor.bmc.local/bmc/lp0lz:25300-v223-redis-exporter-1.73.0-alpine
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:25300-v223-victoriametrics-vminsert-series-update-v1.89.2-cluster-rc20---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:25300-v223-victoriametrics-vminsert-series-update-v1.89.2-cluster-rc20
+docker tag containers.bmc.com/bmc/lp0lz:25300-v223-victoriametrics-vminsert-series-update-v1.89.2-cluster-rc20 helix-harbor.bmc.local/bmc/lp0lz:25300-v223-victoriametrics-vminsert-series-update-v1.89.2-cluster-rc20
+docker push helix-harbor.bmc.local/bmc/lp0lz:25300-v223-victoriametrics-vminsert-series-update-v1.89.2-cluster-rc20
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:25300-v223-victoriametrics-vmselect-series-update-v1.89.2-cluster-rc20---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:25300-v223-victoriametrics-vmselect-series-update-v1.89.2-cluster-rc20
+docker tag containers.bmc.com/bmc/lp0lz:25300-v223-victoriametrics-vmselect-series-update-v1.89.2-cluster-rc20 helix-harbor.bmc.local/bmc/lp0lz:25300-v223-victoriametrics-vmselect-series-update-v1.89.2-cluster-rc20
+docker push helix-harbor.bmc.local/bmc/lp0lz:25300-v223-victoriametrics-vmselect-series-update-v1.89.2-cluster-rc20
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:25300-v223-victoriametrics-vmstorage-series-update-v1.89.2-cluster-rc20---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:25300-v223-victoriametrics-vmstorage-series-update-v1.89.2-cluster-rc20
+docker tag containers.bmc.com/bmc/lp0lz:25300-v223-victoriametrics-vmstorage-series-update-v1.89.2-cluster-rc20 helix-harbor.bmc.local/bmc/lp0lz:25300-v223-victoriametrics-vmstorage-series-update-v1.89.2-cluster-rc20
+docker push helix-harbor.bmc.local/bmc/lp0lz:25300-v223-victoriametrics-vmstorage-series-update-v1.89.2-cluster-rc20
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:25300-v232-ade-infra-clients-alpine---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:25300-v232-ade-infra-clients-alpine
+docker tag containers.bmc.com/bmc/lp0lz:25300-v232-ade-infra-clients-alpine helix-harbor.bmc.local/bmc/lp0lz:25300-v232-ade-infra-clients-alpine
+docker push helix-harbor.bmc.local/bmc/lp0lz:25300-v232-ade-infra-clients-alpine
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:25300-v244-postgres-exporter-0.17.1-alpine---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:25300-v244-postgres-exporter-0.17.1-alpine
+docker tag containers.bmc.com/bmc/lp0lz:25300-v244-postgres-exporter-0.17.1-alpine helix-harbor.bmc.local/bmc/lp0lz:25300-v244-postgres-exporter-0.17.1-alpine
+docker push helix-harbor.bmc.local/bmc/lp0lz:25300-v244-postgres-exporter-0.17.1-alpine
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:25300-v247-bitnami-minio-2025.4.22-alpine---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:25300-v247-bitnami-minio-2025.4.22-alpine
+docker tag containers.bmc.com/bmc/lp0lz:25300-v247-bitnami-minio-2025.4.22-alpine helix-harbor.bmc.local/bmc/lp0lz:25300-v247-bitnami-minio-2025.4.22-alpine
+docker push helix-harbor.bmc.local/bmc/lp0lz:25300-v247-bitnami-minio-2025.4.22-alpine
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:25300-v95-bmc-patroni-pgpool-ha-17.4---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:25300-v95-bmc-patroni-pgpool-ha-17.4
+docker tag containers.bmc.com/bmc/lp0lz:25300-v95-bmc-patroni-pgpool-ha-17.4 helix-harbor.bmc.local/bmc/lp0lz:25300-v95-bmc-patroni-pgpool-ha-17.4
+docker push helix-harbor.bmc.local/bmc/lp0lz:25300-v95-bmc-patroni-pgpool-ha-17.4
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:25300-v95-bmc-patroni-postgress-ha-17.4---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:25300-v95-bmc-patroni-postgress-ha-17.4
+docker tag containers.bmc.com/bmc/lp0lz:25300-v95-bmc-patroni-postgress-ha-17.4 helix-harbor.bmc.local/bmc/lp0lz:25300-v95-bmc-patroni-postgress-ha-17.4
+docker push helix-harbor.bmc.local/bmc/lp0lz:25300-v95-bmc-patroni-postgress-ha-17.4
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:25300-v223-victoriametrics-vmrestore-v1.120.0-enterprise---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:25300-v223-victoriametrics-vmrestore-v1.120.0-enterprise
+docker tag containers.bmc.com/bmc/lp0lz:25300-v223-victoriametrics-vmrestore-v1.120.0-enterprise helix-harbor.bmc.local/bmc/lp0lz:25300-v223-victoriametrics-vmrestore-v1.120.0-enterprise
+docker push helix-harbor.bmc.local/bmc/lp0lz:25300-v223-victoriametrics-vmrestore-v1.120.0-enterprise
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:25300-v223-victoriametrics-vmbackupmanager-v1.120.0-enterprise---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:25300-v223-victoriametrics-vmbackupmanager-v1.120.0-enterprise
+docker tag containers.bmc.com/bmc/lp0lz:25300-v223-victoriametrics-vmbackupmanager-v1.120.0-enterprise helix-harbor.bmc.local/bmc/lp0lz:25300-v223-victoriametrics-vmbackupmanager-v1.120.0-enterprise
+docker push helix-harbor.bmc.local/bmc/lp0lz:25300-v223-victoriametrics-vmbackupmanager-v1.120.0-enterprise
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:25300-v235-fluentbit-3.2.4-rockylinux9---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:25300-v235-fluentbit-3.2.4-rockylinux9
+docker tag containers.bmc.com/bmc/lp0lz:25300-v235-fluentbit-3.2.4-rockylinux9 helix-harbor.bmc.local/bmc/lp0lz:25300-v235-fluentbit-3.2.4-rockylinux9
+docker push helix-harbor.bmc.local/bmc/lp0lz:25300-v235-fluentbit-3.2.4-rockylinux9
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:25300-v242-bitnami-elasticsearch-8.18.0-12-r2-rockylinux-9---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:25300-v242-bitnami-elasticsearch-8.18.0-12-r2-rockylinux-9
+docker tag containers.bmc.com/bmc/lp0lz:25300-v242-bitnami-elasticsearch-8.18.0-12-r2-rockylinux-9 helix-harbor.bmc.local/bmc/lp0lz:25300-v242-bitnami-elasticsearch-8.18.0-12-r2-rockylinux-9
+docker push helix-harbor.bmc.local/bmc/lp0lz:25300-v242-bitnami-elasticsearch-8.18.0-12-r2-rockylinux-9
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:25300-v251b-bitnami-kibana-8.18.0-12-r1-alpine---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:25300-v251b-bitnami-kibana-8.18.0-12-r1-alpine
+docker tag containers.bmc.com/bmc/lp0lz:25300-v251b-bitnami-kibana-8.18.0-12-r1-alpine helix-harbor.bmc.local/bmc/lp0lz:25300-v251b-bitnami-kibana-8.18.0-12-r1-alpine
+docker push helix-harbor.bmc.local/bmc/lp0lz:25300-v251b-bitnami-kibana-8.18.0-12-r1-alpine
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:25300-v140-ade-on-prem-dr-ab1f719---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:25300-v140-ade-on-prem-dr-ab1f719
+docker tag containers.bmc.com/bmc/lp0lz:25300-v140-ade-on-prem-dr-ab1f719 helix-harbor.bmc.local/bmc/lp0lz:25300-v140-ade-on-prem-dr-ab1f719
+docker push helix-harbor.bmc.local/bmc/lp0lz:25300-v140-ade-on-prem-dr-ab1f719
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:25300-v223-bitnami-os-shell-12-r34-alpine---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:25300-v223-bitnami-os-shell-12-r34-alpine
+docker tag containers.bmc.com/bmc/lp0lz:25300-v223-bitnami-os-shell-12-r34-alpine helix-harbor.bmc.local/bmc/lp0lz:25300-v223-bitnami-os-shell-12-r34-alpine
+docker push helix-harbor.bmc.local/bmc/lp0lz:25300-v223-bitnami-os-shell-12-r34-alpine
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:ade-audit-service-1504---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:ade-audit-service-1504
+docker tag containers.bmc.com/bmc/lp0lz:ade-audit-service-1504 helix-harbor.bmc.local/bmc/lp0lz:ade-audit-service-1504
+docker push helix-harbor.bmc.local/bmc/lp0lz:ade-audit-service-1504
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:ade-authz-service-1118---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:ade-authz-service-1118
+docker tag containers.bmc.com/bmc/lp0lz:ade-authz-service-1118 helix-harbor.bmc.local/bmc/lp0lz:ade-authz-service-1118
+docker push helix-harbor.bmc.local/bmc/lp0lz:ade-authz-service-1118
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:ade-file-service-2f2d5f1-5---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:ade-file-service-2f2d5f1-5
+docker tag containers.bmc.com/bmc/lp0lz:ade-file-service-2f2d5f1-5 helix-harbor.bmc.local/bmc/lp0lz:ade-file-service-2f2d5f1-5
+docker push helix-harbor.bmc.local/bmc/lp0lz:ade-file-service-2f2d5f1-5
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:ade-identity-management-portal-3026---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:ade-identity-management-portal-3026
+docker tag containers.bmc.com/bmc/lp0lz:ade-identity-management-portal-3026 helix-harbor.bmc.local/bmc/lp0lz:ade-identity-management-portal-3026
+docker push helix-harbor.bmc.local/bmc/lp0lz:ade-identity-management-portal-3026
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:ade-identity-management-service-2870---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:ade-identity-management-service-2870
+docker tag containers.bmc.com/bmc/lp0lz:ade-identity-management-service-2870 helix-harbor.bmc.local/bmc/lp0lz:ade-identity-management-service-2870
+docker push helix-harbor.bmc.local/bmc/lp0lz:ade-identity-management-service-2870
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:ade-ims-webhook-1316---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:ade-ims-webhook-1316
+docker tag containers.bmc.com/bmc/lp0lz:ade-ims-webhook-1316 helix-harbor.bmc.local/bmc/lp0lz:ade-ims-webhook-1316
+docker push helix-harbor.bmc.local/bmc/lp0lz:ade-ims-webhook-1316
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:ade-itsm-identity-sync-1072---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:ade-itsm-identity-sync-1072
+docker tag containers.bmc.com/bmc/lp0lz:ade-itsm-identity-sync-1072 helix-harbor.bmc.local/bmc/lp0lz:ade-itsm-identity-sync-1072
+docker push helix-harbor.bmc.local/bmc/lp0lz:ade-itsm-identity-sync-1072
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:ade-notification-service-1752---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:ade-notification-service-1752
+docker tag containers.bmc.com/bmc/lp0lz:ade-notification-service-1752 helix-harbor.bmc.local/bmc/lp0lz:ade-notification-service-1752
+docker push helix-harbor.bmc.local/bmc/lp0lz:ade-notification-service-1752
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:adeops-util-659---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:adeops-util-659
+docker tag containers.bmc.com/bmc/lp0lz:adeops-util-659 helix-harbor.bmc.local/bmc/lp0lz:adeops-util-659
+docker push helix-harbor.bmc.local/bmc/lp0lz:adeops-util-659
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:adereporting-apiservice-5290c12-1707-hf_july_25---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:adereporting-apiservice-5290c12-1707-hf_july_25
+docker tag containers.bmc.com/bmc/lp0lz:adereporting-apiservice-5290c12-1707-hf_july_25 helix-harbor.bmc.local/bmc/lp0lz:adereporting-apiservice-5290c12-1707-hf_july_25
+docker push helix-harbor.bmc.local/bmc/lp0lz:adereporting-apiservice-5290c12-1707-hf_july_25
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:adereporting-content-edd89a5-1768---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:adereporting-content-edd89a5-1768
+docker tag containers.bmc.com/bmc/lp0lz:adereporting-content-edd89a5-1768 helix-harbor.bmc.local/bmc/lp0lz:adereporting-content-edd89a5-1768
+docker push helix-harbor.bmc.local/bmc/lp0lz:adereporting-content-edd89a5-1768
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:adereporting-e232faa-8157---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:adereporting-e232faa-8157
+docker tag containers.bmc.com/bmc/lp0lz:adereporting-e232faa-8157 helix-harbor.bmc.local/bmc/lp0lz:adereporting-e232faa-8157
+docker push helix-harbor.bmc.local/bmc/lp0lz:adereporting-e232faa-8157
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:adereporting-initdb-e232faa-8157---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:adereporting-initdb-e232faa-8157
+docker tag containers.bmc.com/bmc/lp0lz:adereporting-initdb-e232faa-8157 helix-harbor.bmc.local/bmc/lp0lz:adereporting-initdb-e232faa-8157
+docker push helix-harbor.bmc.local/bmc/lp0lz:adereporting-initdb-e232faa-8157
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:adereporting-init-storage-versioning-5650121-2376---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:adereporting-init-storage-versioning-5650121-2376
+docker tag containers.bmc.com/bmc/lp0lz:adereporting-init-storage-versioning-5650121-2376 helix-harbor.bmc.local/bmc/lp0lz:adereporting-init-storage-versioning-5650121-2376
+docker push helix-harbor.bmc.local/bmc/lp0lz:adereporting-init-storage-versioning-5650121-2376
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:adereporting-kafkacli-e232faa-8157---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:adereporting-kafkacli-e232faa-8157
+docker tag containers.bmc.com/bmc/lp0lz:adereporting-kafkacli-e232faa-8157 helix-harbor.bmc.local/bmc/lp0lz:adereporting-kafkacli-e232faa-8157
+docker push helix-harbor.bmc.local/bmc/lp0lz:adereporting-kafkacli-e232faa-8157
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:adereporting-metadataservice-e5f06fa-1952---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:adereporting-metadataservice-e5f06fa-1952
+docker tag containers.bmc.com/bmc/lp0lz:adereporting-metadataservice-e5f06fa-1952 helix-harbor.bmc.local/bmc/lp0lz:adereporting-metadataservice-e5f06fa-1952
+docker push helix-harbor.bmc.local/bmc/lp0lz:adereporting-metadataservice-e5f06fa-1952
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:adereporting-metricserver-e232faa-8157---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:adereporting-metricserver-e232faa-8157
+docker tag containers.bmc.com/bmc/lp0lz:adereporting-metricserver-e232faa-8157 helix-harbor.bmc.local/bmc/lp0lz:adereporting-metricserver-e232faa-8157
+docker push helix-harbor.bmc.local/bmc/lp0lz:adereporting-metricserver-e232faa-8157
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:adereporting-ootb-content-f70d2f0-246---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:adereporting-ootb-content-f70d2f0-246
+docker tag containers.bmc.com/bmc/lp0lz:adereporting-ootb-content-f70d2f0-246 helix-harbor.bmc.local/bmc/lp0lz:adereporting-ootb-content-f70d2f0-246
+docker push helix-harbor.bmc.local/bmc/lp0lz:adereporting-ootb-content-f70d2f0-246
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:adereporting-puller-5650121-2376---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:adereporting-puller-5650121-2376
+docker tag containers.bmc.com/bmc/lp0lz:adereporting-puller-5650121-2376 helix-harbor.bmc.local/bmc/lp0lz:adereporting-puller-5650121-2376
+docker push helix-harbor.bmc.local/bmc/lp0lz:adereporting-puller-5650121-2376
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:adereporting-renderer-2e1af12-2251---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:adereporting-renderer-2e1af12-2251
+docker tag containers.bmc.com/bmc/lp0lz:adereporting-renderer-2e1af12-2251 helix-harbor.bmc.local/bmc/lp0lz:adereporting-renderer-2e1af12-2251
+docker push helix-harbor.bmc.local/bmc/lp0lz:adereporting-renderer-2e1af12-2251
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:adereporting-runner-5650121-2376---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:adereporting-runner-5650121-2376
+docker tag containers.bmc.com/bmc/lp0lz:adereporting-runner-5650121-2376 helix-harbor.bmc.local/bmc/lp0lz:adereporting-runner-5650121-2376
+docker push helix-harbor.bmc.local/bmc/lp0lz:adereporting-runner-5650121-2376
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:ade-tenant-management-automation-1138---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:ade-tenant-management-automation-1138
+docker tag containers.bmc.com/bmc/lp0lz:ade-tenant-management-automation-1138 helix-harbor.bmc.local/bmc/lp0lz:ade-tenant-management-automation-1138
+docker push helix-harbor.bmc.local/bmc/lp0lz:ade-tenant-management-automation-1138
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:ade-tenant-management-service-2467---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:ade-tenant-management-service-2467
+docker tag containers.bmc.com/bmc/lp0lz:ade-tenant-management-service-2467 helix-harbor.bmc.local/bmc/lp0lz:ade-tenant-management-service-2467
+docker push helix-harbor.bmc.local/bmc/lp0lz:ade-tenant-management-service-2467
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:ade-ui-content-service-996---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:ade-ui-content-service-996
+docker tag containers.bmc.com/bmc/lp0lz:ade-ui-content-service-996 helix-harbor.bmc.local/bmc/lp0lz:ade-ui-content-service-996
+docker push helix-harbor.bmc.local/bmc/lp0lz:ade-ui-content-service-996
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:aif-api-service-b6cecf9-12---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:aif-api-service-b6cecf9-12
+docker tag containers.bmc.com/bmc/lp0lz:aif-api-service-b6cecf9-12 helix-harbor.bmc.local/bmc/lp0lz:aif-api-service-b6cecf9-12
+docker push helix-harbor.bmc.local/bmc/lp0lz:aif-api-service-b6cecf9-12
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:aif-clustering-ingestion-service-6f4f179a-9---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:aif-clustering-ingestion-service-6f4f179a-9
+docker tag containers.bmc.com/bmc/lp0lz:aif-clustering-ingestion-service-6f4f179a-9 helix-harbor.bmc.local/bmc/lp0lz:aif-clustering-ingestion-service-6f4f179a-9
+docker push helix-harbor.bmc.local/bmc/lp0lz:aif-clustering-ingestion-service-6f4f179a-9
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:aif-clustering-query-service-32c75e0-9---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:aif-clustering-query-service-32c75e0-9
+docker tag containers.bmc.com/bmc/lp0lz:aif-clustering-query-service-32c75e0-9 helix-harbor.bmc.local/bmc/lp0lz:aif-clustering-query-service-32c75e0-9
+docker push helix-harbor.bmc.local/bmc/lp0lz:aif-clustering-query-service-32c75e0-9
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:aif-clustering-service-94c64bdd-7---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:aif-clustering-service-94c64bdd-7
+docker tag containers.bmc.com/bmc/lp0lz:aif-clustering-service-94c64bdd-7 helix-harbor.bmc.local/bmc/lp0lz:aif-clustering-service-94c64bdd-7
+docker push helix-harbor.bmc.local/bmc/lp0lz:aif-clustering-service-94c64bdd-7
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:aif-core-service-cbadc68b-6---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:aif-core-service-cbadc68b-6
+docker tag containers.bmc.com/bmc/lp0lz:aif-core-service-cbadc68b-6 helix-harbor.bmc.local/bmc/lp0lz:aif-core-service-cbadc68b-6
+docker push helix-harbor.bmc.local/bmc/lp0lz:aif-core-service-cbadc68b-6
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:aif-incident-ingestion-service-a6ff4ef-5---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:aif-incident-ingestion-service-a6ff4ef-5
+docker tag containers.bmc.com/bmc/lp0lz:aif-incident-ingestion-service-a6ff4ef-5 helix-harbor.bmc.local/bmc/lp0lz:aif-incident-ingestion-service-a6ff4ef-5
+docker push helix-harbor.bmc.local/bmc/lp0lz:aif-incident-ingestion-service-a6ff4ef-5
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:aif-index-migration-job-a9dccc9-54---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:aif-index-migration-job-a9dccc9-54
+docker tag containers.bmc.com/bmc/lp0lz:aif-index-migration-job-a9dccc9-54 helix-harbor.bmc.local/bmc/lp0lz:aif-index-migration-job-a9dccc9-54
+docker push helix-harbor.bmc.local/bmc/lp0lz:aif-index-migration-job-a9dccc9-54
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:aif-job-manager-service-18d836b-6---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:aif-job-manager-service-18d836b-6
+docker tag containers.bmc.com/bmc/lp0lz:aif-job-manager-service-18d836b-6 helix-harbor.bmc.local/bmc/lp0lz:aif-job-manager-service-18d836b-6
+docker push helix-harbor.bmc.local/bmc/lp0lz:aif-job-manager-service-18d836b-6
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:aif-machine-learning-utilities-48728db-9---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:aif-machine-learning-utilities-48728db-9
+docker tag containers.bmc.com/bmc/lp0lz:aif-machine-learning-utilities-48728db-9 helix-harbor.bmc.local/bmc/lp0lz:aif-machine-learning-utilities-48728db-9
+docker push helix-harbor.bmc.local/bmc/lp0lz:aif-machine-learning-utilities-48728db-9
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:aif-object-store-sync-job-35951a8-4---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:aif-object-store-sync-job-35951a8-4
+docker tag containers.bmc.com/bmc/lp0lz:aif-object-store-sync-job-35951a8-4 helix-harbor.bmc.local/bmc/lp0lz:aif-object-store-sync-job-35951a8-4
+docker push helix-harbor.bmc.local/bmc/lp0lz:aif-object-store-sync-job-35951a8-4
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:aif-ticket-service-cda0ceb-7---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:aif-ticket-service-cda0ceb-7
+docker tag containers.bmc.com/bmc/lp0lz:aif-ticket-service-cda0ceb-7 helix-harbor.bmc.local/bmc/lp0lz:aif-ticket-service-cda0ceb-7
+docker push helix-harbor.bmc.local/bmc/lp0lz:aif-ticket-service-cda0ceb-7
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:anomaly-detection-service-70fba19-1109---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:anomaly-detection-service-70fba19-1109
+docker tag containers.bmc.com/bmc/lp0lz:anomaly-detection-service-70fba19-1109 helix-harbor.bmc.local/bmc/lp0lz:anomaly-detection-service-70fba19-1109
+docker push helix-harbor.bmc.local/bmc/lp0lz:anomaly-detection-service-70fba19-1109
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:authproxy-HSSO_Auth_Proxy_RC_250---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:authproxy-HSSO_Auth_Proxy_RC_250
+docker tag containers.bmc.com/bmc/lp0lz:authproxy-HSSO_Auth_Proxy_RC_250 helix-harbor.bmc.local/bmc/lp0lz:authproxy-HSSO_Auth_Proxy_RC_250
+docker push helix-harbor.bmc.local/bmc/lp0lz:authproxy-HSSO_Auth_Proxy_RC_250
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:authproxy-HSSO_Auth_Proxy_RC_254---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:authproxy-HSSO_Auth_Proxy_RC_254
+docker tag containers.bmc.com/bmc/lp0lz:authproxy-HSSO_Auth_Proxy_RC_254 helix-harbor.bmc.local/bmc/lp0lz:authproxy-HSSO_Auth_Proxy_RC_254
+docker push helix-harbor.bmc.local/bmc/lp0lz:authproxy-HSSO_Auth_Proxy_RC_254
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:es-proxy-nginx-service-dd29ba1-1000---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:es-proxy-nginx-service-dd29ba1-1000
+docker tag containers.bmc.com/bmc/lp0lz:es-proxy-nginx-service-dd29ba1-1000 helix-harbor.bmc.local/bmc/lp0lz:es-proxy-nginx-service-dd29ba1-1000
+docker push helix-harbor.bmc.local/bmc/lp0lz:es-proxy-nginx-service-dd29ba1-1000
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:es-proxy-service-dd29ba1-1000---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:es-proxy-service-dd29ba1-1000
+docker tag containers.bmc.com/bmc/lp0lz:es-proxy-service-dd29ba1-1000 helix-harbor.bmc.local/bmc/lp0lz:es-proxy-service-dd29ba1-1000
+docker push helix-harbor.bmc.local/bmc/lp0lz:es-proxy-service-dd29ba1-1000
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:event-ingestion-service-c39822a4-1141---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:event-ingestion-service-c39822a4-1141
+docker tag containers.bmc.com/bmc/lp0lz:event-ingestion-service-c39822a4-1141 helix-harbor.bmc.local/bmc/lp0lz:event-ingestion-service-c39822a4-1141
+docker push helix-harbor.bmc.local/bmc/lp0lz:event-ingestion-service-c39822a4-1141
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:event-mgmt-service-d66cc0b6-1369---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:event-mgmt-service-d66cc0b6-1369
+docker tag containers.bmc.com/bmc/lp0lz:event-mgmt-service-d66cc0b6-1369 helix-harbor.bmc.local/bmc/lp0lz:event-mgmt-service-d66cc0b6-1369
+docker push helix-harbor.bmc.local/bmc/lp0lz:event-mgmt-service-d66cc0b6-1369
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:event-processor-service-a92a4ffba-1---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:event-processor-service-a92a4ffba-1
+docker tag containers.bmc.com/bmc/lp0lz:event-processor-service-a92a4ffba-1 helix-harbor.bmc.local/bmc/lp0lz:event-processor-service-a92a4ffba-1
+docker push helix-harbor.bmc.local/bmc/lp0lz:event-processor-service-a92a4ffba-1
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:event-service-c971160-1164---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:event-service-c971160-1164
+docker tag containers.bmc.com/bmc/lp0lz:event-service-c971160-1164 helix-harbor.bmc.local/bmc/lp0lz:event-service-c971160-1164
+docker push helix-harbor.bmc.local/bmc/lp0lz:event-service-c971160-1164
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:global-config-service-f33f8d3-1236---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:global-config-service-f33f8d3-1236
+docker tag containers.bmc.com/bmc/lp0lz:global-config-service-f33f8d3-1236 helix-harbor.bmc.local/bmc/lp0lz:global-config-service-f33f8d3-1236
+docker push helix-harbor.bmc.local/bmc/lp0lz:global-config-service-f33f8d3-1236
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:HSSO_25.3.00-RC_2---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:HSSO_25.3.00-RC_2
+docker tag containers.bmc.com/bmc/lp0lz:HSSO_25.3.00-RC_2 helix-harbor.bmc.local/bmc/lp0lz:HSSO_25.3.00-RC_2
+docker push helix-harbor.bmc.local/bmc/lp0lz:HSSO_25.3.00-RC_2
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:kibana-proxy-service-903dec5-1239---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:kibana-proxy-service-903dec5-1239
+docker tag containers.bmc.com/bmc/lp0lz:kibana-proxy-service-903dec5-1239 helix-harbor.bmc.local/bmc/lp0lz:kibana-proxy-service-903dec5-1239
+docker push helix-harbor.bmc.local/bmc/lp0lz:kibana-proxy-service-903dec5-1239
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:license-reporting-service-adaa601-19---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:license-reporting-service-adaa601-19
+docker tag containers.bmc.com/bmc/lp0lz:license-reporting-service-adaa601-19 helix-harbor.bmc.local/bmc/lp0lz:license-reporting-service-adaa601-19
+docker push helix-harbor.bmc.local/bmc/lp0lz:license-reporting-service-adaa601-19
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:log-anomaly-service-ddcd4a5-785---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:log-anomaly-service-ddcd4a5-785
+docker tag containers.bmc.com/bmc/lp0lz:log-anomaly-service-ddcd4a5-785 helix-harbor.bmc.local/bmc/lp0lz:log-anomaly-service-ddcd4a5-785
+docker push helix-harbor.bmc.local/bmc/lp0lz:log-anomaly-service-ddcd4a5-785
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:log-compression-f4dcdba4-1403---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:log-compression-f4dcdba4-1403
+docker tag containers.bmc.com/bmc/lp0lz:log-compression-f4dcdba4-1403 helix-harbor.bmc.local/bmc/lp0lz:log-compression-f4dcdba4-1403
+docker push helix-harbor.bmc.local/bmc/lp0lz:log-compression-f4dcdba4-1403
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:log-fluent-connector-job-2a8ccb36-509---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:log-fluent-connector-job-2a8ccb36-509
+docker tag containers.bmc.com/bmc/lp0lz:log-fluent-connector-job-2a8ccb36-509 helix-harbor.bmc.local/bmc/lp0lz:log-fluent-connector-job-2a8ccb36-509
+docker push helix-harbor.bmc.local/bmc/lp0lz:log-fluent-connector-job-2a8ccb36-509
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:log-ingestion-service-c9f85bd-927---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:log-ingestion-service-c9f85bd-927
+docker tag containers.bmc.com/bmc/lp0lz:log-ingestion-service-c9f85bd-927 helix-harbor.bmc.local/bmc/lp0lz:log-ingestion-service-c9f85bd-927
+docker push helix-harbor.bmc.local/bmc/lp0lz:log-ingestion-service-c9f85bd-927
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:log-metrics-service-bea7874-668---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:log-metrics-service-bea7874-668
+docker tag containers.bmc.com/bmc/lp0lz:log-metrics-service-bea7874-668 helix-harbor.bmc.local/bmc/lp0lz:log-metrics-service-bea7874-668
+docker push helix-harbor.bmc.local/bmc/lp0lz:log-metrics-service-bea7874-668
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:log-mgmt-service-f4dcdba4-1403---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:log-mgmt-service-f4dcdba4-1403
+docker tag containers.bmc.com/bmc/lp0lz:log-mgmt-service-f4dcdba4-1403 helix-harbor.bmc.local/bmc/lp0lz:log-mgmt-service-f4dcdba4-1403
+docker push helix-harbor.bmc.local/bmc/lp0lz:log-mgmt-service-f4dcdba4-1403
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:log-processing-service-c5f96a8-1104---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:log-processing-service-c5f96a8-1104
+docker tag containers.bmc.com/bmc/lp0lz:log-processing-service-c5f96a8-1104 helix-harbor.bmc.local/bmc/lp0lz:log-processing-service-c5f96a8-1104
+docker push helix-harbor.bmc.local/bmc/lp0lz:log-processing-service-c5f96a8-1104
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:logs-enrichment-sync-service-b410173-680---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:logs-enrichment-sync-service-b410173-680
+docker tag containers.bmc.com/bmc/lp0lz:logs-enrichment-sync-service-b410173-680 helix-harbor.bmc.local/bmc/lp0lz:logs-enrichment-sync-service-b410173-680
+docker push helix-harbor.bmc.local/bmc/lp0lz:logs-enrichment-sync-service-b410173-680
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:log-situation-service-1cd3b99-752---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:log-situation-service-1cd3b99-752
+docker tag containers.bmc.com/bmc/lp0lz:log-situation-service-1cd3b99-752 helix-harbor.bmc.local/bmc/lp0lz:log-situation-service-1cd3b99-752
+docker push helix-harbor.bmc.local/bmc/lp0lz:log-situation-service-1cd3b99-752
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:logs-portal-d635ecc1-1124---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:logs-portal-d635ecc1-1124
+docker tag containers.bmc.com/bmc/lp0lz:logs-portal-d635ecc1-1124 helix-harbor.bmc.local/bmc/lp0lz:logs-portal-d635ecc1-1124
+docker push helix-harbor.bmc.local/bmc/lp0lz:logs-portal-d635ecc1-1124
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:metric-gateway-service-cd023fc-1185---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:metric-gateway-service-cd023fc-1185
+docker tag containers.bmc.com/bmc/lp0lz:metric-gateway-service-cd023fc-1185 helix-harbor.bmc.local/bmc/lp0lz:metric-gateway-service-cd023fc-1185
+docker push helix-harbor.bmc.local/bmc/lp0lz:metric-gateway-service-cd023fc-1185
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:metricservice-93e7c7e-1089---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:metricservice-93e7c7e-1089
+docker tag containers.bmc.com/bmc/lp0lz:metricservice-93e7c7e-1089 helix-harbor.bmc.local/bmc/lp0lz:metricservice-93e7c7e-1089
+docker push helix-harbor.bmc.local/bmc/lp0lz:metricservice-93e7c7e-1089
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:ml-model-mgmt-service-2d281b3-719---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:ml-model-mgmt-service-2d281b3-719
+docker tag containers.bmc.com/bmc/lp0lz:ml-model-mgmt-service-2d281b3-719 helix-harbor.bmc.local/bmc/lp0lz:ml-model-mgmt-service-2d281b3-719
+docker push helix-harbor.bmc.local/bmc/lp0lz:ml-model-mgmt-service-2d281b3-719
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:prometheus-ingestion-service-002e8f5-1056---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:prometheus-ingestion-service-002e8f5-1056
+docker tag containers.bmc.com/bmc/lp0lz:prometheus-ingestion-service-002e8f5-1056 helix-harbor.bmc.local/bmc/lp0lz:prometheus-ingestion-service-002e8f5-1056
+docker push helix-harbor.bmc.local/bmc/lp0lz:prometheus-ingestion-service-002e8f5-1056
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:opensearch-dashboards-2x-903dec5-1239---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:opensearch-dashboards-2x-903dec5-1239
+docker tag containers.bmc.com/bmc/lp0lz:opensearch-dashboards-2x-903dec5-1239 helix-harbor.bmc.local/bmc/lp0lz:opensearch-dashboards-2x-903dec5-1239
+docker push helix-harbor.bmc.local/bmc/lp0lz:opensearch-dashboards-2x-903dec5-1239
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:tctlrest-685---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:tctlrest-685
+docker tag containers.bmc.com/bmc/lp0lz:tctlrest-685 helix-harbor.bmc.local/bmc/lp0lz:tctlrest-685
+docker push helix-harbor.bmc.local/bmc/lp0lz:tctlrest-685
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:smart-graph-api-r6680-9-s-25.3.00---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:smart-graph-api-r6680-9-s-25.3.00
+docker tag containers.bmc.com/bmc/lp0lz:smart-graph-api-r6680-9-s-25.3.00 helix-harbor.bmc.local/bmc/lp0lz:smart-graph-api-r6680-9-s-25.3.00
+docker push helix-harbor.bmc.local/bmc/lp0lz:smart-graph-api-r6680-9-s-25.3.00
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:smart-graph-controller-api-r6680-9-s-25.3.00---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:smart-graph-controller-api-r6680-9-s-25.3.00
+docker tag containers.bmc.com/bmc/lp0lz:smart-graph-controller-api-r6680-9-s-25.3.00 helix-harbor.bmc.local/bmc/lp0lz:smart-graph-controller-api-r6680-9-s-25.3.00
+docker push helix-harbor.bmc.local/bmc/lp0lz:smart-graph-controller-api-r6680-9-s-25.3.00
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:smart-graph-controller-efsinit-r6680-9-s-25.3.00---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:smart-graph-controller-efsinit-r6680-9-s-25.3.00
+docker tag containers.bmc.com/bmc/lp0lz:smart-graph-controller-efsinit-r6680-9-s-25.3.00 helix-harbor.bmc.local/bmc/lp0lz:smart-graph-controller-efsinit-r6680-9-s-25.3.00
+docker push helix-harbor.bmc.local/bmc/lp0lz:smart-graph-controller-efsinit-r6680-9-s-25.3.00
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:smart-graph-controller-security-r6680-9-s-25.3.00---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:smart-graph-controller-security-r6680-9-s-25.3.00
+docker tag containers.bmc.com/bmc/lp0lz:smart-graph-controller-security-r6680-9-s-25.3.00 helix-harbor.bmc.local/bmc/lp0lz:smart-graph-controller-security-r6680-9-s-25.3.00
+docker push helix-harbor.bmc.local/bmc/lp0lz:smart-graph-controller-security-r6680-9-s-25.3.00
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:thirdparty-ingestion-service-9c42cb4-1041---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:thirdparty-ingestion-service-9c42cb4-1041
+docker tag containers.bmc.com/bmc/lp0lz:thirdparty-ingestion-service-9c42cb4-1041 helix-harbor.bmc.local/bmc/lp0lz:thirdparty-ingestion-service-9c42cb4-1041
+docker push helix-harbor.bmc.local/bmc/lp0lz:thirdparty-ingestion-service-9c42cb4-1041
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:timeframe-service-544d485-976---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:timeframe-service-544d485-976
+docker tag containers.bmc.com/bmc/lp0lz:timeframe-service-544d485-976 helix-harbor.bmc.local/bmc/lp0lz:timeframe-service-544d485-976
+docker push helix-harbor.bmc.local/bmc/lp0lz:timeframe-service-544d485-976
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:tmf-events-service-375bf97-867---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:tmf-events-service-375bf97-867
+docker tag containers.bmc.com/bmc/lp0lz:tmf-events-service-375bf97-867 helix-harbor.bmc.local/bmc/lp0lz:tmf-events-service-375bf97-867
+docker push helix-harbor.bmc.local/bmc/lp0lz:tmf-events-service-375bf97-867
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:truesight-credential-service-1072---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:truesight-credential-service-1072
+docker tag containers.bmc.com/bmc/lp0lz:truesight-credential-service-1072 helix-harbor.bmc.local/bmc/lp0lz:truesight-credential-service-1072
+docker push helix-harbor.bmc.local/bmc/lp0lz:truesight-credential-service-1072
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:truesight-featureflag-service-1363---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:truesight-featureflag-service-1363
+docker tag containers.bmc.com/bmc/lp0lz:truesight-featureflag-service-1363 helix-harbor.bmc.local/bmc/lp0lz:truesight-featureflag-service-1363
+docker push helix-harbor.bmc.local/bmc/lp0lz:truesight-featureflag-service-1363
+===========================================IMAGE=containers.bmc.com/bmc/lp0lz:webhook-2102_20210218---starting on pids 
+docker push containers.bmc.com/bmc/lp0lz:webhook-2102_20210218
+docker tag containers.bmc.com/bmc/lp0lz:webhook-2102_20210218 helix-harbor.bmc.local/bmc/lp0lz:webhook-2102_20210218
+docker push helix-harbor.bmc.local/bmc/lp0lz:webhook-2102_20210218
+Removing login credentials for helix-harbor.bmc.local
+WARNING! Using --password via the CLI is insecure. Use --password-stdin.
+WARNING! Your password will be stored unencrypted in /root/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+Preparing to start load images......
+Loaded image: containers.bmc.com/bmc/lp0oz:iaitsmservice-25.3.00-1
+Loaded image: containers.bmc.com/bmc/lp0oz:ade-action-library-service-1725
+Loaded image: containers.bmc.com/bmc/lp0oz:automationproffer-1328
+Loaded image: containers.bmc.com/bmc/lp0oz:restapiplugin-1487
+Loaded image: containers.bmc.com/bmc/lp0oz:ia-ansibleplugin-1099
+Loaded image: containers.bmc.com/bmc/lp0oz:automationeventsservice-1141
+Loaded image: containers.bmc.com/bmc/lp0oz:iatransformerplugin-1041
+Loaded image: containers.bmc.com/bmc/lp0oz:ia-automation-service-25.3.00-2
+Loaded image: containers.bmc.com/bmc/lp0oz:is-plugin-1090
+Loaded image: containers.bmc.com/bmc/lp0oz:ade-insight-ingestion-service-1243
+Loaded image: containers.bmc.com/bmc/lp0oz:iawebhook-event-ingestion-586
+Loaded image: containers.bmc.com/bmc/lp0oz:ia-deploy-db-302
+Loaded image: containers.bmc.com/bmc/lp0oz:ia-kafka-service-1115
+Loaded image: containers.bmc.com/bmc/lp0oz:ade-intelligent-automation-portal-25.3.00-6
+Loaded image: containers.bmc.com/bmc/lp0oz:remotepluginservice-1302
+image file: lp0oz_images.txt
+Preparing to start pushing images......
+===========================================IMAGE=containers.bmc.com/bmc/lp0oz:ade-action-library-service-1725---starting on pids 
+docker push containers.bmc.com/bmc/lp0oz:ade-action-library-service-1725
+docker tag containers.bmc.com/bmc/lp0oz:ade-action-library-service-1725 helix-harbor.bmc.local/bmc/lp0oz:ade-action-library-service-1725
+docker push helix-harbor.bmc.local/bmc/lp0oz:ade-action-library-service-1725
+===========================================IMAGE=containers.bmc.com/bmc/lp0oz:ade-insight-ingestion-service-1243---starting on pids 
+docker push containers.bmc.com/bmc/lp0oz:ade-insight-ingestion-service-1243
+docker tag containers.bmc.com/bmc/lp0oz:ade-insight-ingestion-service-1243 helix-harbor.bmc.local/bmc/lp0oz:ade-insight-ingestion-service-1243
+docker push helix-harbor.bmc.local/bmc/lp0oz:ade-insight-ingestion-service-1243
+===========================================IMAGE=containers.bmc.com/bmc/lp0oz:ade-intelligent-automation-portal-25.3.00-6---starting on pids 
+docker push containers.bmc.com/bmc/lp0oz:ade-intelligent-automation-portal-25.3.00-6
+docker tag containers.bmc.com/bmc/lp0oz:ade-intelligent-automation-portal-25.3.00-6 helix-harbor.bmc.local/bmc/lp0oz:ade-intelligent-automation-portal-25.3.00-6
+docker push helix-harbor.bmc.local/bmc/lp0oz:ade-intelligent-automation-portal-25.3.00-6
+===========================================IMAGE=containers.bmc.com/bmc/lp0oz:automationeventsservice-1141---starting on pids 
+docker push containers.bmc.com/bmc/lp0oz:automationeventsservice-1141
+docker tag containers.bmc.com/bmc/lp0oz:automationeventsservice-1141 helix-harbor.bmc.local/bmc/lp0oz:automationeventsservice-1141
+docker push helix-harbor.bmc.local/bmc/lp0oz:automationeventsservice-1141
+===========================================IMAGE=containers.bmc.com/bmc/lp0oz:automationproffer-1328---starting on pids 
+docker push containers.bmc.com/bmc/lp0oz:automationproffer-1328
+docker tag containers.bmc.com/bmc/lp0oz:automationproffer-1328 helix-harbor.bmc.local/bmc/lp0oz:automationproffer-1328
+docker push helix-harbor.bmc.local/bmc/lp0oz:automationproffer-1328
+===========================================IMAGE=containers.bmc.com/bmc/lp0oz:ia-ansibleplugin-1099---starting on pids 
+docker push containers.bmc.com/bmc/lp0oz:ia-ansibleplugin-1099
+docker tag containers.bmc.com/bmc/lp0oz:ia-ansibleplugin-1099 helix-harbor.bmc.local/bmc/lp0oz:ia-ansibleplugin-1099
+docker push helix-harbor.bmc.local/bmc/lp0oz:ia-ansibleplugin-1099
+===========================================IMAGE=containers.bmc.com/bmc/lp0oz:ia-automation-service-25.3.00-2---starting on pids 
+docker push containers.bmc.com/bmc/lp0oz:ia-automation-service-25.3.00-2
+docker tag containers.bmc.com/bmc/lp0oz:ia-automation-service-25.3.00-2 helix-harbor.bmc.local/bmc/lp0oz:ia-automation-service-25.3.00-2
+docker push helix-harbor.bmc.local/bmc/lp0oz:ia-automation-service-25.3.00-2
+===========================================IMAGE=containers.bmc.com/bmc/lp0oz:ia-deploy-db-302---starting on pids 
+docker push containers.bmc.com/bmc/lp0oz:ia-deploy-db-302
+docker tag containers.bmc.com/bmc/lp0oz:ia-deploy-db-302 helix-harbor.bmc.local/bmc/lp0oz:ia-deploy-db-302
+docker push helix-harbor.bmc.local/bmc/lp0oz:ia-deploy-db-302
+===========================================IMAGE=containers.bmc.com/bmc/lp0oz:iaitsmservice-25.3.00-1---starting on pids 
+docker push containers.bmc.com/bmc/lp0oz:iaitsmservice-25.3.00-1
+docker tag containers.bmc.com/bmc/lp0oz:iaitsmservice-25.3.00-1 helix-harbor.bmc.local/bmc/lp0oz:iaitsmservice-25.3.00-1
+docker push helix-harbor.bmc.local/bmc/lp0oz:iaitsmservice-25.3.00-1
+===========================================IMAGE=containers.bmc.com/bmc/lp0oz:ia-kafka-service-1115---starting on pids 
+docker push containers.bmc.com/bmc/lp0oz:ia-kafka-service-1115
+docker tag containers.bmc.com/bmc/lp0oz:ia-kafka-service-1115 helix-harbor.bmc.local/bmc/lp0oz:ia-kafka-service-1115
+docker push helix-harbor.bmc.local/bmc/lp0oz:ia-kafka-service-1115
+===========================================IMAGE=containers.bmc.com/bmc/lp0oz:iatransformerplugin-1041---starting on pids 
+docker push containers.bmc.com/bmc/lp0oz:iatransformerplugin-1041
+docker tag containers.bmc.com/bmc/lp0oz:iatransformerplugin-1041 helix-harbor.bmc.local/bmc/lp0oz:iatransformerplugin-1041
+docker push helix-harbor.bmc.local/bmc/lp0oz:iatransformerplugin-1041
+===========================================IMAGE=containers.bmc.com/bmc/lp0oz:iawebhook-event-ingestion-586---starting on pids 
+docker push containers.bmc.com/bmc/lp0oz:iawebhook-event-ingestion-586
+docker tag containers.bmc.com/bmc/lp0oz:iawebhook-event-ingestion-586 helix-harbor.bmc.local/bmc/lp0oz:iawebhook-event-ingestion-586
+docker push helix-harbor.bmc.local/bmc/lp0oz:iawebhook-event-ingestion-586
+===========================================IMAGE=containers.bmc.com/bmc/lp0oz:is-plugin-1090---starting on pids 
+docker push containers.bmc.com/bmc/lp0oz:is-plugin-1090
+docker tag containers.bmc.com/bmc/lp0oz:is-plugin-1090 helix-harbor.bmc.local/bmc/lp0oz:is-plugin-1090
+docker push helix-harbor.bmc.local/bmc/lp0oz:is-plugin-1090
+===========================================IMAGE=containers.bmc.com/bmc/lp0oz:remotepluginservice-1302---starting on pids 
+docker push containers.bmc.com/bmc/lp0oz:remotepluginservice-1302
+docker tag containers.bmc.com/bmc/lp0oz:remotepluginservice-1302 helix-harbor.bmc.local/bmc/lp0oz:remotepluginservice-1302
+docker push helix-harbor.bmc.local/bmc/lp0oz:remotepluginservice-1302
+===========================================IMAGE=containers.bmc.com/bmc/lp0oz:restapiplugin-1487---starting on pids 
+docker push containers.bmc.com/bmc/lp0oz:restapiplugin-1487
+docker tag containers.bmc.com/bmc/lp0oz:restapiplugin-1487 helix-harbor.bmc.local/bmc/lp0oz:restapiplugin-1487
+docker push helix-harbor.bmc.local/bmc/lp0oz:restapiplugin-1487
+Removing login credentials for helix-harbor.bmc.local
+WARNING! Using --password via the CLI is insecure. Use --password-stdin.
+WARNING! Your password will be stored unencrypted in /root/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+Preparing to start load images......
+Loaded image: containers.bmc.com/bmc/lp0pz:ade-optweb-2025-07-09-2010-25.3.00-rc5
+Loaded image: containers.bmc.com/bmc/lp0pz:ade-optcatalogui-2025-07-09-2010-25.3.00-rc5
+Loaded image: containers.bmc.com/bmc/lp0pz:ade-opthtsreader-2025-07-28-2012-25.3.00-rc7
+Loaded image: containers.bmc.com/bmc/lp0pz:ade-optetlexec-2025-07-09-2010-25.3.00-rc5
+Loaded image: containers.bmc.com/bmc/lp0pz:ade-optdataprv-2025-07-09-2010-25.3.00-rc5
+Loaded image: containers.bmc.com/bmc/lp0pz:ade-optpostdeploy-2025-07-09-2010-25.3.00-rc5
+Loaded image: containers.bmc.com/bmc/lp0pz:ade-optcfs-2025-07-09-2010-25.3.00-rc5
+Loaded image: containers.bmc.com/bmc/lp0pz:ade-optdash-2025-07-09-2010-25.3.00-rc5
+Loaded image: containers.bmc.com/bmc/lp0pz:ade-optpredeploy-2025-07-09-2010-25.3.00-rc5
+Loaded image: containers.bmc.com/bmc/lp0pz:ade-optforecastpy-2025-07-09-2010-25.3.00-rc5
+Loaded image: containers.bmc.com/bmc/lp0pz:ade-opthtsingest-2025-07-09-2010-25.3.00-rc5
+Loaded image: containers.bmc.com/bmc/lp0pz:ade-opthistaggregator-2025-07-09-2010-25.3.00-rc5
+Loaded image: containers.bmc.com/bmc/lp0pz:ade-optdsmintegration-2025-07-09-2010-25.3.00-rc5
+Loaded image: containers.bmc.com/bmc/lp0pz:ade-optprice-2025-07-09-2010-25.3.00-rc5
+Loaded image: containers.bmc.com/bmc/lp0pz:ade-optsupervisorapi-2025-07-09-2010-25.3.00-rc5
+Loaded image: containers.bmc.com/bmc/lp0pz:ade-optwebapi-2025-07-09-2010-25.3.00-rc5
+Loaded image: containers.bmc.com/bmc/lp0pz:ade-opteventintegration-2025-07-09-2010-25.3.00-rc5
+Loaded image: containers.bmc.com/bmc/lp0pz:ade-optindicator-2025-07-09-2010-25.3.00-rc5
+Loaded image: containers.bmc.com/bmc/lp0pz:ade-optdatamigrator-2025-07-09-2010-25.3.00-rc5
+Loaded image: containers.bmc.com/bmc/lp0pz:ade-optsimulation-2025-07-09-2010-25.3.00-rc5
+Loaded image: containers.bmc.com/bmc/lp0pz:ade-optcatalog-2025-07-09-2010-25.3.00-rc5
+Loaded image: containers.bmc.com/bmc/lp0pz:ade-optforecast-2025-07-09-2010-25.3.00-rc5
+Loaded image: containers.bmc.com/bmc/lp0pz:ade-optanalysis-2025-07-09-2010-25.3.00-rc5
+Loaded image: containers.bmc.com/bmc/lp0pz:ade-optreporting-2025-07-09-2010-25.3.00-rc5
+Loaded image: containers.bmc.com/bmc/lp0pz:ade-optdataorg-2025-07-09-2010-25.3.00-rc5
+Loaded image: containers.bmc.com/bmc/lp0pz:ade-optsupervisorcore-2025-07-09-2011-25.3.00-rc6
+Loaded image: containers.bmc.com/bmc/lp0pz:ade-optagentdata-2025-07-09-2010-25.3.00-rc5
+Loaded image: containers.bmc.com/bmc/lp0pz:ade-optoptimizer-2025-07-09-2010-25.3.00-rc5
+image file: lp0pz_images.txt
+Preparing to start pushing images......
+===========================================IMAGE=containers.bmc.com/bmc/lp0pz:ade-optagentdata-2025-07-09-2010-25.3.00-rc5---starting on pids 
+docker push containers.bmc.com/bmc/lp0pz:ade-optagentdata-2025-07-09-2010-25.3.00-rc5
+docker tag containers.bmc.com/bmc/lp0pz:ade-optagentdata-2025-07-09-2010-25.3.00-rc5 helix-harbor.bmc.local/bmc/lp0pz:ade-optagentdata-2025-07-09-2010-25.3.00-rc5
+docker push helix-harbor.bmc.local/bmc/lp0pz:ade-optagentdata-2025-07-09-2010-25.3.00-rc5
+===========================================IMAGE=containers.bmc.com/bmc/lp0pz:ade-optanalysis-2025-07-09-2010-25.3.00-rc5---starting on pids 
+docker push containers.bmc.com/bmc/lp0pz:ade-optanalysis-2025-07-09-2010-25.3.00-rc5
+docker tag containers.bmc.com/bmc/lp0pz:ade-optanalysis-2025-07-09-2010-25.3.00-rc5 helix-harbor.bmc.local/bmc/lp0pz:ade-optanalysis-2025-07-09-2010-25.3.00-rc5
+docker push helix-harbor.bmc.local/bmc/lp0pz:ade-optanalysis-2025-07-09-2010-25.3.00-rc5
+===========================================IMAGE=containers.bmc.com/bmc/lp0pz:ade-optcatalog-2025-07-09-2010-25.3.00-rc5---starting on pids 
+docker push containers.bmc.com/bmc/lp0pz:ade-optcatalog-2025-07-09-2010-25.3.00-rc5
+docker tag containers.bmc.com/bmc/lp0pz:ade-optcatalog-2025-07-09-2010-25.3.00-rc5 helix-harbor.bmc.local/bmc/lp0pz:ade-optcatalog-2025-07-09-2010-25.3.00-rc5
+docker push helix-harbor.bmc.local/bmc/lp0pz:ade-optcatalog-2025-07-09-2010-25.3.00-rc5
+===========================================IMAGE=containers.bmc.com/bmc/lp0pz:ade-optcatalogui-2025-07-09-2010-25.3.00-rc5---starting on pids 
+docker push containers.bmc.com/bmc/lp0pz:ade-optcatalogui-2025-07-09-2010-25.3.00-rc5
+docker tag containers.bmc.com/bmc/lp0pz:ade-optcatalogui-2025-07-09-2010-25.3.00-rc5 helix-harbor.bmc.local/bmc/lp0pz:ade-optcatalogui-2025-07-09-2010-25.3.00-rc5
+docker push helix-harbor.bmc.local/bmc/lp0pz:ade-optcatalogui-2025-07-09-2010-25.3.00-rc5
+===========================================IMAGE=containers.bmc.com/bmc/lp0pz:ade-optcfs-2025-07-09-2010-25.3.00-rc5---starting on pids 
+docker push containers.bmc.com/bmc/lp0pz:ade-optcfs-2025-07-09-2010-25.3.00-rc5
+docker tag containers.bmc.com/bmc/lp0pz:ade-optcfs-2025-07-09-2010-25.3.00-rc5 helix-harbor.bmc.local/bmc/lp0pz:ade-optcfs-2025-07-09-2010-25.3.00-rc5
+docker push helix-harbor.bmc.local/bmc/lp0pz:ade-optcfs-2025-07-09-2010-25.3.00-rc5
+===========================================IMAGE=containers.bmc.com/bmc/lp0pz:ade-optdash-2025-07-09-2010-25.3.00-rc5---starting on pids 
+docker push containers.bmc.com/bmc/lp0pz:ade-optdash-2025-07-09-2010-25.3.00-rc5
+docker tag containers.bmc.com/bmc/lp0pz:ade-optdash-2025-07-09-2010-25.3.00-rc5 helix-harbor.bmc.local/bmc/lp0pz:ade-optdash-2025-07-09-2010-25.3.00-rc5
+docker push helix-harbor.bmc.local/bmc/lp0pz:ade-optdash-2025-07-09-2010-25.3.00-rc5
+===========================================IMAGE=containers.bmc.com/bmc/lp0pz:ade-optdatamigrator-2025-07-09-2010-25.3.00-rc5---starting on pids 
+docker push containers.bmc.com/bmc/lp0pz:ade-optdatamigrator-2025-07-09-2010-25.3.00-rc5
+docker tag containers.bmc.com/bmc/lp0pz:ade-optdatamigrator-2025-07-09-2010-25.3.00-rc5 helix-harbor.bmc.local/bmc/lp0pz:ade-optdatamigrator-2025-07-09-2010-25.3.00-rc5
+docker push helix-harbor.bmc.local/bmc/lp0pz:ade-optdatamigrator-2025-07-09-2010-25.3.00-rc5
+===========================================IMAGE=containers.bmc.com/bmc/lp0pz:ade-optdataorg-2025-07-09-2010-25.3.00-rc5---starting on pids 
+docker push containers.bmc.com/bmc/lp0pz:ade-optdataorg-2025-07-09-2010-25.3.00-rc5
+docker tag containers.bmc.com/bmc/lp0pz:ade-optdataorg-2025-07-09-2010-25.3.00-rc5 helix-harbor.bmc.local/bmc/lp0pz:ade-optdataorg-2025-07-09-2010-25.3.00-rc5
+docker push helix-harbor.bmc.local/bmc/lp0pz:ade-optdataorg-2025-07-09-2010-25.3.00-rc5
+===========================================IMAGE=containers.bmc.com/bmc/lp0pz:ade-optdataprv-2025-07-09-2010-25.3.00-rc5---starting on pids 
+docker push containers.bmc.com/bmc/lp0pz:ade-optdataprv-2025-07-09-2010-25.3.00-rc5
+docker tag containers.bmc.com/bmc/lp0pz:ade-optdataprv-2025-07-09-2010-25.3.00-rc5 helix-harbor.bmc.local/bmc/lp0pz:ade-optdataprv-2025-07-09-2010-25.3.00-rc5
+docker push helix-harbor.bmc.local/bmc/lp0pz:ade-optdataprv-2025-07-09-2010-25.3.00-rc5
+===========================================IMAGE=containers.bmc.com/bmc/lp0pz:ade-optdsmintegration-2025-07-09-2010-25.3.00-rc5---starting on pids 
+docker push containers.bmc.com/bmc/lp0pz:ade-optdsmintegration-2025-07-09-2010-25.3.00-rc5
+docker tag containers.bmc.com/bmc/lp0pz:ade-optdsmintegration-2025-07-09-2010-25.3.00-rc5 helix-harbor.bmc.local/bmc/lp0pz:ade-optdsmintegration-2025-07-09-2010-25.3.00-rc5
+docker push helix-harbor.bmc.local/bmc/lp0pz:ade-optdsmintegration-2025-07-09-2010-25.3.00-rc5
+===========================================IMAGE=containers.bmc.com/bmc/lp0pz:ade-optetlexec-2025-07-09-2010-25.3.00-rc5---starting on pids 
+docker push containers.bmc.com/bmc/lp0pz:ade-optetlexec-2025-07-09-2010-25.3.00-rc5
+docker tag containers.bmc.com/bmc/lp0pz:ade-optetlexec-2025-07-09-2010-25.3.00-rc5 helix-harbor.bmc.local/bmc/lp0pz:ade-optetlexec-2025-07-09-2010-25.3.00-rc5
+docker push helix-harbor.bmc.local/bmc/lp0pz:ade-optetlexec-2025-07-09-2010-25.3.00-rc5
+===========================================IMAGE=containers.bmc.com/bmc/lp0pz:ade-opteventintegration-2025-07-09-2010-25.3.00-rc5---starting on pids 
+docker push containers.bmc.com/bmc/lp0pz:ade-opteventintegration-2025-07-09-2010-25.3.00-rc5
+docker tag containers.bmc.com/bmc/lp0pz:ade-opteventintegration-2025-07-09-2010-25.3.00-rc5 helix-harbor.bmc.local/bmc/lp0pz:ade-opteventintegration-2025-07-09-2010-25.3.00-rc5
+docker push helix-harbor.bmc.local/bmc/lp0pz:ade-opteventintegration-2025-07-09-2010-25.3.00-rc5
+===========================================IMAGE=containers.bmc.com/bmc/lp0pz:ade-optforecast-2025-07-09-2010-25.3.00-rc5---starting on pids 
+docker push containers.bmc.com/bmc/lp0pz:ade-optforecast-2025-07-09-2010-25.3.00-rc5
+docker tag containers.bmc.com/bmc/lp0pz:ade-optforecast-2025-07-09-2010-25.3.00-rc5 helix-harbor.bmc.local/bmc/lp0pz:ade-optforecast-2025-07-09-2010-25.3.00-rc5
+docker push helix-harbor.bmc.local/bmc/lp0pz:ade-optforecast-2025-07-09-2010-25.3.00-rc5
+===========================================IMAGE=containers.bmc.com/bmc/lp0pz:ade-optforecastpy-2025-07-09-2010-25.3.00-rc5---starting on pids 
+docker push containers.bmc.com/bmc/lp0pz:ade-optforecastpy-2025-07-09-2010-25.3.00-rc5
+docker tag containers.bmc.com/bmc/lp0pz:ade-optforecastpy-2025-07-09-2010-25.3.00-rc5 helix-harbor.bmc.local/bmc/lp0pz:ade-optforecastpy-2025-07-09-2010-25.3.00-rc5
+docker push helix-harbor.bmc.local/bmc/lp0pz:ade-optforecastpy-2025-07-09-2010-25.3.00-rc5
+===========================================IMAGE=containers.bmc.com/bmc/lp0pz:ade-opthistaggregator-2025-07-09-2010-25.3.00-rc5---starting on pids 
+docker push containers.bmc.com/bmc/lp0pz:ade-opthistaggregator-2025-07-09-2010-25.3.00-rc5
+docker tag containers.bmc.com/bmc/lp0pz:ade-opthistaggregator-2025-07-09-2010-25.3.00-rc5 helix-harbor.bmc.local/bmc/lp0pz:ade-opthistaggregator-2025-07-09-2010-25.3.00-rc5
+docker push helix-harbor.bmc.local/bmc/lp0pz:ade-opthistaggregator-2025-07-09-2010-25.3.00-rc5
+===========================================IMAGE=containers.bmc.com/bmc/lp0pz:ade-opthtsingest-2025-07-09-2010-25.3.00-rc5---starting on pids 
+docker push containers.bmc.com/bmc/lp0pz:ade-opthtsingest-2025-07-09-2010-25.3.00-rc5
+docker tag containers.bmc.com/bmc/lp0pz:ade-opthtsingest-2025-07-09-2010-25.3.00-rc5 helix-harbor.bmc.local/bmc/lp0pz:ade-opthtsingest-2025-07-09-2010-25.3.00-rc5
+docker push helix-harbor.bmc.local/bmc/lp0pz:ade-opthtsingest-2025-07-09-2010-25.3.00-rc5
+===========================================IMAGE=containers.bmc.com/bmc/lp0pz:ade-opthtsreader-2025-07-28-2012-25.3.00-rc7---starting on pids 
+docker push containers.bmc.com/bmc/lp0pz:ade-opthtsreader-2025-07-28-2012-25.3.00-rc7
+docker tag containers.bmc.com/bmc/lp0pz:ade-opthtsreader-2025-07-28-2012-25.3.00-rc7 helix-harbor.bmc.local/bmc/lp0pz:ade-opthtsreader-2025-07-28-2012-25.3.00-rc7
+docker push helix-harbor.bmc.local/bmc/lp0pz:ade-opthtsreader-2025-07-28-2012-25.3.00-rc7
+===========================================IMAGE=containers.bmc.com/bmc/lp0pz:ade-optindicator-2025-07-09-2010-25.3.00-rc5---starting on pids 
+docker push containers.bmc.com/bmc/lp0pz:ade-optindicator-2025-07-09-2010-25.3.00-rc5
+docker tag containers.bmc.com/bmc/lp0pz:ade-optindicator-2025-07-09-2010-25.3.00-rc5 helix-harbor.bmc.local/bmc/lp0pz:ade-optindicator-2025-07-09-2010-25.3.00-rc5
+docker push helix-harbor.bmc.local/bmc/lp0pz:ade-optindicator-2025-07-09-2010-25.3.00-rc5
+===========================================IMAGE=containers.bmc.com/bmc/lp0pz:ade-optoptimizer-2025-07-09-2010-25.3.00-rc5---starting on pids 
+docker push containers.bmc.com/bmc/lp0pz:ade-optoptimizer-2025-07-09-2010-25.3.00-rc5
+docker tag containers.bmc.com/bmc/lp0pz:ade-optoptimizer-2025-07-09-2010-25.3.00-rc5 helix-harbor.bmc.local/bmc/lp0pz:ade-optoptimizer-2025-07-09-2010-25.3.00-rc5
+docker push helix-harbor.bmc.local/bmc/lp0pz:ade-optoptimizer-2025-07-09-2010-25.3.00-rc5
+===========================================IMAGE=containers.bmc.com/bmc/lp0pz:ade-optpostdeploy-2025-07-09-2010-25.3.00-rc5---starting on pids 
+docker push containers.bmc.com/bmc/lp0pz:ade-optpostdeploy-2025-07-09-2010-25.3.00-rc5
+docker tag containers.bmc.com/bmc/lp0pz:ade-optpostdeploy-2025-07-09-2010-25.3.00-rc5 helix-harbor.bmc.local/bmc/lp0pz:ade-optpostdeploy-2025-07-09-2010-25.3.00-rc5
+docker push helix-harbor.bmc.local/bmc/lp0pz:ade-optpostdeploy-2025-07-09-2010-25.3.00-rc5
+===========================================IMAGE=containers.bmc.com/bmc/lp0pz:ade-optpredeploy-2025-07-09-2010-25.3.00-rc5---starting on pids 
+docker push containers.bmc.com/bmc/lp0pz:ade-optpredeploy-2025-07-09-2010-25.3.00-rc5
+docker tag containers.bmc.com/bmc/lp0pz:ade-optpredeploy-2025-07-09-2010-25.3.00-rc5 helix-harbor.bmc.local/bmc/lp0pz:ade-optpredeploy-2025-07-09-2010-25.3.00-rc5
+docker push helix-harbor.bmc.local/bmc/lp0pz:ade-optpredeploy-2025-07-09-2010-25.3.00-rc5
+===========================================IMAGE=containers.bmc.com/bmc/lp0pz:ade-optprice-2025-07-09-2010-25.3.00-rc5---starting on pids 
+docker push containers.bmc.com/bmc/lp0pz:ade-optprice-2025-07-09-2010-25.3.00-rc5
+docker tag containers.bmc.com/bmc/lp0pz:ade-optprice-2025-07-09-2010-25.3.00-rc5 helix-harbor.bmc.local/bmc/lp0pz:ade-optprice-2025-07-09-2010-25.3.00-rc5
+docker push helix-harbor.bmc.local/bmc/lp0pz:ade-optprice-2025-07-09-2010-25.3.00-rc5
+===========================================IMAGE=containers.bmc.com/bmc/lp0pz:ade-optreporting-2025-07-09-2010-25.3.00-rc5---starting on pids 
+docker push containers.bmc.com/bmc/lp0pz:ade-optreporting-2025-07-09-2010-25.3.00-rc5
+docker tag containers.bmc.com/bmc/lp0pz:ade-optreporting-2025-07-09-2010-25.3.00-rc5 helix-harbor.bmc.local/bmc/lp0pz:ade-optreporting-2025-07-09-2010-25.3.00-rc5
+docker push helix-harbor.bmc.local/bmc/lp0pz:ade-optreporting-2025-07-09-2010-25.3.00-rc5
+===========================================IMAGE=containers.bmc.com/bmc/lp0pz:ade-optsimulation-2025-07-09-2010-25.3.00-rc5---starting on pids 
+docker push containers.bmc.com/bmc/lp0pz:ade-optsimulation-2025-07-09-2010-25.3.00-rc5
+docker tag containers.bmc.com/bmc/lp0pz:ade-optsimulation-2025-07-09-2010-25.3.00-rc5 helix-harbor.bmc.local/bmc/lp0pz:ade-optsimulation-2025-07-09-2010-25.3.00-rc5
+docker push helix-harbor.bmc.local/bmc/lp0pz:ade-optsimulation-2025-07-09-2010-25.3.00-rc5
+===========================================IMAGE=containers.bmc.com/bmc/lp0pz:ade-optsupervisorapi-2025-07-09-2010-25.3.00-rc5---starting on pids 
+docker push containers.bmc.com/bmc/lp0pz:ade-optsupervisorapi-2025-07-09-2010-25.3.00-rc5
+docker tag containers.bmc.com/bmc/lp0pz:ade-optsupervisorapi-2025-07-09-2010-25.3.00-rc5 helix-harbor.bmc.local/bmc/lp0pz:ade-optsupervisorapi-2025-07-09-2010-25.3.00-rc5
+docker push helix-harbor.bmc.local/bmc/lp0pz:ade-optsupervisorapi-2025-07-09-2010-25.3.00-rc5
+===========================================IMAGE=containers.bmc.com/bmc/lp0pz:ade-optsupervisorcore-2025-07-09-2011-25.3.00-rc6---starting on pids 
+docker push containers.bmc.com/bmc/lp0pz:ade-optsupervisorcore-2025-07-09-2011-25.3.00-rc6
+docker tag containers.bmc.com/bmc/lp0pz:ade-optsupervisorcore-2025-07-09-2011-25.3.00-rc6 helix-harbor.bmc.local/bmc/lp0pz:ade-optsupervisorcore-2025-07-09-2011-25.3.00-rc6
+docker push helix-harbor.bmc.local/bmc/lp0pz:ade-optsupervisorcore-2025-07-09-2011-25.3.00-rc6
+===========================================IMAGE=containers.bmc.com/bmc/lp0pz:ade-optweb-2025-07-09-2010-25.3.00-rc5---starting on pids 
+docker push containers.bmc.com/bmc/lp0pz:ade-optweb-2025-07-09-2010-25.3.00-rc5
+docker tag containers.bmc.com/bmc/lp0pz:ade-optweb-2025-07-09-2010-25.3.00-rc5 helix-harbor.bmc.local/bmc/lp0pz:ade-optweb-2025-07-09-2010-25.3.00-rc5
+docker push helix-harbor.bmc.local/bmc/lp0pz:ade-optweb-2025-07-09-2010-25.3.00-rc5
+===========================================IMAGE=containers.bmc.com/bmc/lp0pz:ade-optwebapi-2025-07-09-2010-25.3.00-rc5---starting on pids 
+docker push containers.bmc.com/bmc/lp0pz:ade-optwebapi-2025-07-09-2010-25.3.00-rc5
+docker tag containers.bmc.com/bmc/lp0pz:ade-optwebapi-2025-07-09-2010-25.3.00-rc5 helix-harbor.bmc.local/bmc/lp0pz:ade-optwebapi-2025-07-09-2010-25.3.00-rc5
+docker push helix-harbor.bmc.local/bmc/lp0pz:ade-optwebapi-2025-07-09-2010-25.3.00-rc5
+Removing login credentials for helix-harbor.bmc.local
+WARNING! Using --password via the CLI is insecure. Use --password-stdin.
+WARNING! Your password will be stored unencrypted in /root/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+Preparing to start load images......
+Loaded image: containers.bmc.com/bmc/lp0mz:deployment-repository-service-0bfdaf47-1108
+Loaded image: containers.bmc.com/bmc/lp0mz:agent-configuration-service-71d4f32e-1249
+Loaded image: containers.bmc.com/bmc/lp0mz:cli-service-1da9e7e-701
+Loaded image: containers.bmc.com/bmc/lp0mz:ui-service-dd5d1d411f-2
+Loaded image: containers.bmc.com/bmc/lp0mz:anomaly-service-70f4e98f-1350
+Loaded image: containers.bmc.com/bmc/lp0mz:agent-health-monitor-service-c9c20b3-911
+Loaded image: containers.bmc.com/bmc/lp0mz:impact-management-service-9e8806a2-1459
+Loaded image: containers.bmc.com/bmc/lp0mz:tag-service-8d33f06-1279
+Loaded image: containers.bmc.com/bmc/lp0mz:user-management-service-5e345070-1228
+Loaded image: containers.bmc.com/bmc/lp0mz:prometheus-entity-reconciler-service-d8bd305-1107
+Loaded image: containers.bmc.com/bmc/lp0mz:hm-preprocessor-service-571a7b3-1195
+Loaded image: containers.bmc.com/bmc/lp0mz:deployment-repository-service-6c6aa1bc-5
+Loaded image: containers.bmc.com/bmc/lp0mz:helix-monitor-repository-164c033-1330
+Loaded image: containers.bmc.com/bmc/lp0mz:data-download-gateway-service-ac036c9-1048
+Loaded image: containers.bmc.com/bmc/lp0mz:itil-service-d6b6ff6-1528
+Loaded image: containers.bmc.com/bmc/lp0mz:managed-object-service-3f48f211-1458
+Loaded image: containers.bmc.com/bmc/lp0mz:metric-annotation-service-bf3eb0f-503
+Loaded image: containers.bmc.com/bmc/lp0mz:open-data-gateway-service-1d54dd70-1257
+Loaded image: containers.bmc.com/bmc/lp0mz:notification-service-7986769-1080
+image file: lp0mz_images.txt
+Preparing to start pushing images......
+===========================================IMAGE=containers.bmc.com/bmc/lp0mz:agent-configuration-service-71d4f32e-1249---starting on pids 
+docker push containers.bmc.com/bmc/lp0mz:agent-configuration-service-71d4f32e-1249
+docker tag containers.bmc.com/bmc/lp0mz:agent-configuration-service-71d4f32e-1249 helix-harbor.bmc.local/bmc/lp0mz:agent-configuration-service-71d4f32e-1249
+docker push helix-harbor.bmc.local/bmc/lp0mz:agent-configuration-service-71d4f32e-1249
+===========================================IMAGE=containers.bmc.com/bmc/lp0mz:agent-health-monitor-service-c9c20b3-911---starting on pids 
+docker push containers.bmc.com/bmc/lp0mz:agent-health-monitor-service-c9c20b3-911
+docker tag containers.bmc.com/bmc/lp0mz:agent-health-monitor-service-c9c20b3-911 helix-harbor.bmc.local/bmc/lp0mz:agent-health-monitor-service-c9c20b3-911
+docker push helix-harbor.bmc.local/bmc/lp0mz:agent-health-monitor-service-c9c20b3-911
+===========================================IMAGE=containers.bmc.com/bmc/lp0mz:anomaly-service-70f4e98f-1350---starting on pids 
+docker push containers.bmc.com/bmc/lp0mz:anomaly-service-70f4e98f-1350
+docker tag containers.bmc.com/bmc/lp0mz:anomaly-service-70f4e98f-1350 helix-harbor.bmc.local/bmc/lp0mz:anomaly-service-70f4e98f-1350
+docker push helix-harbor.bmc.local/bmc/lp0mz:anomaly-service-70f4e98f-1350
+===========================================IMAGE=containers.bmc.com/bmc/lp0mz:cli-service-1da9e7e-701---starting on pids 
+docker push containers.bmc.com/bmc/lp0mz:cli-service-1da9e7e-701
+docker tag containers.bmc.com/bmc/lp0mz:cli-service-1da9e7e-701 helix-harbor.bmc.local/bmc/lp0mz:cli-service-1da9e7e-701
+docker push helix-harbor.bmc.local/bmc/lp0mz:cli-service-1da9e7e-701
+===========================================IMAGE=containers.bmc.com/bmc/lp0mz:data-download-gateway-service-ac036c9-1048---starting on pids 
+docker push containers.bmc.com/bmc/lp0mz:data-download-gateway-service-ac036c9-1048
+docker tag containers.bmc.com/bmc/lp0mz:data-download-gateway-service-ac036c9-1048 helix-harbor.bmc.local/bmc/lp0mz:data-download-gateway-service-ac036c9-1048
+docker push helix-harbor.bmc.local/bmc/lp0mz:data-download-gateway-service-ac036c9-1048
+===========================================IMAGE=containers.bmc.com/bmc/lp0mz:deployment-repository-service-0bfdaf47-1108---starting on pids 
+docker push containers.bmc.com/bmc/lp0mz:deployment-repository-service-0bfdaf47-1108
+docker tag containers.bmc.com/bmc/lp0mz:deployment-repository-service-0bfdaf47-1108 helix-harbor.bmc.local/bmc/lp0mz:deployment-repository-service-0bfdaf47-1108
+docker push helix-harbor.bmc.local/bmc/lp0mz:deployment-repository-service-0bfdaf47-1108
+===========================================IMAGE=containers.bmc.com/bmc/lp0mz:helix-monitor-repository-164c033-1330---starting on pids 
+docker push containers.bmc.com/bmc/lp0mz:helix-monitor-repository-164c033-1330
+docker tag containers.bmc.com/bmc/lp0mz:helix-monitor-repository-164c033-1330 helix-harbor.bmc.local/bmc/lp0mz:helix-monitor-repository-164c033-1330
+docker push helix-harbor.bmc.local/bmc/lp0mz:helix-monitor-repository-164c033-1330
+===========================================IMAGE=containers.bmc.com/bmc/lp0mz:hm-preprocessor-service-571a7b3-1195---starting on pids 
+docker push containers.bmc.com/bmc/lp0mz:hm-preprocessor-service-571a7b3-1195
+docker tag containers.bmc.com/bmc/lp0mz:hm-preprocessor-service-571a7b3-1195 helix-harbor.bmc.local/bmc/lp0mz:hm-preprocessor-service-571a7b3-1195
+docker push helix-harbor.bmc.local/bmc/lp0mz:hm-preprocessor-service-571a7b3-1195
+===========================================IMAGE=containers.bmc.com/bmc/lp0mz:impact-management-service-9e8806a2-1459---starting on pids 
+docker push containers.bmc.com/bmc/lp0mz:impact-management-service-9e8806a2-1459
+docker tag containers.bmc.com/bmc/lp0mz:impact-management-service-9e8806a2-1459 helix-harbor.bmc.local/bmc/lp0mz:impact-management-service-9e8806a2-1459
+docker push helix-harbor.bmc.local/bmc/lp0mz:impact-management-service-9e8806a2-1459
+===========================================IMAGE=containers.bmc.com/bmc/lp0mz:itil-service-d6b6ff6-1528---starting on pids 
+docker push containers.bmc.com/bmc/lp0mz:itil-service-d6b6ff6-1528
+docker tag containers.bmc.com/bmc/lp0mz:itil-service-d6b6ff6-1528 helix-harbor.bmc.local/bmc/lp0mz:itil-service-d6b6ff6-1528
+docker push helix-harbor.bmc.local/bmc/lp0mz:itil-service-d6b6ff6-1528
+===========================================IMAGE=containers.bmc.com/bmc/lp0mz:managed-object-service-3f48f211-1458---starting on pids 
+docker push containers.bmc.com/bmc/lp0mz:managed-object-service-3f48f211-1458
+docker tag containers.bmc.com/bmc/lp0mz:managed-object-service-3f48f211-1458 helix-harbor.bmc.local/bmc/lp0mz:managed-object-service-3f48f211-1458
+docker push helix-harbor.bmc.local/bmc/lp0mz:managed-object-service-3f48f211-1458
+===========================================IMAGE=containers.bmc.com/bmc/lp0mz:metric-annotation-service-bf3eb0f-503---starting on pids 
+docker push containers.bmc.com/bmc/lp0mz:metric-annotation-service-bf3eb0f-503
+docker tag containers.bmc.com/bmc/lp0mz:metric-annotation-service-bf3eb0f-503 helix-harbor.bmc.local/bmc/lp0mz:metric-annotation-service-bf3eb0f-503
+docker push helix-harbor.bmc.local/bmc/lp0mz:metric-annotation-service-bf3eb0f-503
+===========================================IMAGE=containers.bmc.com/bmc/lp0mz:notification-service-7986769-1080---starting on pids 
+docker push containers.bmc.com/bmc/lp0mz:notification-service-7986769-1080
+docker tag containers.bmc.com/bmc/lp0mz:notification-service-7986769-1080 helix-harbor.bmc.local/bmc/lp0mz:notification-service-7986769-1080
+docker push helix-harbor.bmc.local/bmc/lp0mz:notification-service-7986769-1080
+===========================================IMAGE=containers.bmc.com/bmc/lp0mz:open-data-gateway-service-1d54dd70-1257---starting on pids 
+docker push containers.bmc.com/bmc/lp0mz:open-data-gateway-service-1d54dd70-1257
+docker tag containers.bmc.com/bmc/lp0mz:open-data-gateway-service-1d54dd70-1257 helix-harbor.bmc.local/bmc/lp0mz:open-data-gateway-service-1d54dd70-1257
+docker push helix-harbor.bmc.local/bmc/lp0mz:open-data-gateway-service-1d54dd70-1257
+===========================================IMAGE=containers.bmc.com/bmc/lp0mz:prometheus-entity-reconciler-service-d8bd305-1107---starting on pids 
+docker push containers.bmc.com/bmc/lp0mz:prometheus-entity-reconciler-service-d8bd305-1107
+docker tag containers.bmc.com/bmc/lp0mz:prometheus-entity-reconciler-service-d8bd305-1107 helix-harbor.bmc.local/bmc/lp0mz:prometheus-entity-reconciler-service-d8bd305-1107
+docker push helix-harbor.bmc.local/bmc/lp0mz:prometheus-entity-reconciler-service-d8bd305-1107
+===========================================IMAGE=containers.bmc.com/bmc/lp0mz:tag-service-8d33f06-1279---starting on pids 
+docker push containers.bmc.com/bmc/lp0mz:tag-service-8d33f06-1279
+docker tag containers.bmc.com/bmc/lp0mz:tag-service-8d33f06-1279 helix-harbor.bmc.local/bmc/lp0mz:tag-service-8d33f06-1279
+docker push helix-harbor.bmc.local/bmc/lp0mz:tag-service-8d33f06-1279
+===========================================IMAGE=containers.bmc.com/bmc/lp0mz:ui-service-dd5d1d411f-2---starting on pids 
+docker push containers.bmc.com/bmc/lp0mz:ui-service-dd5d1d411f-2
+docker tag containers.bmc.com/bmc/lp0mz:ui-service-dd5d1d411f-2 helix-harbor.bmc.local/bmc/lp0mz:ui-service-dd5d1d411f-2
+docker push helix-harbor.bmc.local/bmc/lp0mz:ui-service-dd5d1d411f-2
+===========================================IMAGE=containers.bmc.com/bmc/lp0mz:user-management-service-5e345070-1228---starting on pids 
+docker push containers.bmc.com/bmc/lp0mz:user-management-service-5e345070-1228
+docker tag containers.bmc.com/bmc/lp0mz:user-management-service-5e345070-1228 helix-harbor.bmc.local/bmc/lp0mz:user-management-service-5e345070-1228
+docker push helix-harbor.bmc.local/bmc/lp0mz:user-management-service-5e345070-1228
+Removing login credentials for helix-harbor.bmc.local
+WARNING! Using --password via the CLI is insecure. Use --password-stdin.
+WARNING! Your password will be stored unencrypted in /root/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+Preparing to start load images......
+Loaded image: containers.bmc.com/bmc/la0cz:situation-fingerprint-service-c49d4b5-605
+Loaded image: containers.bmc.com/bmc/la0cz:tdc-kubernetes-884a78b-587
+Loaded image: containers.bmc.com/bmc/la0cz:situation-fingerprinting-service-dba15ba-561
+Loaded image: containers.bmc.com/bmc/la0cz:prediction-service-c05a2cf-692
+Loaded image: containers.bmc.com/bmc/la0cz:pca-api-service-1b4f8c9-816
+Loaded image: containers.bmc.com/bmc/la0cz:impact-api-service-6cd90f1-1060
+Loaded image: containers.bmc.com/bmc/la0cz:auto-anomaly-events-close-b86083c-263
+Loaded image: containers.bmc.com/bmc/la0cz:baseline-calculation-f6223b8-900
+Loaded image: containers.bmc.com/bmc/la0cz:entity-collator-service-e44b4e8-967
+Loaded image: containers.bmc.com/bmc/la0cz:tdigest-ad-service-077baf4-644
+Loaded image: containers.bmc.com/bmc/la0cz:tdc-aws-da44e7f-730
+Loaded image: containers.bmc.com/bmc/la0cz:aiops-notification-service-1c56861-774
+Loaded image: containers.bmc.com/bmc/la0cz:tdc-windows-event-d617a7f-325
+Loaded image: containers.bmc.com/bmc/la0cz:metric-correlation-service-9b672c5-1099
+Loaded image: containers.bmc.com/bmc/la0cz:baseline-violation-service-8b45dfa-60
+Loaded image: containers.bmc.com/bmc/la0cz:aiops-nextgen-service-health-595315c3-737
+Loaded image: containers.bmc.com/bmc/la0cz:prediction-api-service-0ecdf28-661
+Loaded image: containers.bmc.com/bmc/la0cz:aiops-config-service-2655d0e-1487
+Loaded image: containers.bmc.com/bmc/la0cz:aiops-ui-service-761e418b8-1205
+Loaded image: containers.bmc.com/bmc/la0cz:helix-gpt-bar-a244e09-386
+Loaded image: containers.bmc.com/bmc/la0cz:tdc-file-8a2f5eb-400
+Loaded image: containers.bmc.com/bmc/la0cz:situation-detector-service-v2-61caaa7-381
+Loaded image: containers.bmc.com/bmc/la0cz:change-risk-analysis-2779d64-512
+Loaded image: containers.bmc.com/bmc/la0cz:pca-core-service-7bdd654-931
+Loaded image: containers.bmc.com/bmc/la0cz:ad-algorithm-selector-13f087c-1143
+Loaded image: containers.bmc.com/bmc/la0cz:ml-model-store-service-f6223b8-900
+Loaded image: containers.bmc.com/bmc/la0cz:prediction-algorithm-service-8c3fc4e-534
+Loaded image: containers.bmc.com/bmc/la0cz:tdc-kubernetes-operator-3d93a47-382
+Loaded image: containers.bmc.com/bmc/la0cz:tdc-mgmt-portal-5ea4eccf-769
+Loaded image: containers.bmc.com/bmc/la0cz:tdc-connector-base-job-8f6755f-886
+Loaded image: containers.bmc.com/bmc/la0cz:situation-analyzer-service-b3aaa66-690
+Loaded image: containers.bmc.com/bmc/la0cz:tdc-tsom-dba6578-484
+Loaded image: containers.bmc.com/bmc/la0cz:service-management-86c3ec2c5-817
+Loaded image: containers.bmc.com/bmc/la0cz:tdc-generic-a454339-5877
+Loaded image: containers.bmc.com/bmc/la0cz:situation-best-action-recommender-service-5ad32f0-444
+Loaded image: containers.bmc.com/bmc/la0cz:situation-detector-service-278973ff-1
+Loaded image: containers.bmc.com/bmc/la0cz:service-health-insight-23566cb-548
+Loaded image: containers.bmc.com/bmc/la0cz:tdc-controller-service-c20925de-923
+Loaded image: containers.bmc.com/bmc/la0cz:tdc-syslog-bc03443-321
+image file: la0cz_images.txt
+Preparing to start pushing images......
+===========================================IMAGE=containers.bmc.com/bmc/la0cz:pca-api-service-1b4f8c9-816---starting on pids 
+docker push containers.bmc.com/bmc/la0cz:pca-api-service-1b4f8c9-816
+docker tag containers.bmc.com/bmc/la0cz:pca-api-service-1b4f8c9-816 helix-harbor.bmc.local/bmc/la0cz:pca-api-service-1b4f8c9-816
+docker push helix-harbor.bmc.local/bmc/la0cz:pca-api-service-1b4f8c9-816
+===========================================IMAGE=containers.bmc.com/bmc/la0cz:pca-core-service-7bdd654-931---starting on pids 
+docker push containers.bmc.com/bmc/la0cz:pca-core-service-7bdd654-931
+docker tag containers.bmc.com/bmc/la0cz:pca-core-service-7bdd654-931 helix-harbor.bmc.local/bmc/la0cz:pca-core-service-7bdd654-931
+docker push helix-harbor.bmc.local/bmc/la0cz:pca-core-service-7bdd654-931
+===========================================IMAGE=containers.bmc.com/bmc/la0cz:prediction-algorithm-service-8c3fc4e-534---starting on pids 
+docker push containers.bmc.com/bmc/la0cz:prediction-algorithm-service-8c3fc4e-534
+docker tag containers.bmc.com/bmc/la0cz:prediction-algorithm-service-8c3fc4e-534 helix-harbor.bmc.local/bmc/la0cz:prediction-algorithm-service-8c3fc4e-534
+docker push helix-harbor.bmc.local/bmc/la0cz:prediction-algorithm-service-8c3fc4e-534
+===========================================IMAGE=containers.bmc.com/bmc/la0cz:prediction-api-service-0ecdf28-661---starting on pids 
+docker push containers.bmc.com/bmc/la0cz:prediction-api-service-0ecdf28-661
+docker tag containers.bmc.com/bmc/la0cz:prediction-api-service-0ecdf28-661 helix-harbor.bmc.local/bmc/la0cz:prediction-api-service-0ecdf28-661
+docker push helix-harbor.bmc.local/bmc/la0cz:prediction-api-service-0ecdf28-661
+===========================================IMAGE=containers.bmc.com/bmc/la0cz:prediction-service-c05a2cf-692---starting on pids 
+docker push containers.bmc.com/bmc/la0cz:prediction-service-c05a2cf-692
+docker tag containers.bmc.com/bmc/la0cz:prediction-service-c05a2cf-692 helix-harbor.bmc.local/bmc/la0cz:prediction-service-c05a2cf-692
+docker push helix-harbor.bmc.local/bmc/la0cz:prediction-service-c05a2cf-692
+===========================================IMAGE=containers.bmc.com/bmc/la0cz:service-health-insight-23566cb-548---starting on pids 
+docker push containers.bmc.com/bmc/la0cz:service-health-insight-23566cb-548
+docker tag containers.bmc.com/bmc/la0cz:service-health-insight-23566cb-548 helix-harbor.bmc.local/bmc/la0cz:service-health-insight-23566cb-548
+docker push helix-harbor.bmc.local/bmc/la0cz:service-health-insight-23566cb-548
+===========================================IMAGE=containers.bmc.com/bmc/la0cz:service-management-86c3ec2c5-817---starting on pids 
+docker push containers.bmc.com/bmc/la0cz:service-management-86c3ec2c5-817
+docker tag containers.bmc.com/bmc/la0cz:service-management-86c3ec2c5-817 helix-harbor.bmc.local/bmc/la0cz:service-management-86c3ec2c5-817
+docker push helix-harbor.bmc.local/bmc/la0cz:service-management-86c3ec2c5-817
+===========================================IMAGE=containers.bmc.com/bmc/la0cz:situation-analyzer-service-b3aaa66-690---starting on pids 
+docker push containers.bmc.com/bmc/la0cz:situation-analyzer-service-b3aaa66-690
+docker tag containers.bmc.com/bmc/la0cz:situation-analyzer-service-b3aaa66-690 helix-harbor.bmc.local/bmc/la0cz:situation-analyzer-service-b3aaa66-690
+docker push helix-harbor.bmc.local/bmc/la0cz:situation-analyzer-service-b3aaa66-690
+===========================================IMAGE=containers.bmc.com/bmc/la0cz:situation-best-action-recommender-service-5ad32f0-444---starting on pids 
+docker push containers.bmc.com/bmc/la0cz:situation-best-action-recommender-service-5ad32f0-444
+docker tag containers.bmc.com/bmc/la0cz:situation-best-action-recommender-service-5ad32f0-444 helix-harbor.bmc.local/bmc/la0cz:situation-best-action-recommender-service-5ad32f0-444
+docker push helix-harbor.bmc.local/bmc/la0cz:situation-best-action-recommender-service-5ad32f0-444
+===========================================IMAGE=containers.bmc.com/bmc/la0cz:situation-detector-service-278973ff-1---starting on pids 
+docker push containers.bmc.com/bmc/la0cz:situation-detector-service-278973ff-1
+docker tag containers.bmc.com/bmc/la0cz:situation-detector-service-278973ff-1 helix-harbor.bmc.local/bmc/la0cz:situation-detector-service-278973ff-1
+docker push helix-harbor.bmc.local/bmc/la0cz:situation-detector-service-278973ff-1
+===========================================IMAGE=containers.bmc.com/bmc/la0cz:situation-detector-service-v2-61caaa7-381---starting on pids 
+docker push containers.bmc.com/bmc/la0cz:situation-detector-service-v2-61caaa7-381
+docker tag containers.bmc.com/bmc/la0cz:situation-detector-service-v2-61caaa7-381 helix-harbor.bmc.local/bmc/la0cz:situation-detector-service-v2-61caaa7-381
+docker push helix-harbor.bmc.local/bmc/la0cz:situation-detector-service-v2-61caaa7-381
+===========================================IMAGE=containers.bmc.com/bmc/la0cz:situation-fingerprinting-service-dba15ba-561---starting on pids 
+docker push containers.bmc.com/bmc/la0cz:situation-fingerprinting-service-dba15ba-561
+docker tag containers.bmc.com/bmc/la0cz:situation-fingerprinting-service-dba15ba-561 helix-harbor.bmc.local/bmc/la0cz:situation-fingerprinting-service-dba15ba-561
+docker push helix-harbor.bmc.local/bmc/la0cz:situation-fingerprinting-service-dba15ba-561
+===========================================IMAGE=containers.bmc.com/bmc/la0cz:situation-fingerprint-service-c49d4b5-605---starting on pids 
+docker push containers.bmc.com/bmc/la0cz:situation-fingerprint-service-c49d4b5-605
+docker tag containers.bmc.com/bmc/la0cz:situation-fingerprint-service-c49d4b5-605 helix-harbor.bmc.local/bmc/la0cz:situation-fingerprint-service-c49d4b5-605
+docker push helix-harbor.bmc.local/bmc/la0cz:situation-fingerprint-service-c49d4b5-605
+===========================================IMAGE=containers.bmc.com/bmc/la0cz:tdc-aws-da44e7f-730---starting on pids 
+docker push containers.bmc.com/bmc/la0cz:tdc-aws-da44e7f-730
+docker tag containers.bmc.com/bmc/la0cz:tdc-aws-da44e7f-730 helix-harbor.bmc.local/bmc/la0cz:tdc-aws-da44e7f-730
+docker push helix-harbor.bmc.local/bmc/la0cz:tdc-aws-da44e7f-730
+===========================================IMAGE=containers.bmc.com/bmc/la0cz:tdc-connector-base-job-8f6755f-886---starting on pids 
+docker push containers.bmc.com/bmc/la0cz:tdc-connector-base-job-8f6755f-886
+docker tag containers.bmc.com/bmc/la0cz:tdc-connector-base-job-8f6755f-886 helix-harbor.bmc.local/bmc/la0cz:tdc-connector-base-job-8f6755f-886
+docker push helix-harbor.bmc.local/bmc/la0cz:tdc-connector-base-job-8f6755f-886
+===========================================IMAGE=containers.bmc.com/bmc/la0cz:tdc-controller-service-c20925de-923---starting on pids 
+docker push containers.bmc.com/bmc/la0cz:tdc-controller-service-c20925de-923
+docker tag containers.bmc.com/bmc/la0cz:tdc-controller-service-c20925de-923 helix-harbor.bmc.local/bmc/la0cz:tdc-controller-service-c20925de-923
+docker push helix-harbor.bmc.local/bmc/la0cz:tdc-controller-service-c20925de-923
+===========================================IMAGE=containers.bmc.com/bmc/la0cz:tdc-file-8a2f5eb-400---starting on pids 
+docker push containers.bmc.com/bmc/la0cz:tdc-file-8a2f5eb-400
+docker tag containers.bmc.com/bmc/la0cz:tdc-file-8a2f5eb-400 helix-harbor.bmc.local/bmc/la0cz:tdc-file-8a2f5eb-400
+docker push helix-harbor.bmc.local/bmc/la0cz:tdc-file-8a2f5eb-400
+===========================================IMAGE=containers.bmc.com/bmc/la0cz:tdc-generic-a454339-5877---starting on pids 
+docker push containers.bmc.com/bmc/la0cz:tdc-generic-a454339-5877
+docker tag containers.bmc.com/bmc/la0cz:tdc-generic-a454339-5877 helix-harbor.bmc.local/bmc/la0cz:tdc-generic-a454339-5877
+docker push helix-harbor.bmc.local/bmc/la0cz:tdc-generic-a454339-5877
+===========================================IMAGE=containers.bmc.com/bmc/la0cz:tdc-kubernetes-884a78b-587---starting on pids 
+docker push containers.bmc.com/bmc/la0cz:tdc-kubernetes-884a78b-587
+docker tag containers.bmc.com/bmc/la0cz:tdc-kubernetes-884a78b-587 helix-harbor.bmc.local/bmc/la0cz:tdc-kubernetes-884a78b-587
+docker push helix-harbor.bmc.local/bmc/la0cz:tdc-kubernetes-884a78b-587
+===========================================IMAGE=containers.bmc.com/bmc/la0cz:tdc-kubernetes-operator-3d93a47-382---starting on pids 
+docker push containers.bmc.com/bmc/la0cz:tdc-kubernetes-operator-3d93a47-382
+docker tag containers.bmc.com/bmc/la0cz:tdc-kubernetes-operator-3d93a47-382 helix-harbor.bmc.local/bmc/la0cz:tdc-kubernetes-operator-3d93a47-382
+docker push helix-harbor.bmc.local/bmc/la0cz:tdc-kubernetes-operator-3d93a47-382
+===========================================IMAGE=containers.bmc.com/bmc/la0cz:tdc-mgmt-portal-5ea4eccf-769---starting on pids 
+docker push containers.bmc.com/bmc/la0cz:tdc-mgmt-portal-5ea4eccf-769
+docker tag containers.bmc.com/bmc/la0cz:tdc-mgmt-portal-5ea4eccf-769 helix-harbor.bmc.local/bmc/la0cz:tdc-mgmt-portal-5ea4eccf-769
+docker push helix-harbor.bmc.local/bmc/la0cz:tdc-mgmt-portal-5ea4eccf-769
+===========================================IMAGE=containers.bmc.com/bmc/la0cz:tdc-syslog-bc03443-321---starting on pids 
+docker push containers.bmc.com/bmc/la0cz:tdc-syslog-bc03443-321
+docker tag containers.bmc.com/bmc/la0cz:tdc-syslog-bc03443-321 helix-harbor.bmc.local/bmc/la0cz:tdc-syslog-bc03443-321
+docker push helix-harbor.bmc.local/bmc/la0cz:tdc-syslog-bc03443-321
+===========================================IMAGE=containers.bmc.com/bmc/la0cz:tdc-tsom-dba6578-484---starting on pids 
+docker push containers.bmc.com/bmc/la0cz:tdc-tsom-dba6578-484
+docker tag containers.bmc.com/bmc/la0cz:tdc-tsom-dba6578-484 helix-harbor.bmc.local/bmc/la0cz:tdc-tsom-dba6578-484
+docker push helix-harbor.bmc.local/bmc/la0cz:tdc-tsom-dba6578-484
+===========================================IMAGE=containers.bmc.com/bmc/la0cz:tdc-windows-event-d617a7f-325---starting on pids 
+docker push containers.bmc.com/bmc/la0cz:tdc-windows-event-d617a7f-325
+docker tag containers.bmc.com/bmc/la0cz:tdc-windows-event-d617a7f-325 helix-harbor.bmc.local/bmc/la0cz:tdc-windows-event-d617a7f-325
+docker push helix-harbor.bmc.local/bmc/la0cz:tdc-windows-event-d617a7f-325
+===========================================IMAGE=containers.bmc.com/bmc/la0cz:tdigest-ad-service-077baf4-644---starting on pids 
+docker push containers.bmc.com/bmc/la0cz:tdigest-ad-service-077baf4-644
+docker tag containers.bmc.com/bmc/la0cz:tdigest-ad-service-077baf4-644 helix-harbor.bmc.local/bmc/la0cz:tdigest-ad-service-077baf4-644
+docker push helix-harbor.bmc.local/bmc/la0cz:tdigest-ad-service-077baf4-644
+===========================================IMAGE=containers.bmc.com/bmc/la0cz:ad-algorithm-selector-13f087c-1143---starting on pids 
+docker push containers.bmc.com/bmc/la0cz:ad-algorithm-selector-13f087c-1143
+docker tag containers.bmc.com/bmc/la0cz:ad-algorithm-selector-13f087c-1143 helix-harbor.bmc.local/bmc/la0cz:ad-algorithm-selector-13f087c-1143
+docker push helix-harbor.bmc.local/bmc/la0cz:ad-algorithm-selector-13f087c-1143
+===========================================IMAGE=containers.bmc.com/bmc/la0cz:aiops-config-service-2655d0e-1487---starting on pids 
+docker push containers.bmc.com/bmc/la0cz:aiops-config-service-2655d0e-1487
+docker tag containers.bmc.com/bmc/la0cz:aiops-config-service-2655d0e-1487 helix-harbor.bmc.local/bmc/la0cz:aiops-config-service-2655d0e-1487
+docker push helix-harbor.bmc.local/bmc/la0cz:aiops-config-service-2655d0e-1487
+===========================================IMAGE=containers.bmc.com/bmc/la0cz:aiops-nextgen-service-health-595315c3-737---starting on pids 
+docker push containers.bmc.com/bmc/la0cz:aiops-nextgen-service-health-595315c3-737
+docker tag containers.bmc.com/bmc/la0cz:aiops-nextgen-service-health-595315c3-737 helix-harbor.bmc.local/bmc/la0cz:aiops-nextgen-service-health-595315c3-737
+docker push helix-harbor.bmc.local/bmc/la0cz:aiops-nextgen-service-health-595315c3-737
+===========================================IMAGE=containers.bmc.com/bmc/la0cz:aiops-notification-service-1c56861-774---starting on pids 
+docker push containers.bmc.com/bmc/la0cz:aiops-notification-service-1c56861-774
+docker tag containers.bmc.com/bmc/la0cz:aiops-notification-service-1c56861-774 helix-harbor.bmc.local/bmc/la0cz:aiops-notification-service-1c56861-774
+docker push helix-harbor.bmc.local/bmc/la0cz:aiops-notification-service-1c56861-774
+===========================================IMAGE=containers.bmc.com/bmc/la0cz:aiops-ui-service-761e418b8-1205---starting on pids 
+docker push containers.bmc.com/bmc/la0cz:aiops-ui-service-761e418b8-1205
+docker tag containers.bmc.com/bmc/la0cz:aiops-ui-service-761e418b8-1205 helix-harbor.bmc.local/bmc/la0cz:aiops-ui-service-761e418b8-1205
+docker push helix-harbor.bmc.local/bmc/la0cz:aiops-ui-service-761e418b8-1205
+===========================================IMAGE=containers.bmc.com/bmc/la0cz:auto-anomaly-events-close-b86083c-263---starting on pids 
+docker push containers.bmc.com/bmc/la0cz:auto-anomaly-events-close-b86083c-263
+docker tag containers.bmc.com/bmc/la0cz:auto-anomaly-events-close-b86083c-263 helix-harbor.bmc.local/bmc/la0cz:auto-anomaly-events-close-b86083c-263
+docker push helix-harbor.bmc.local/bmc/la0cz:auto-anomaly-events-close-b86083c-263
+===========================================IMAGE=containers.bmc.com/bmc/la0cz:baseline-calculation-f6223b8-900---starting on pids 
+docker push containers.bmc.com/bmc/la0cz:baseline-calculation-f6223b8-900
+docker tag containers.bmc.com/bmc/la0cz:baseline-calculation-f6223b8-900 helix-harbor.bmc.local/bmc/la0cz:baseline-calculation-f6223b8-900
+docker push helix-harbor.bmc.local/bmc/la0cz:baseline-calculation-f6223b8-900
+===========================================IMAGE=containers.bmc.com/bmc/la0cz:baseline-violation-service-8b45dfa-60---starting on pids 
+docker push containers.bmc.com/bmc/la0cz:baseline-violation-service-8b45dfa-60
+docker tag containers.bmc.com/bmc/la0cz:baseline-violation-service-8b45dfa-60 helix-harbor.bmc.local/bmc/la0cz:baseline-violation-service-8b45dfa-60
+docker push helix-harbor.bmc.local/bmc/la0cz:baseline-violation-service-8b45dfa-60
+===========================================IMAGE=containers.bmc.com/bmc/la0cz:change-risk-analysis-2779d64-512---starting on pids 
+docker push containers.bmc.com/bmc/la0cz:change-risk-analysis-2779d64-512
+docker tag containers.bmc.com/bmc/la0cz:change-risk-analysis-2779d64-512 helix-harbor.bmc.local/bmc/la0cz:change-risk-analysis-2779d64-512
+docker push helix-harbor.bmc.local/bmc/la0cz:change-risk-analysis-2779d64-512
+===========================================IMAGE=containers.bmc.com/bmc/la0cz:entity-collator-service-e44b4e8-967---starting on pids 
+docker push containers.bmc.com/bmc/la0cz:entity-collator-service-e44b4e8-967
+docker tag containers.bmc.com/bmc/la0cz:entity-collator-service-e44b4e8-967 helix-harbor.bmc.local/bmc/la0cz:entity-collator-service-e44b4e8-967
+docker push helix-harbor.bmc.local/bmc/la0cz:entity-collator-service-e44b4e8-967
+===========================================IMAGE=containers.bmc.com/bmc/la0cz:ml-model-store-service-f6223b8-900---starting on pids 
+docker push containers.bmc.com/bmc/la0cz:ml-model-store-service-f6223b8-900
+docker tag containers.bmc.com/bmc/la0cz:ml-model-store-service-f6223b8-900 helix-harbor.bmc.local/bmc/la0cz:ml-model-store-service-f6223b8-900
+docker push helix-harbor.bmc.local/bmc/la0cz:ml-model-store-service-f6223b8-900
+===========================================IMAGE=containers.bmc.com/bmc/la0cz:metric-correlation-service-9b672c5-1099---starting on pids 
+docker push containers.bmc.com/bmc/la0cz:metric-correlation-service-9b672c5-1099
+docker tag containers.bmc.com/bmc/la0cz:metric-correlation-service-9b672c5-1099 helix-harbor.bmc.local/bmc/la0cz:metric-correlation-service-9b672c5-1099
+docker push helix-harbor.bmc.local/bmc/la0cz:metric-correlation-service-9b672c5-1099
+===========================================IMAGE=containers.bmc.com/bmc/la0cz:impact-api-service-6cd90f1-1060---starting on pids 
+docker push containers.bmc.com/bmc/la0cz:impact-api-service-6cd90f1-1060
+docker tag containers.bmc.com/bmc/la0cz:impact-api-service-6cd90f1-1060 helix-harbor.bmc.local/bmc/la0cz:impact-api-service-6cd90f1-1060
+docker push helix-harbor.bmc.local/bmc/la0cz:impact-api-service-6cd90f1-1060
+===========================================IMAGE=containers.bmc.com/bmc/la0cz:helix-gpt-bar-a244e09-386---starting on pids 
+docker push containers.bmc.com/bmc/la0cz:helix-gpt-bar-a244e09-386
+docker tag containers.bmc.com/bmc/la0cz:helix-gpt-bar-a244e09-386 helix-harbor.bmc.local/bmc/la0cz:helix-gpt-bar-a244e09-386
+docker push helix-harbor.bmc.local/bmc/la0cz:helix-gpt-bar-a244e09-386
+Removing login credentials for helix-harbor.bmc.local
