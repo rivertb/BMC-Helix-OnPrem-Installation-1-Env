@@ -2,7 +2,7 @@
 
 #Source repo details containers.bmc.com
 SOURCE_DOCKER_REPO="containers.bmc.com"
-SOURCE_DOCKER_PASSWORD="a0a959a1-d0f2-40dc-aea9-62180c270c07"
+SOURCE_DOCKER_PASSWORD="xxxx-xxxx-xxxx-xxxx-xxxx"
 SOURCE_DOCKER_USER="peng_li@bmc.com"
 
 IMAGE_REGISTRY_ORG="$1"
