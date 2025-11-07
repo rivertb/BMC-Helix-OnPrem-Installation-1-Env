@@ -1,3 +1,4 @@
+containers.bmc.com/bmc/lpade:helix-gpt-vllm-docker-25.3.00-5cd10d1-7
 containers.bmc.com/bmc/la0cz:pca-api-service-1b4f8c9-816
 containers.bmc.com/bmc/la0cz:pca-core-service-7bdd654-931
 containers.bmc.com/bmc/la0cz:prediction-algorithm-service-8c3fc4e-534
@@ -126,6 +127,7 @@ containers.bmc.com/bmc/lp0lz:logs-portal-d635ecc1-1124
 containers.bmc.com/bmc/lp0lz:metric-gateway-service-cd023fc-1185
 containers.bmc.com/bmc/lp0lz:metricservice-93e7c7e-1089
 containers.bmc.com/bmc/lp0lz:ml-model-mgmt-service-2d281b3-719
+containers.bmc.com/bmc/la0cz:ml-model-mgmt-service-2d281b3-719
 containers.bmc.com/bmc/lp0lz:prometheus-ingestion-service-002e8f5-1056
 containers.bmc.com/bmc/lp0lz:opensearch-dashboards-2x-903dec5-1239
 containers.bmc.com/bmc/lp0lz:tctlrest-685
