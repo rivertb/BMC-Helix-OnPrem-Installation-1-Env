@@ -533,10 +533,10 @@ To download the Rancher image file, refer to the Rancher official documentationï
 * Download Rancher image files
 ```
 #mkdir rancher
-mkdir /root/rancher-images-2.11.2
+mkdir /root/rancher-images-2.13.2
 
 # cp rancher-images.txt, rancher-load-images.sh, rancher-save-images.sh file to /root/rancher-images-2.11.2 directory
-cd /root/rancher-images-2.11.2
+cd /root/rancher-images-2.13.2
 chmod a+x *.sh
     
 ls -l
@@ -580,7 +580,7 @@ Use rancher-load-images.sh to extract, tag and push rancher-images.txt and ranch
 
 ```
 # Chang to images file direcotry
-cd /root/rancher-images-2.11.2
+cd /root/rancher-images-2.13.2
 
 # Login to Helix Harbor Server
 docker login helix-harbor.bmc.local -u admin -p bmcAdm1n
