@@ -460,6 +460,7 @@ In the New Project window, specify the following values:
  - Access Level: Select the Public check   box.
 
 Leave the other parameters to their default values.
+
 ![Harbor New Projects bmc](./diagram/harbor-new-project-bmc.png)
 
 Click OK
