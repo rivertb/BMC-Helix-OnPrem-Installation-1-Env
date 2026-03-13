@@ -1,3 +1,4 @@
+
 # BMC Helix ITOM & ITSM OnPrem Installation Step by Step 1 - Prepare the environment
 
 - [BMC HelixOM OnPrem Installation Step by Step 1 - Prepare the environment](#bmc-helixom-onprem-installation-step-by-step-1---prepare-the-environment)
@@ -467,53 +468,57 @@ This step can be performed on any server that can connect to the Internet, not j
 * Create Helix images download directory
 
 ```
-cp -R ~/BMC-Helix-OnPrem-Installation-1-Env/helix-images-25.3  /root/.
+cp -R ~/BMC-Helix-OnPrem-Installation-1-Env/helix-itom-26.1  /root/.
 
 ```
-* Download Helix ITOM all_images_<version>.txt file from BMC Docs to root/helix-images-25.3
-    [all_images_25.3.txt](https://docs.bmc.com/xwiki/bin/view/IT-Operations-Management/On-Premises-Deployment/BMC-Helix-IT-Operations-Management-Deployment/itomdeploy253/Deploying/Preparing-for-deployment/Accessing-container-images/Setting-up-a-Harbor-registry-in-a-local-network-and-synchronizing-it-with-BMC-DTR/)
+* Download Helix ITOM all_images_<version>.txt file from BMC Docs to root/helix-images-26.1
+    [all_images_26.1.txt](https://docs.bmc.com/xwiki/bin/view/IT-Operations-Management/On-Premises-Deployment/BMC-Helix-IT-Operations-Management-Deployment/itomdeploy261/Deploying/Preparing-for-deployment/Accessing-container-images/Setting-up-a-Harbor-registry-in-a-local-network-and-synchronizing-it-with-BMC-DTR/)
     
  
 ```
 pwd
-/root/helix-images-25.3
+/root/helix-itom-26.1
 
 ls -l
--rw-r--r-- 1 root root 13685 Feb 25 15:55 all_images_25.3.txt
--rw-r--r-- 1 root root  2158 Feb 25 15:44 helix-load-images.sh
--rw-r--r-- 1 root root  2399 Feb 25 15:44 helix-save-images.sh
--rw-r--r-- 1 root root   174 Feb 25 15:44 saveall.sh
+-rw-r--r-- 1 root root 15045 Mar  3 12:05 all_images_26.1.txt
+-rwxr-xr-x 1 root root   233 Mar  2 15:38 download_all.sh
+-rwxr-xr-x 1 root root  1090 Mar  2 15:38 helix_file_to_tar_gz.sh
+-rwxr-xr-x 1 root root  1609 Mar  2 15:38 helix_load_and_push.sh
+
 
 # Convert the file to an UNIX format
 dnf install dos2unix -y
-dos2unix all_images_25.3.txt
+dos2unix all_images_26.1.txt
 
 # Get Helix ITOM different repository images lists
 
 # lp0lz: BMC Helix Platform images
-cat all_images_25.3.txt | grep lp0lz > lp0lz_images.txt
+cat all_images_26.1.txt | grep lp0lz > BMC_Helix_Platform_images.txt
 
 # lp0oz: BMC Helix Intelligent Automation images
-cat all_images_25.3.txt | grep lp0oz > lp0oz_images.txt
+cat all_images_26.1.txt | grep lp0oz > BMC_Helix_Intelligent_Automation_images.txt
 
 # lp0pz: BMC Helix Continuous Optimization images
-cat all_images_25.3.txt | grep lp0pz > lp0pz_images.txt
+cat all_images_26.1.txt | grep lp0pz > BMC_Helix_Continuous_Optimization_images.txt
 
 # lp0mz: BMC Helix Operations Management on-premises images
-cat all_images_25.3.txt | grep lp0mz > lp0mz_images.txt
+cat all_images_26.1.txt | grep lp0mz > BMC_Helix_Operations_Management_on-premises_images.txt
 
 # la0cz: BMC Helix AIOps images
-cat all_images_25.3.txt | grep la0cz > la0cz_images.txt
+cat all_images_26.1.txt | grep la0cz > BMC_Helix_AIOps_images.txt
 
-# lpcs5: BMC Helix Automation Console images
-cat all_images_25.3.txt | grep lpcs5 > lpcs5_images.txt
+# lpcs5: BMC Helix Automation Console images1
+cat all_images_26.1.txt | grep lpcs5 > BMC_Helix_Automation_Console_images1.txt
 
-# lpdbt: BMC Helix Automation Console images
-cat all_images_25.3.txt | grep lpdbt > lpdbt_images.txt
+# lpdbt: BMC Helix Automation Console images2
+cat all_images_26.1.txt | grep lpdbt > BMC_Helix_Automation_Console_images2.txt
+
+# lpdbt: BMC Helix Intelligent Integrations images
+cat all_images_26.1.txt | grep lp0jz > BMC_Helix_Intelligent_Integrations_images.txt
 
 # Run batch downloader for Helix ITOM image
 chmod a+x *.sh
-nohup ./saveall.sh > nohup.out &
+nohup ./download_all.sh > nohup.out &
 tail -f nohup.out
 
 # Due to the limitation of network speed, the entire download process may take several hours to several days.
@@ -667,7 +672,7 @@ sudo docker run -d --privileged --restart=unless-stopped --net=host -v /etc/kube
 
 * Paste and execute the installation script on the helix-k8s-master server
 ```
-sudo docker run -d --privileged --restart=unless-stopped --net=host -v /etc/kubernetes:/etc/kubernetes -v /var/run:/var/run  helix-harbor.bmc.local/rancher/rancher-agent:v2.11.2 --server https://192.168.1.200 --token gq8xnnnggvbszhvjw7nnl9gkwgd9x6dfknzfkddwktfbg2fblhk74z --ca-checksum aa8822a3021e9750335cc909cfaf5566c75e2845e81428c5cd100a9a662ce4eb --etcd --controlplane
+sudo docker run -d --privileged --restart=unless-stopped --net=host -v /etc/kubernetes:/etc/kubernetes -v /var/run:/var/run  helix-harbor.bmc.local/rancher/rancher-agent:v2.13.2 --server https://192.168.1.200 --token gq8xnnnggvbszhvjw7nnl9gkwgd9x6dfknzfkddwktfbg2fblhk74z --ca-checksum aa8822a3021e9750335cc909cfaf5566c75e2845e81428c5cd100a9a662ce4eb --etcd --controlplane
 ```
 
 * Wait for all nodes to join the cluster and the k8s cluster is created
@@ -720,6 +725,7 @@ kubectl top nodes
 ```
 kubectl create ns helixade
 kubectl create ns helixis
+kubectl create ns helixde
 ```
 
 #### 6.4.2 Install helm
