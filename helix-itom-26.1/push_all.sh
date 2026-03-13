@@ -1,0 +1,10 @@
+./helix_load_and_push.sh BMC_Helix_AIOps_images.txt				helix-harbor.bmc.local/bmchelix
+./helix_load_and_push.sh BMC_Helix_Automation_Console_images1.txt		helix-harbor.bmc.local/bmchelix
+./helix_load_and_push.sh BMC_Helix_Automation_Console_images2.txt		helix-harbor.bmc.local/bmchelix
+./helix_load_and_push.sh BMC_Helix_Container_Monitor_images.txt			helix-harbor.bmc.local/bmchelix
+./helix_load_and_push.sh BMC_Helix_Continuous_Optimization_images.txt		helix-harbor.bmc.local/bmchelix
+./helix_load_and_push.sh BMC_Helix_Intelligent_Automation_images.txt		helix-harbor.bmc.local/bmchelix
+./helix_load_and_push.sh BMC_Helix_Intelligent_Integrations_images.txt		helix-harbor.bmc.local/bmchelix
+./helix_load_and_push.sh BMC_Helix_Operations_Management_on-premises_images.txt	helix-harbor.bmc.local/bmchelix
+./helix_load_and_push.sh BMC_Helix_Platform_images.txt				helix-harbor.bmc.local/bmchelix
+

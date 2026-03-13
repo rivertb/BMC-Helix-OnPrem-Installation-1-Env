@@ -1,4 +1,10 @@
-./helix_file_to_tar_gz.sh 25401001_ITSM_Platform_Images.txt
-./helix_file_to_tar_gz.sh 25401001_ITSM_SmartApps_Images
-./helix_file_to_tar_gz.sh 25401001_ITSM_Pipeline_Images
-./helix_file_to_tar_gz.sh 25401001_SupportAssistTool_Images
+./helix_file_to_tar_gz.sh BMC_Helix_AIOps_images.txt
+./helix_file_to_tar_gz.sh BMC_Helix_Automation_Console_images1.txt
+./helix_file_to_tar_gz.sh BMC_Helix_Automation_Console_images2.txt
+./helix_file_to_tar_gz.sh BMC_Helix_Container_Monitor_images.txt
+./helix_file_to_tar_gz.sh BMC_Helix_Continuous_Optimization_images.txt
+./helix_file_to_tar_gz.sh BMC_Helix_Intelligent_Automation_images.txt
+./helix_file_to_tar_gz.sh BMC_Helix_Intelligent_Integrations_images.txt
+./helix_file_to_tar_gz.sh BMC_Helix_Operations_Management_on-premises_images.txt
+./helix_file_to_tar_gz.sh BMC_Helix_Platform_images.txt
+
