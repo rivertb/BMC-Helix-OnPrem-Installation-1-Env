@@ -455,10 +455,13 @@ Select Projects and then click NEW PROJECT.
 ![Harbor Projects](./diagram/harbor-projects.png)
 
 In the New Project window, specify the following values:
-Project Name: Enter bmc.
-Access Level: Select the Public check box.
+
+ - Project Name: Enter bmchelix. 
+ - Access Level: Select the Public check   box.
+
 Leave the other parameters to their default values.
 ![Harbor New Projects bmc](./diagram/harbor-new-project-bmc.png)
+
 Click OK
     
 
@@ -574,8 +577,8 @@ Import the downloaded Rancher Image image package file into the Harbor registry 
 Log in to the Harbor registry and perform the following steps to create a new project:
 Select Projects and then click NEW PROJECT. In the New Project window, specify the following values:
 
-Project Name: Enter rancher.
-Access Level: Select the Public check box.
+Project Name: Enter rancher. 
+Access Level: Select the Public check  box. 
 Leave the other parameters to their default values.
 
 ![Harbor New Project rancher](./diagram/harbor-new-project-rancher.png)
