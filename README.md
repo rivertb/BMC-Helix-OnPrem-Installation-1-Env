@@ -526,6 +526,11 @@ nohup ./download_all.sh > nohup.out &
 tail -f nohup.out
 
 # Due to the limitation of network speed, the entire download process may take several hours to several days.
+
+# Upload images to Harbor
+nohup ./pull_all.sh > nohup.out &
+tail -f nohup.out
+
 ```
 
 ### 5.3 Download Rancher image files
