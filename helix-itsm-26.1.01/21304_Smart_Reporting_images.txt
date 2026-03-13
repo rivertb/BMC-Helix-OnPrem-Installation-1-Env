@@ -1,0 +1,4 @@
+docker.io/bmchelix/pipelines-smart-reporting-woraround:06112020-RTM
+docker.io/bmchelix/smart-reporting-db-upgrade:213004-RTM
+docker.io/bmchelix/smart-reporting:213004-RTM
+docker.io/bmchelix/sr-db:213004-RTM

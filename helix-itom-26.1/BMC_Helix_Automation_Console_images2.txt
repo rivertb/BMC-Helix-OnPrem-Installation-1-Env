@@ -1,0 +1,6 @@
+docker.io/bmchelix/lpcs5:bmchelix-discovery-cloud-connector-578
+docker.io/bmchelix/lpcs5:truesight-common-tso-connector-807
+docker.io/bmchelix/lpcs5:truesight-connectors-service-3978
+docker.io/bmchelix/lpcs5:truesight-kafka-service-769
+docker.io/bmchelix/lpcs5:truesight-resource-service-2512
+docker.io/bmchelix/lpcs5:truesight-workmanager-service-1807

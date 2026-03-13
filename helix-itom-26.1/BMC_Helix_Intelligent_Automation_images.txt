@@ -1,0 +1,15 @@
+docker.io/bmchelix/lp0oz:ade-action-library-service-26.1.00-2
+docker.io/bmchelix/lp0oz:ade-insight-ingestion-service-1431
+docker.io/bmchelix/lp0oz:ade-intelligent-automation-portal-3798
+docker.io/bmchelix/lp0oz:automationeventsservice-1323
+docker.io/bmchelix/lp0oz:automationproffer-1517
+docker.io/bmchelix/lp0oz:ia-ansibleplugin-1281
+docker.io/bmchelix/lp0oz:ia-automation-service-1918
+docker.io/bmchelix/lp0oz:ia-deploy-db-486
+docker.io/bmchelix/lp0oz:ia-kafka-service-1300
+docker.io/bmchelix/lp0oz:iaitsmservice-1303
+docker.io/bmchelix/lp0oz:iatransformerplugin-1225
+docker.io/bmchelix/lp0oz:iawebhook-event-ingestion-26.1.00-2
+docker.io/bmchelix/lp0oz:is-plugin-1270
+docker.io/bmchelix/lp0oz:remotepluginservice-1502
+docker.io/bmchelix/lp0oz:restapiplugin-1717

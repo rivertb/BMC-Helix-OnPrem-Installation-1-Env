@@ -1,0 +1,2 @@
+docker.io/bmchelix/lp0jz:hii-gateway-proxy-app-prod-26.1.0-104GAB11SHA91a358b1
+docker.io/bmchelix/lp0jz:hii-tenant-service-26.1.0-104GAB11SHA91a358b1

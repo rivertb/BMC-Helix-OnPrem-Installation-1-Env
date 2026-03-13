@@ -1,0 +1,2 @@
+docker.io/bmchelix/assisttool:v117_021320261825_26101-RTM
+docker.io/bmchelix/authproxy:HSSO_Auth_Proxy_RC_284_26101-RTM

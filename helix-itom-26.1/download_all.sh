@@ -1,0 +1,4 @@
+./helix_file_to_tar_gz.sh 25401001_ITSM_Platform_Images.txt
+./helix_file_to_tar_gz.sh 25401001_ITSM_SmartApps_Images
+./helix_file_to_tar_gz.sh 25401001_ITSM_Pipeline_Images
+./helix_file_to_tar_gz.sh 25401001_SupportAssistTool_Images

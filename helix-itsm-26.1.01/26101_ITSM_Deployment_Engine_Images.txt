@@ -1,0 +1,8 @@
+
+docker.io/bmchelix/de-jenkins-refresh:26101-RTM
+docker.io/bmchelix/de-bootstrap:26101-RTM
+docker.io/bmchelix/de-jenkins-agent:26101-RTM
+docker.io/bmchelix/de-jenkins-master:26101-RTM
+docker.io/bmchelix/gitea:26101-RTM
+docker.io/bmchelix/de-repo-seeder:26101-RTM1
+docker.io/bmchelix/de-repo-seeder-sr:213004-RTM
