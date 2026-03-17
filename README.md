@@ -613,6 +613,7 @@ tail -f nohup.out
 docker login helix-harbor.bmc.local -u admin -p bmcAdm1n
 
 # Prepare certificate
+mkdir -p /opt/rancher
 mkdir -p /etc/rancher/ssl
 scp root@helix-svc.bmc.local:/root/openssl/bmc.local.crt /etc/rancher/ssl/cert.pem
 scp root@helix-svc.bmc.local:/root/openssl/bmc.local.key /etc/rancher/ssl/key.pem
@@ -630,6 +631,17 @@ docker run -d --privileged \
   -e CATTLE_SYSTEM_DEFAULT_REGISTRY=helix-harbor.bmc.local \
   -e CATTLE_SERVER_URL=https://helix-k8s-master.bmc.local \
   helix-harbor.bmc.local/rancher/rancher:v2.13.2
+
+# Or Install Rancher docker version online
+docker run -d --privileged \
+  --name rancher \
+  --restart=unless-stopped \
+  -p 80:80 \
+  -p 443:443 \
+  -v /opt/rancher:/var/lib/rancher \
+  -v /etc/rancher/ssl:/etc/rancher/ssl \
+  rancher/rancher:v2.13.2
+
 
 ```
 * Find the Rancher Console password
