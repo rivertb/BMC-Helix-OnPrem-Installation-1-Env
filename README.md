@@ -626,9 +626,7 @@ docker run -d --privileged \
   -p 443:443 \
   --add-host helix-k8s-master.bmc.local:192.168.1.200 \
   -v /opt/rancher:/var/lib/rancher \
-  -v /etc/rancher/ssl/cert.pem:/etc/rancher/ssl/cert.pem \
-  -v /etc/rancher/ssl/key.pem:/etc/rancher/ssl/key.pem \
-  -v /etc/rancher/ssl/cacerts.pem:/etc/rancher/ssl/cacerts.pem \
+  -v /etc/rancher/ssl:/etc/rancher/ssl \
   -e CATTLE_SYSTEM_DEFAULT_REGISTRY=helix-harbor.bmc.local \
   -e CATTLE_SERVER_URL=https://helix-k8s-master.bmc.local \
   helix-harbor.bmc.local/rancher/rancher:v2.13.2
